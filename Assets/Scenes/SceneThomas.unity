@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 436841374}
   - component: {fileID: 436841373}
   - component: {fileID: 436841372}
+  - component: {fileID: 436841375}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -257,12 +258,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436841371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2025796727}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &436841375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436841371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ce0c4d5d16bcd43b181ee4d1f4b5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limitX: 8
+  limitY: 4
+  offset: 8
+  lerpSpeed: 0.05
 --- !u!1 &768499036
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,8 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limitX: 16
   limitY: 9
-  maxMoveSpeed: 5
-  lerpMoveSpeed: 0.1
+  maxMoveSpeed: 10
+  lerpMoveSpeed: 0.08
 --- !u!65 &768499039
 BoxCollider:
   m_ObjectHideFlags: 0
