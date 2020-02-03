@@ -36,7 +36,7 @@ public class PathMovement : MonoBehaviour
 
         if (CurrentWayPointID >= PathToFollow.pathTransforms.Count)
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 }
