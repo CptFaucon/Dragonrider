@@ -12,9 +12,12 @@ public class CameraController : MonoBehaviour
     private float limitY;
 
     [Space]
+    [Tooltip("Camera Offset on Y-Axis")]
+    [SerializeField]
+    private float offsetY;
     [Tooltip("Camera Offset on Z-Axis")]
     [SerializeField]
-    private float offset;
+    private float offsetZ;
 
     [Header("   Move")]
     [Range(0, 1)]
@@ -37,10 +40,10 @@ public class CameraController : MonoBehaviour
         Vector2 desiredPosition = pc.gameObject.transform.localPosition;
 
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, -limitX / 2, limitX / 2);
-        desiredPosition.y = Mathf.Clamp(desiredPosition.y, -limitY / 2, limitY / 2);
+        desiredPosition.y = Mathf.Clamp(desiredPosition.y + offsetY, -limitY / 2 + offsetY, limitY / 2 + offsetY);
 
         position = Vector3.Lerp(position, desiredPosition, lerpSpeed);
-        position.z = -offset;
+        position.z = offsetZ;
 
         transform.localPosition = position;
     }
