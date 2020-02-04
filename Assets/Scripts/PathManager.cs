@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    public List<Transform> pathTransforms = new List<Transform>();
-    Transform[] pathArray;
+    private Color rayColor = Color.white;
+    public List<Transform> pathTransforms = new List<Transform> ();
+    Transform[] theArray;
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
-        pathArray = GetComponentsInChildren<Transform>();
+        Gizmos.color = rayColor;
+        theArray = GetComponentsInChildren<Transform> ();
         pathTransforms.Clear();
 
-        foreach (Transform pathTransform in pathArray)
+        foreach (Transform pathTransform in theArray)
         {
             if (pathTransform != this.transform)
             {
@@ -23,11 +24,10 @@ public class PathManager : MonoBehaviour
         for (int i = 0; i < pathTransforms.Count; i++)
         {
             Vector3 position = pathTransforms[i].position;
-
-            if (i > 0)
+            if(i > 0)
             {
                 Vector3 previous = pathTransforms[i - 1].position;
-                Gizmos.DrawLine(previous, position);
+                Gizmos.DrawLine (previous, position);
             }
         }
     }
