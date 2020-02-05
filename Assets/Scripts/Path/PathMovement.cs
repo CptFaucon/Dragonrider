@@ -5,7 +5,8 @@ public class PathMovement : MonoBehaviour
 {
     public PathManager PathToFollow;
 
-    private int CurrentWayPointID;
+    [HideInInspector]
+    public int CurrentWayPointID;
     private float reachDistance = 1.0f;
 
     public float speed = 2f;

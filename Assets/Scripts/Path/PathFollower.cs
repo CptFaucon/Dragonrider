@@ -6,7 +6,8 @@ using System;
 
 public class PathFollower : MonoBehaviour
 {
-    private PathMovement pm;
+    [HideInInspector]
+    public PathMovement pm;
     public Action OnFinishedPath;
 
 

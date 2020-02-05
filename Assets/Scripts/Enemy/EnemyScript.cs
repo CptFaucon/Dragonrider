@@ -12,6 +12,8 @@ public class EnemyScript : PathFollower
 
     public void DisableEnemy()
     {
+        Debug.Log("disabled");
+        pm.CurrentWayPointID = 0;
         gameObject.SetActive(false);
     }
 }
