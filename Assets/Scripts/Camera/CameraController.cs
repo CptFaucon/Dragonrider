@@ -7,9 +7,7 @@ public class CameraController : MonoBehaviour
     #region Variables
     [Header("   Movement Zone")]
     [SerializeField]
-    private float limitX;
-    [SerializeField]
-    private float limitY;
+    private float limit = 4;
 
     [Space]
     [Tooltip("Camera Offset on Y-Axis")]
@@ -17,12 +15,12 @@ public class CameraController : MonoBehaviour
     private float offsetY;
     [Tooltip("Camera Offset on Z-Axis")]
     [SerializeField]
-    private float offsetZ;
+    private float offsetZ = -8;
 
     [Header("   Move")]
     [Range(0, 1)]
     [SerializeField]
-    private float lerpSpeed;
+    private float lerpSpeed = .05f;
 
     private PlayerController pc;
     #endregion
@@ -39,8 +37,7 @@ public class CameraController : MonoBehaviour
         Vector3 position = transform.localPosition;
         Vector2 desiredPosition = pc.gameObject.transform.localPosition;
 
-        desiredPosition.x = Mathf.Clamp(desiredPosition.x, -limitX / 2, limitX / 2);
-        desiredPosition.y = Mathf.Clamp(desiredPosition.y + offsetY, -limitY / 2 + offsetY, limitY / 2 + offsetY);
+        desiredPosition.x = Mathf.Clamp(desiredPosition.x, -limit / 2, limit / 2);
 
         position = Vector3.Lerp(position, desiredPosition, lerpSpeed);
         position.z = offsetZ;

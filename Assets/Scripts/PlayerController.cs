@@ -6,34 +6,27 @@ public class PlayerController : MonoBehaviour
     [Header("   Movement Zone")]
     [Tooltip("Lenght of the zone where the player can move")]
     [SerializeField]
-    private float limitX;
-
-    [Tooltip("Height of the zone where the player can move")]
-    [SerializeField]
-    private float limitY;
+    private float limit = 16;
 
     [Header("   Move Speed")]
     [SerializeField]
-    private float maxMoveSpeed;
+    private float maxMoveSpeed = 5;
     [Range(0, 1)]
     [SerializeField]
-    private float lerpMoveSpeed;
+    private float lerpMoveSpeed = .08f;
 
-    private float moveSpeedX, moveSpeedY;
+    private float moveSpeed;
     #endregion
 
 
     private void Movement()
     {
         /// Accelerate or decelerate
-        Vector2 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        moveSpeedX = Mathf.Clamp(Mathf.Lerp(moveSpeedX, maxMoveSpeed * move.x, lerpMoveSpeed), -maxMoveSpeed, maxMoveSpeed);
-        moveSpeedY = Mathf.Clamp(Mathf.Lerp(moveSpeedY, maxMoveSpeed * move.y, lerpMoveSpeed), -maxMoveSpeed, maxMoveSpeed);
+        moveSpeed = Mathf.Clamp(Mathf.Lerp(moveSpeed, maxMoveSpeed * Input.GetAxisRaw("Horizontal"), lerpMoveSpeed), -maxMoveSpeed, maxMoveSpeed);
         
         /// Move between limits
         Vector2 position = transform.localPosition;
-        position.x = Mathf.Clamp(position.x + moveSpeedX * Time.deltaTime, -limitX / 2, limitX / 2);
-        position.y = Mathf.Clamp(position.y + moveSpeedY * Time.deltaTime, -limitY / 2, limitY / 2);
+        position.x = Mathf.Clamp(position.x + moveSpeed * Time.deltaTime, -limit / 2, limit / 2);
 
         transform.localPosition = position;
     }
