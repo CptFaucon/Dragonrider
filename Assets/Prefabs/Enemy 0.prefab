@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3197513666975964032}
   - component: {fileID: 673306411691963641}
   - component: {fileID: 7468324746319594918}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathToFollow: {fileID: 0}
-  CurrentWayPointID: 0
   speed: 2
   rotationSpeed: 2
-  pathName: 

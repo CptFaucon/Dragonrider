@@ -15,6 +15,14 @@ public class HitBoxesManager : MonoBehaviour
             if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
             {
                 enemiesOnTrigger[i].SetActive(false);
+                for (int j = 0; j < 6; j++)
+                {
+                    if (i != j && enemiesOnTrigger[i] == enemiesOnTrigger[j])
+                    {
+                        enemiesOnTrigger[j] = null;
+                        isHitboxActivated[j] = false;
+                    }
+                }
                 enemiesOnTrigger[i] = null;
                 isHitboxActivated[i] = false;
             }
