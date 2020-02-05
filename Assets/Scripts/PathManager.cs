@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    private Color rayColor = Color.white;
     public List<Transform> pathTransforms = new List<Transform> ();
     Transform[] theArray;
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = rayColor;
+        Gizmos.color = Color.white;
         theArray = GetComponentsInChildren<Transform> ();
         pathTransforms.Clear();
 

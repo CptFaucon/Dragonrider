@@ -6,19 +6,17 @@ public class PathMovement : MonoBehaviour
 {
     public PathManager PathToFollow;
 
-    public int CurrentWayPointID = 0;
-    public float speed;
+    private int CurrentWayPointID;
     private float reachDistance = 1.0f;
-    public float rotationSpeed;
-    //public string pathName;
 
-    //Vector3 lastPosition;
-    //Vector3 currentPosition;
+    public float speed = 2f;
+    public float rotationSpeed = 2f;
+
+    private EnemyScript enemyscript;
 
     private void Start()
     {
-        //PathToFollow = GameObject.Find(pathName).GetComponent<PathManager> ();
-        //lastPosition = transform.position;
+        enemyscript = GetComponent<EnemyScript>();
     }
 
     private void Update()
@@ -36,7 +34,7 @@ public class PathMovement : MonoBehaviour
 
         if (CurrentWayPointID >= PathToFollow.pathTransforms.Count)
         {
-            //gameObject.SetActive(false);
+            enemyscript?.OnfinishedPath.Invoke();
         }
     }
 }
