@@ -10,15 +10,15 @@ public class PathMovement : MonoBehaviour
     public float speed;
     private float reachDistance = 1.0f;
     public float rotationSpeed;
-    public string pathName;
+    //public string pathName;
 
-    Vector3 lastPosition;
-    Vector3 currentPosition;
+    //Vector3 lastPosition;
+    //Vector3 currentPosition;
 
     private void Start()
     {
-        PathToFollow = GameObject.Find(pathName).GetComponent<PathManager> ();
-        lastPosition = transform.position;
+        //PathToFollow = GameObject.Find(pathName).GetComponent<PathManager> ();
+        //lastPosition = transform.position;
     }
 
     private void Update()
