@@ -1514,6 +1514,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 735918286336728107, guid: abb4342f6638bb74c9cb11138a5ecb7c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 735918286336728111, guid: abb4342f6638bb74c9cb11138a5ecb7c,
         type: 3}
       propertyPath: m_LocalPosition.x
