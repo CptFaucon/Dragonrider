@@ -14,7 +14,7 @@ public class Hitbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         hitBoxesManager.isHitboxActivated[HitBoxIndex] = true;
-        hitBoxesManager.enemiesOnTrigger[HitBoxIndex] = other.gameObject;
+        hitBoxesManager.enemiesOnTrigger[HitBoxIndex] = other.GetComponent<EnemyScript>();
     }
 
     private void OnTriggerExit(Collider other)

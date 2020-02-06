@@ -10,11 +10,11 @@ public class ScoreManager : MonoBehaviour
 
     public void modifyScoreDisplay(float modifier)
     {
-        needleTransform.eulerAngles = new Vector3(0, 0, scoreDisplay);
+        scoreDisplay -= modifier;
 
         if (scoreDisplay < maxScoreAngle) scoreDisplay = maxScoreAngle;
         if (scoreDisplay > minScoreAngle) scoreDisplay = minScoreAngle;
 
-        scoreDisplay -= modifier;
+        needleTransform.eulerAngles = new Vector3(0, 0, scoreDisplay);
     }
 }
