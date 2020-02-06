@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : PathFollower
 {
-    public Action OnfinishedPath;
 
-    private void Awake()
+    public override void Awake()
     {
-        OnfinishedPath += DisableEnemy;
+        base.Awake();
+        OnFinishedPath += DisableEnemy;
     }
 
     public void DisableEnemy()
     {
+        Debug.Log("disabled");
+        pm.CurrentWayPointID = 0;
         gameObject.SetActive(false);
     }
 }

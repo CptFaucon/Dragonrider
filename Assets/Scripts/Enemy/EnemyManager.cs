@@ -35,9 +35,9 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemy(int enemyType, Vector3 spawnPosition, PathManager path)
     {
-        EnemiesArrays[enemyType, currentEnemy[enemyType]].SetActive(true);
         EnemiesArrays[enemyType, currentEnemy[enemyType]].GetComponent<PathMovement>().PathToFollow = path;
         EnemiesArrays[enemyType, currentEnemy[enemyType]].transform.position = spawnPosition;
+        EnemiesArrays[enemyType, currentEnemy[enemyType]].SetActive(true);
         currentEnemy[enemyType] = (currentEnemy[enemyType] + 1) % maxNbOfEnemies;
     }
 }
