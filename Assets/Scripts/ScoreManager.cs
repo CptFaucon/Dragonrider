@@ -6,16 +6,15 @@ public class ScoreManager : MonoBehaviour
 
     private const float maxScoreAngle = -30;
     private const float minScoreAngle = 210;
-    private float score = 90;
+    private float scoreDisplay = 90;
 
-    private void Update()
+    public void modifyScoreDisplay(float modifier)
     {
-        needleTransform.eulerAngles = new Vector3(0, 0, score);
+        needleTransform.eulerAngles = new Vector3(0, 0, scoreDisplay);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) score -= 10;
-        if (Input.GetKeyDown(KeyCode.DownArrow)) score += 10;
+        if (scoreDisplay < maxScoreAngle) scoreDisplay = maxScoreAngle;
+        if (scoreDisplay > minScoreAngle) scoreDisplay = minScoreAngle;
 
-        if (score < maxScoreAngle) score = maxScoreAngle;
-        if (score > minScoreAngle) score = minScoreAngle;
+        scoreDisplay -= modifier;
     }
 }
