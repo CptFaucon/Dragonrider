@@ -44,7 +44,7 @@ public class PlayerController : PathFollower
 
     public void EndPath()
     {
-        Debug.Log("Path Followed");
+
     }
 
 

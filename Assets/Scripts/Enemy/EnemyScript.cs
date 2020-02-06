@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System;
-
-public class EnemyScript : PathFollower
+﻿public class EnemyScript : PathFollower
 {
     private ScoreManager sm;
     public float scoreMalus = -10;
@@ -16,7 +13,6 @@ public class EnemyScript : PathFollower
 
     public void DisableEnemy()
     {
-        Debug.Log("disabled");
         pm.CurrentWayPointID = 0;
         gameObject.SetActive(false);
         sm.modifyScoreDisplay(scoreMalus);
