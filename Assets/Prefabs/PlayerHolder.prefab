@@ -1239,6 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ce0c4d5d16bcd43b181ee4d1f4b5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 994274300186476767}
   limit: 4
   offsetY: 0
   offsetZ: -8
@@ -2049,6 +2050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathToFollow: {fileID: 994274300278771111}
+  CurrentWayPointID: 0
   speed: 2
   rotationSpeed: 2
 --- !u!114 &994274301068153737
@@ -2072,6 +2074,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  sm: {fileID: 0}
 --- !u!54 &7637594644317279579
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2113,6 +2116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3056b65f5e9db34cac145f82e3ef2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
   body: {fileID: 994274300186476767}
   limit: 16
   maxMoveSpeed: 5
