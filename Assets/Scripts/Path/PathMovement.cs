@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public class PathMovement : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class PathMovement : MonoBehaviour
     public float rotationSpeed = 2f;
     
     
-
     public void FollowPath(Action OnFinishedPath)
     {
         if (CurrentWayPointID >= PathToFollow.pathTransforms.Count)
@@ -34,6 +34,40 @@ public class PathMovement : MonoBehaviour
                 CurrentWayPointID++;
             }
         }
+    }
+
+
+    public void ChangeSpeed(float newSpeed, float lerpSpeed, bool isStopping, float stoppedTime)
+    {
+        if (!isStopping)
+        {
+            StartCoroutine(LerpSpeed(newSpeed, lerpSpeed));
+        }
+        else
+        {
+            StartCoroutine(StopToFollow(newSpeed, lerpSpeed, stoppedTime));
+        }
+    }
+
+
+    private IEnumerator StopToFollow(float newSpeed, float lerpSpeed, float stoppedTime)
+    {
+        yield return LerpSpeed(0, lerpSpeed);
+        yield return new WaitForSeconds(stoppedTime);
+        yield return LerpSpeed(newSpeed, lerpSpeed);
+        yield break;
+    }
+
+
+    private IEnumerator LerpSpeed(float newSpeed, float lerpSpeed)
+    {
+        float limit = Mathf.Abs(speed - newSpeed) / 100;
+        while (Mathf.Abs(speed - newSpeed) >= limit)
+        {
+            speed = Mathf.Lerp(speed, newSpeed, lerpSpeed);
+            yield return new WaitForFixedUpdate();
+        }
+        yield break;
     }
 }
  
