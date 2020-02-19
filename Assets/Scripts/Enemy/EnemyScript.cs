@@ -15,6 +15,6 @@
     {
         pm.CurrentWayPointID = 0;
         gameObject.SetActive(false);
-        sm.modifyScoreDisplay(scoreMalus);
+        sm.modifyScoreGauge(scoreMalus);
     }
 }
