@@ -8,6 +8,11 @@ public class ScoreManager : MonoBehaviour
     private const float minScoreAngle = 210;
     private float scoreDisplay = 90;
 
+    private void Start()
+    {
+        needleTransform = transform.Find("needle");
+    }
+
     public void modifyScoreDisplay(float modifier)
     {
         scoreDisplay -= modifier;
