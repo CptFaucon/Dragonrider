@@ -10,15 +10,11 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform follow;
 
-    [Header("   Movement Zone")]
-    [SerializeField]
-    private float limit = 4;
-
-    [Space]
-    [Tooltip("Camera Offset on Y-Axis")]
+    [Header("   Position of the Object ToFollow relative to PlayerBody")]
+    [Tooltip("Offset on Y-Axis")]
     [SerializeField]
     private float offsetY = 1;
-    [Tooltip("Camera Offset on Z-Axis")]
+    [Tooltip("Offset on Z-Axis")]
     [SerializeField]
     private float offsetZ = -8;
 

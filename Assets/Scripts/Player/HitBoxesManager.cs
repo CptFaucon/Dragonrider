@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class HitBoxesManager : MonoBehaviour
 {
@@ -6,13 +7,17 @@ public class HitBoxesManager : MonoBehaviour
 
     public KeyCode[] inputs;
 
-    public EnemyScript[] enemiesOnTrigger;
+    public List<List<EnemyScript>> enemiesOnTrigger = new List<List<EnemyScript>>();
     public ScoreManager sm;
 
 
     private void Awake()
     {
         sm = FindObjectOfType<ScoreManager>();
+        foreach (var item in isHitboxActivated)
+        {
+            enemiesOnTrigger.Add(new List<EnemyScript>());
+        }
     }
 
 
@@ -22,18 +27,33 @@ public class HitBoxesManager : MonoBehaviour
         {
             if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
             {
-                enemiesOnTrigger[i].gameObject.SetActive(false);
-                for (int j = 0; j < 6; j++)
+                for (int k = 0; k < enemiesOnTrigger[i].Count; k++)
                 {
-                    if (i != j && enemiesOnTrigger[i] == enemiesOnTrigger[j])
+                    for (int j = 0; j < 6; j++)
                     {
-                        enemiesOnTrigger[j] = null;
-                        isHitboxActivated[j] = false;
+                        for (int l = 0; l < enemiesOnTrigger[j].Count; l++)
+                        {
+                            if (i != j && enemiesOnTrigger[i][k] == enemiesOnTrigger[j][l])
+                            {
+                                enemiesOnTrigger[j].Remove(enemiesOnTrigger[j][l]);
+
+                                if (enemiesOnTrigger[j].Count == 0)
+                                {
+                                    isHitboxActivated[j] = false;
+                                }
+                            }
+                        }
                     }
+                    enemiesOnTrigger[i][k].gameObject.SetActive(false);
+                    sm.modifyScoreGauge(enemiesOnTrigger[i][k].scoreBonus);
+                    enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                 }
-                sm.modifyScoreGauge(enemiesOnTrigger[i].scoreBonus);
-                enemiesOnTrigger[i] = null;
-                isHitboxActivated[i] = false;
+
+                
+                if (enemiesOnTrigger[i].Count == 0)
+                {
+                    isHitboxActivated[i] = false;
+                }
             }
         }
     }
