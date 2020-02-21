@@ -6,14 +6,19 @@ public class TESTEnemy : MonoBehaviour
     GameObject enemy;
     Transform target;
 
-    public bool stopped;
+    private bool stopped;
 
+    [Header("Paramètres de vitesse")]
     public float speed;
     public float maxSpeed;
     public float minSpeed;
-    public float brakeDistance;
     public float accelerationAndDeceleration;
+
+    [Header("Paramètres de freinage")]
+    public float brakeDistance;
     public float brakeDuration;
+
+    [Header("Portées horizontales et verticales")]
     public float HorizontalRange;
     public float VerticalRange;
 
@@ -28,7 +33,6 @@ public class TESTEnemy : MonoBehaviour
         if (speed > maxSpeed) speed = maxSpeed;
         if (speed < minSpeed && stopped == false) speed = minSpeed;
 
-
         if (Vector3.Distance(enemy.transform.position, target.position) > brakeDistance && stopped == false) speed += accelerationAndDeceleration * Time.deltaTime;
         if (Vector3.Distance(enemy.transform.position, target.position) < brakeDistance && stopped == false) speed -= accelerationAndDeceleration * Time.deltaTime;
 
@@ -38,10 +42,7 @@ public class TESTEnemy : MonoBehaviour
             StartCoroutine(Turning());
         }
 
-        else
-        {
-            enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, speed * Time.deltaTime);
-        }
+        else enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, speed * Time.deltaTime);
     }
 
     IEnumerator Turning()
