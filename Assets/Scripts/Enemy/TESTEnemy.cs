@@ -9,14 +9,14 @@ public class TESTEnemy : MonoBehaviour
     private bool stopped;
 
     [Header("Paramètres de vitesse")]
-    public float speed;
+    public float currentSpeed;
     public float maxSpeed;
     public float minSpeed;
-    public float accelerationAndDeceleration;
+    public float accelerationAndDecelerationSpeed;
 
     [Header("Paramètres de freinage")]
     public float brakeDistance;
-    public float brakeDuration;
+    public float stopDuration;
 
     [Header("Portées horizontales et verticales")]
     public float HorizontalRange;
@@ -30,11 +30,11 @@ public class TESTEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (speed > maxSpeed) speed = maxSpeed;
-        if (speed < minSpeed && stopped == false) speed = minSpeed;
+        if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+        if (currentSpeed < minSpeed && stopped == false) currentSpeed = minSpeed;
 
-        if (Vector3.Distance(enemy.transform.position, target.position) > brakeDistance && stopped == false) speed += accelerationAndDeceleration * Time.deltaTime;
-        if (Vector3.Distance(enemy.transform.position, target.position) < brakeDistance && stopped == false) speed -= accelerationAndDeceleration * Time.deltaTime;
+        if (Vector3.Distance(enemy.transform.position, target.position) > brakeDistance && stopped == false) currentSpeed += accelerationAndDecelerationSpeed * Time.deltaTime;
+        if (Vector3.Distance(enemy.transform.position, target.position) < brakeDistance && stopped == false) currentSpeed -= accelerationAndDecelerationSpeed * Time.deltaTime;
 
         if (enemy.transform.localPosition == target.localPosition)
         {
@@ -42,14 +42,14 @@ public class TESTEnemy : MonoBehaviour
             StartCoroutine(Turning());
         }
 
-        else enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, speed * Time.deltaTime);
+        else enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
     }
 
     IEnumerator Turning()
     {
         stopped = true;
-        speed = 0;
-        yield return new WaitForSeconds(brakeDuration);
+        currentSpeed = 0;
+        yield return new WaitForSeconds(stopDuration);
         stopped = false;
     }
 }

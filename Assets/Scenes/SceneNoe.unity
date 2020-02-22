@@ -157,13 +157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6a3832067671247845ddae09b120ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopped: 1
-  speed: 0
+  currentSpeed: 0
   maxSpeed: 4
   minSpeed: 2.5
+  accelerationAndDecelerationSpeed: 15
   brakeDistance: 1
-  accelerationAndDeceleration: 15
-  brakeDuration: 1
+  stopDuration: 1
   HorizontalRange: 7
   VerticalRange: 3
 --- !u!1 &239653490
