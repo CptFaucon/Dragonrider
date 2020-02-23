@@ -1,20 +1,44 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public Transform needleTransform;
+    private Transform needleTransform;
+    private TextMeshProUGUI score;
 
-    private const float maxScoreAngle = -30;
-    private const float minScoreAngle = 210;
-    private float scoreDisplay = 90;
+    public float minScoreMultiplier = 0.5f;
+    public float normalScoreMultiplier = 1f;
+    public float maxScoreMultiplier = 2f;
 
-    public void modifyScoreDisplay(float modifier)
+    private float scoreValue = 0f;
+    [SerializeField]
+    private float scoreMultiplier = 1f;
+
+    private const float maxScoreAngle = -30f;
+    private const float minScoreAngle = 210f;
+    private float scoreGauge = 90f;
+
+    private void Start()
     {
-        scoreDisplay -= modifier;
+        needleTransform = transform.Find("needle");
+        score = FindObjectOfType<TextMeshProUGUI>();
+        score.text = "Score : " + scoreValue;
+    }
 
-        if (scoreDisplay < maxScoreAngle) scoreDisplay = maxScoreAngle;
-        if (scoreDisplay > minScoreAngle) scoreDisplay = minScoreAngle;
+    public void modifyScoreGauge(float modifier)
+    {
+        scoreGauge -= modifier;
 
-        needleTransform.eulerAngles = new Vector3(0, 0, scoreDisplay);
+        if (scoreGauge > 130) scoreMultiplier = minScoreMultiplier;
+        if (scoreGauge > 50 && scoreGauge < 130) scoreMultiplier = normalScoreMultiplier;
+        if (scoreGauge > -30 && scoreGauge < 50) scoreMultiplier = maxScoreMultiplier;
+
+        if (modifier > 0f) scoreValue += modifier * (10f) * scoreMultiplier;
+
+        if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
+        if (scoreGauge > minScoreAngle) scoreGauge = minScoreAngle;
+
+        needleTransform.eulerAngles = new Vector3(0, 0, scoreGauge);
+        score.text = "Score : " + scoreValue;
     }
 }
