@@ -3,7 +3,7 @@
 public class SpeedTrigger : MonoBehaviour
 {
     GameObject playerReference;
-    PlayerController pcReference;
+    PathMovement pmReference;
 
     [Header("Nouvelle vitesse du joueur")]
     public float speedModifier;
@@ -11,11 +11,11 @@ public class SpeedTrigger : MonoBehaviour
     void Start()
     {
         playerReference = GameObject.Find("Player");
-        pcReference = playerReference.GetComponent<PlayerController>();
+        pmReference = playerReference.GetComponent<PathMovement>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        pcReference.SpeedModification(speedModifier);
+        pmReference.SpeedModification(speedModifier);
     }
 }

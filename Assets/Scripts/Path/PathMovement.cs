@@ -69,5 +69,10 @@ public class PathMovement : MonoBehaviour
         }
         yield break;
     }
+
+    public void SpeedModification(float modifier)
+    {
+        speed = modifier;
+    }
 }
  
