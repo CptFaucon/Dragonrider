@@ -47,6 +47,11 @@ public class PlayerController : PathFollower
 
     }
 
+    public void SpeedModification(float modifier)
+    {
+        maxMoveSpeed = modifier;
+    }
+
 
     public override void Update()
     {
