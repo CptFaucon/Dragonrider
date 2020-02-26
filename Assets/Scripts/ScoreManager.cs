@@ -6,9 +6,10 @@ public class ScoreManager : MonoBehaviour
     private Transform needleTransform;
     private TextMeshProUGUI score;
 
-    public float minScoreMultiplier = 0.5f;
-    public float normalScoreMultiplier = 1f;
-    public float maxScoreMultiplier = 2f;
+    [Header("Gestion des multiplicateurs de score")]
+    public float minScoreMultiplier = 1f;
+    public float normalScoreMultiplier = 2f;
+    public float maxScoreMultiplier = 4f;
 
     private float scoreValue = 0f;
     [SerializeField]
@@ -16,7 +17,7 @@ public class ScoreManager : MonoBehaviour
 
     private const float maxScoreAngle = -30f;
     private const float minScoreAngle = 210f;
-    private float scoreGauge = 90f;
+    private float scoreGauge = 210f;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class ScoreManager : MonoBehaviour
         score.text = "Score : " + scoreValue;
     }
 
-    public void modifyScoreGauge(float modifier)
+    public void modifyScore(float modifier)
     {
         scoreGauge -= modifier;
 

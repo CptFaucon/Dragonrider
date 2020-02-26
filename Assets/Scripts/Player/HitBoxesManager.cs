@@ -31,7 +31,7 @@ public class HitBoxesManager : MonoBehaviour
                         isHitboxActivated[j] = false;
                     }
                 }
-                sm.modifyScoreGauge(enemiesOnTrigger[i].scoreBonus);
+                sm.modifyScore(enemiesOnTrigger[i].scoreBonus);
                 enemiesOnTrigger[i] = null;
                 isHitboxActivated[i] = false;
             }
