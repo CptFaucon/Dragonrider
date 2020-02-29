@@ -136,19 +136,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6a3832067671247845ddae09b120ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 0
-  maxSpeed: 4
-  minSpeed: 2.5
-  accelerationAndDecelerationSpeed: 15
-  brakeDistance: 1
-  stopDuration: 1
-  HorizontalRange: 7
-  VerticalRange: 4
   upSpawn: 10
   downSpawn: -10
   rightSpawn: 15
   leftSpawn: -15
+  HorizontalRange: 7
+  VerticalRange: 4
   stayDuration: 20
+  currentSpeed: 0
+  maxSpeed: 4
+  minSpeed: 2.5
+  accelerationAndDecelerationSpeed: 5
+  brakeDistance: 1.5
+  stopDuration: 1
 --- !u!1 &7643140468456024009
 GameObject:
   m_ObjectHideFlags: 0
