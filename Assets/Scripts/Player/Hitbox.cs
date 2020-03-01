@@ -13,13 +13,23 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        hitBoxesManager.isHitboxActivated[HitBoxIndex] = true;
-        hitBoxesManager.enemiesOnTrigger[HitBoxIndex] = other.GetComponent<EnemyDisabler>();
+        if (!hitBoxesManager.isHitboxActivated[HitBoxIndex])
+        {
+            hitBoxesManager.isHitboxActivated[HitBoxIndex] = true;
+        }
+        
+        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Add(other.GetComponent<EnemyScript>());
+        Debug.Log(hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        hitBoxesManager.isHitboxActivated[HitBoxIndex] = false;
-        hitBoxesManager.enemiesOnTrigger[HitBoxIndex] = null;
+        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Remove(other.GetComponent<EnemyScript>());
+        if (hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count == 0)
+        {
+            hitBoxesManager.isHitboxActivated[HitBoxIndex] = false;
+        }
+
+        Debug.Log(hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count);
     }
 }
