@@ -6,17 +6,15 @@ public class CameraController : MonoBehaviour
 {
     #region Variables
     [SerializeField]
-    private GameObject body;
-
-    [Header("   Movement Zone")]
+    private Transform body;
     [SerializeField]
-    private float limit = 4;
+    private Transform follow;
 
-    [Space]
-    [Tooltip("Camera Offset on Y-Axis")]
+    [Header("   Position of the Object ToFollow relative to PlayerBody")]
+    [Tooltip("Offset on Y-Axis")]
     [SerializeField]
-    private float offsetY;
-    [Tooltip("Camera Offset on Z-Axis")]
+    private float offsetY = 1;
+    [Tooltip("Offset on Z-Axis")]
     [SerializeField]
     private float offsetZ = -8;
 
@@ -24,25 +22,27 @@ public class CameraController : MonoBehaviour
     [Range(0, 1)]
     [SerializeField]
     private float lerpSpeed = .05f;
-    
+
     #endregion
 
-    
+    private void Awake()
+    {
+        PlayerController pc = FindObjectOfType<PlayerController>();
+        body = pc.transform.Find("PlayerBody");
+        follow = body.transform.Find("ToFollow");
+        follow.localPosition = new Vector3(0, offsetY, offsetZ);
+    }
 
 
     private void FollowPlayer()
     {
-        Vector3 position = transform.localPosition;
-        Vector2 desiredPosition = body.transform.localPosition;
+        transform.LookAt(body);
 
-        desiredPosition.x = Mathf.Clamp(desiredPosition.x, -limit / 2, limit / 2);
-
-
-
+        Vector3 position = transform.position;
+        Vector3 desiredPosition = follow.position;
         position = Vector3.Lerp(position, desiredPosition, lerpSpeed);
-        position.z = offsetZ;
 
-        transform.localPosition = position;
+        transform.position = position;
     }
 
 
