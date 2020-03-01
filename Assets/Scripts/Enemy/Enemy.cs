@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private List<Vector3> spawnPoints;
     private Vector3 spawnPos;
 
+    private ScoreManager sm;
+
     [Header("Position des points de spawn")]
     public float upSpawn;
     public float downSpawn;
@@ -23,6 +25,10 @@ public class Enemy : MonoBehaviour
     [Header("Limites horizontales et verticales des déplacements")]
     public float HorizontalRange;
     public float VerticalRange;
+
+    [Header("Points lors de la destruction")]
+    public float scoreMalus;
+    public float scoreBonus;
 
     [Header("Durée pendant laquelle l'ennemi reste à l'écran")]
     public float stayDuration;
@@ -39,8 +45,10 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        enemy = GameObject.Find("enemyBody");
-        target = transform.Find("enemyTarget");
+        enemy = transform.GetChild(1).gameObject;
+        target = transform.GetChild(0);
+
+        sm = FindObjectOfType<ScoreManager>();
 
         target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
 
@@ -81,7 +89,7 @@ public class Enemy : MonoBehaviour
 
         if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == true)
         {
-            //La désactivation de l'ennemi doit être appelée ici (pulling) et doit remplacer le SetActive
+            sm.modifyScore(scoreMalus);
             gameObject.SetActive(false);
         }
     }

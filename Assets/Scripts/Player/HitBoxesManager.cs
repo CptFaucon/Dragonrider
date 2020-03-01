@@ -6,13 +6,17 @@ public class HitBoxesManager : MonoBehaviour
 
     public KeyCode[] inputs;
 
-    public EnemyScript[] enemiesOnTrigger;
+    public EnemyDisabler[] enemiesOnTrigger;
     public ScoreManager sm;
+    public EnemyDisabler ed;
+    public Enemy e;
 
 
     private void Awake()
     {
         sm = FindObjectOfType<ScoreManager>();
+        ed = FindObjectOfType<EnemyDisabler>();
+        e = FindObjectOfType<Enemy>();
     }
 
 
@@ -22,7 +26,7 @@ public class HitBoxesManager : MonoBehaviour
         {
             if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
             {
-                enemiesOnTrigger[i].gameObject.SetActive(false);
+                enemiesOnTrigger[i].DisableEnemy();
                 for (int j = 0; j < 6; j++)
                 {
                     if (i != j && enemiesOnTrigger[i] == enemiesOnTrigger[j])
@@ -31,7 +35,7 @@ public class HitBoxesManager : MonoBehaviour
                         isHitboxActivated[j] = false;
                     }
                 }
-                sm.modifyScore(enemiesOnTrigger[i].scoreBonus);
+                sm.modifyScore(e.scoreBonus);
                 enemiesOnTrigger[i] = null;
                 isHitboxActivated[i] = false;
             }
