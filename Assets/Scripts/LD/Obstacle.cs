@@ -6,7 +6,8 @@ public class Obstacle : MonoBehaviour
     private Renderer r;
 
     public bool hasCollided;
-    public float scoreAmount;
+    public float scoreMalus;
+    public float scoreBonus;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        sm.modifyScore(scoreAmount);
+        sm.modifyScore(scoreMalus);
         r.enabled = false;
         hasCollided = true;
     }

@@ -5,14 +5,18 @@ public class ScoreManager : MonoBehaviour
 {
     private Transform needleTransform;
     private TextMeshProUGUI score;
+    private TextMeshProUGUI multiplier;
 
     [Header("Gestion des multiplicateurs de score")]
-    public float currentMultiplier = 1f;
-    public float minScoreMultiplier = 1f;
-    public float normalScoreMultiplier = 2f;
-    public float maxScoreMultiplier = 4f;
+    public float currentMultiplier;
+    public float firstMultiplier;
+    public float secondMultiplier;
+    public float thirdMultiplier;
 
-    private float scoreValue = 0f;
+    [Header("Vitesse de remplissage de la jauge")]
+    public float fillingSpeed;
+
+    private float scoreValue;
 
     private const float maxScoreAngle = -30f;
     private const float minScoreAngle = 210f;
@@ -21,17 +25,21 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         needleTransform = transform.Find("needle");
-        score = FindObjectOfType<TextMeshProUGUI>();
+
+        score = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
         score.text = "Score : " + scoreValue;
+
+        multiplier = GameObject.Find("Multiplier").GetComponent<TextMeshProUGUI>();
+        multiplier.text = "x" + currentMultiplier;
     }
 
     public void modifyScore(float modifier)
     {
-        scoreGauge -= modifier * (3);
+        scoreGauge -= modifier * (fillingSpeed);
 
-        if (scoreGauge > 130) currentMultiplier = minScoreMultiplier;
-        if (scoreGauge > 50 && scoreGauge < 130) currentMultiplier = normalScoreMultiplier;
-        if (scoreGauge > -30 && scoreGauge < 50) currentMultiplier = maxScoreMultiplier;
+        if (scoreGauge > 130) currentMultiplier = firstMultiplier;
+        if (scoreGauge > 50 && scoreGauge < 130) currentMultiplier = secondMultiplier;
+        if (scoreGauge > -30 && scoreGauge < 50) currentMultiplier = thirdMultiplier;
 
         if (modifier > 0f) scoreValue += modifier * (10f) * currentMultiplier;
 
@@ -39,6 +47,8 @@ public class ScoreManager : MonoBehaviour
         if (scoreGauge > minScoreAngle) scoreGauge = minScoreAngle;
 
         needleTransform.eulerAngles = new Vector3(0, 0, scoreGauge);
+
         score.text = "Score : " + scoreValue;
+        multiplier.text = "x" + currentMultiplier;
     }
 }

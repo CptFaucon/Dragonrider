@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 651969968295801534}
   - component: {fileID: 651969968295801529}
   - component: {fileID: 651969968295801535}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: avoidObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c80a1fbd136484fbd53c75bb29287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 10
 --- !u!1 &651969968709629137
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +79,7 @@ GameObject:
   - component: {fileID: 651969968709629140}
   - component: {fileID: 651969968709629143}
   - component: {fileID: 651969968709629142}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,4 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasCollided: 0
-  scoreAmount: -10
+  scoreMalus: -10
+  scoreBonus: 10

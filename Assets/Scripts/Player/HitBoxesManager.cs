@@ -47,7 +47,7 @@ public class HitBoxesManager : MonoBehaviour
                         }
                     }
                     enemiesOnTrigger[i][k].gameObject.SetActive(false);
-                    sm.modifyScoreGauge(enemiesOnTrigger[i][k].scoreBonus);
+                    sm.modifyScore(enemiesOnTrigger[i][k].scoreBonus);
                     enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                 }
 

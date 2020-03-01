@@ -5,8 +5,6 @@ public class avoidObstacle : MonoBehaviour
     private ScoreManager sm;
     private Obstacle o;
 
-    public float scoreAmount;
-
     private void Start()
     {
         sm = FindObjectOfType<ScoreManager>();
@@ -17,7 +15,7 @@ public class avoidObstacle : MonoBehaviour
     {
         if (o.hasCollided == false)
         {
-            sm.modifyScore(scoreAmount);
+            sm.modifyScore(o.scoreBonus);
         }
     }
 }
