@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
         spawnPoints.Add(new Vector3(leftSpawn,0,0));
 
         spawnPos = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        enemy.transform.position = spawnPos;
+        enemy.transform.localPosition = spawnPos;
 
         StartCoroutine(StayDuration());
     }
