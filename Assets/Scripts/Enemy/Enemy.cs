@@ -43,7 +43,16 @@ public class Enemy : MonoBehaviour
     public float brakeDistance;
     public float stopDuration;
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
+        gameObject.transform.SetParent(other.transform);
+        transform.localPosition = new Vector3(0, 0, 2);
+        LaunchScript();
+    }
+
+    private void LaunchScript()
     {
         enemy = transform.GetChild(1).gameObject;
         target = transform.GetChild(0);
