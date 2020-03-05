@@ -17,7 +17,7 @@ MonoBehaviour:
   length: 2
   difficulty: 1
   path:
-  - {x: -3, y: 0, z: 5}
+  - {x: -3, y: -3, z: 5}
   elements:
   - element: {fileID: 11400000, guid: 04bdf2887d514574cad4ed08cf7b5777, type: 2}
     localPosition: {x: 0, y: 0, z: 3}

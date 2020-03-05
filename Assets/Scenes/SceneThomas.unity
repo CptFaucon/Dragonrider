@@ -2468,6 +2468,8 @@ MonoBehaviour:
   isHitboxActivated: 000000000000
   inputs: 6b0000006c0000006d000000690000006f00000070000000
   sm: {fileID: 0}
+  ed: {fileID: 0}
+  e: {fileID: 0}
 --- !u!1 &264975612293739406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,10 +2969,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ce0c4d5d16bcd43b181ee4d1f4b5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  follow: {fileID: 0}
-  offsetY: 1
-  offsetZ: -8
+  defaultOffset: {x: 0, y: 1, z: -6}
+  divingOffset: {x: 0, y: 1.5, z: -7}
+  flyingOffset: {x: 0, y: 0.5, z: -5}
   lerpSpeed: 0.05
 --- !u!1 &264975612505612445
 GameObject:

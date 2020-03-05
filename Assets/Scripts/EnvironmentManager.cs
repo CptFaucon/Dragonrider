@@ -598,7 +598,7 @@ public class EnvironmentManager : MonoBehaviour
     }
 
 
-    private void SetElementsActive(SituationData situation, Transform currentField, int iteration)
+    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint)
     {
         Vector3 position = new Vector3(0, 0, dimensions[1] / 2 * iteration);
 
@@ -618,6 +618,8 @@ public class EnvironmentManager : MonoBehaviour
 
             AddPathPoint(point + position, currentField);
         }
+        
+        AddPathPoint(lastPoint, currentField);
     }
 
 
@@ -645,7 +647,8 @@ public class EnvironmentManager : MonoBehaviour
             new int[2] { 1, 0 } ;
         for (int i = 0; i <= length[1]; i++) {
 
-            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i);
+            Vector3 lastPoint = new Vector3(0, 0, dimensions[1] * (2 + i - length[1]) / 2);
+            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint);
         }
 
         if (index < numberOfFields - 1) {
@@ -663,11 +666,6 @@ public class EnvironmentManager : MonoBehaviour
                     AddPathPoint(point.localPosition, path.transform);
                 }
             }
-        }
-
-        AddPathPoint(transitionPositions[index], null);
-
-        if (index < numberOfFields - 1) {
 
             AddPathPoint(fieldPositions[index + 1], null);
         }
