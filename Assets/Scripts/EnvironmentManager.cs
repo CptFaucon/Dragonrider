@@ -90,7 +90,7 @@ public class EnvironmentManager : MonoBehaviour
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
     private GameObject[,] elements;
     private int[] indexes;
-    private int maxIndex = 10;
+    private int maxIndex = 6;
     
     private int[] majorChallenges;
     private int[] attributes;

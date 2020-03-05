@@ -16,15 +16,11 @@ MonoBehaviour:
   majorChallenge: 1
   length: 2
   difficulty: 1
-  path:
-  - {x: 3, y: -2, z: 5}
+  path: []
   elements:
-  - element: {fileID: 11400000, guid: e27a3906e16e8d64ea925ec00d090391, type: 2}
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
     localPosition: {x: 0, y: 0, z: 3}
     localRotation: {x: 0, y: 0, z: 0}
-  - element: {fileID: 11400000, guid: e27a3906e16e8d64ea925ec00d090391, type: 2}
-    localPosition: {x: -1, y: 0, z: 5}
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
+    localPosition: {x: 0, y: 0, z: 5}
     localRotation: {x: 0, y: 0, z: 0}
-  - element: {fileID: 11400000, guid: e27a3906e16e8d64ea925ec00d090391, type: 2}
-    localPosition: {x: 1, y: 2, z: 8}
-    localRotation: {x: 0, y: 180, z: 0}

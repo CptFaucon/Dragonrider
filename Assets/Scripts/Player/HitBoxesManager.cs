@@ -7,7 +7,7 @@ public class HitBoxesManager : MonoBehaviour
 
     public KeyCode[] inputs;
 
-    public List<List<EnemyScript>> enemiesOnTrigger = new List<List<EnemyScript>>();
+    public List<List<EnemyDisabler>> enemiesOnTrigger = new List<List<EnemyDisabler>>();
     public ScoreManager sm;
     public EnemyDisabler ed;
     public Enemy e;
@@ -18,7 +18,7 @@ public class HitBoxesManager : MonoBehaviour
         sm = FindObjectOfType<ScoreManager>();
         foreach (var item in isHitboxActivated)
         {
-            enemiesOnTrigger.Add(new List<EnemyScript>());
+            enemiesOnTrigger.Add(new List<EnemyDisabler>());
         }
     }
 
@@ -46,8 +46,7 @@ public class HitBoxesManager : MonoBehaviour
                             }
                         }
                     }
-                    enemiesOnTrigger[i][k].gameObject.SetActive(false);
-                    sm.modifyScore(enemiesOnTrigger[i][k].scoreBonus);
+                    enemiesOnTrigger[i][k].DisableEnemy();
                     enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                 }
 

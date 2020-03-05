@@ -16,9 +16,8 @@ MonoBehaviour:
   majorChallenge: 1
   length: 1
   difficulty: 1
-  path:
-  - {x: 1, y: 0, z: 2.5}
+  path: []
   elements:
-  - element: {fileID: 11400000, guid: 04bdf2887d514574cad4ed08cf7b5777, type: 2}
-    localPosition: {x: 0, y: 0, z: 2.5}
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
+    localPosition: {x: 0, y: 0, z: 1}
     localRotation: {x: 0, y: 0, z: 0}

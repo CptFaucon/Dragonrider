@@ -187,7 +187,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13086
+  m_Name: pb_Mesh25750
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -347,7 +347,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13114
+  m_Name: pb_Mesh25778
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -507,7 +507,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13064
+  m_Name: pb_Mesh25728
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -667,7 +667,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13136
+  m_Name: pb_Mesh25800
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -853,6 +853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementData:
   - {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+  - {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
   - {fileID: 11400000, guid: 04bdf2887d514574cad4ed08cf7b5777, type: 2}
   - {fileID: 11400000, guid: e27a3906e16e8d64ea925ec00d090391, type: 2}
   - {fileID: 11400000, guid: 0f34a2e58dcf8694985769c2eed2abd0, type: 2}
@@ -896,9 +897,9 @@ MonoBehaviour:
   difficultRateUp: 80
   difficultRateDown: 40
   chances:
-  - spearChallengeChances: 34
-    dodgingChallengeChances: 33
-    observationChallengeChances: 33
+  - spearChallengeChances: 0
+    dodgingChallengeChances: 100
+    observationChallengeChances: 0
 --- !u!65 &1711986978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -932,7 +933,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13170
+  m_Name: pb_Mesh25834
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1236,7 +1237,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13048
+  m_Name: pb_Mesh25712
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2451,7 +2452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathToFollow: {fileID: 264975612579802535}
   CurrentWayPointID: 0
-  speed: 6
+  speed: 1
   rotationSpeed: 2
 --- !u!114 &264975612293739401
 MonoBehaviour:

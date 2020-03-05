@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    GameObject enemy;
+    EnemyDisabler enemy;
     Transform target;
 
     private bool stopped;
     private bool stayDurationEnded;
     private bool lastPath;
+    private bool isActivated = false;
 
     private List<Vector3> spawnPoints;
     private Vector3 spawnPos;
@@ -45,19 +46,31 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(1).gameObject.SetActive(true);
-        gameObject.transform.SetParent(other.transform);
+        transform.SetParent(other.transform);
         transform.localPosition = new Vector3(0, 0, 2);
         LaunchScript();
     }
 
     private void LaunchScript()
     {
-        enemy = transform.GetChild(1).gameObject;
-        target = transform.GetChild(0);
+        if (enemy == null)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
+            enemy = transform.GetChild(1).GetComponent<EnemyDisabler>();
+            enemy.parent = this;
+            target = transform.GetChild(0);
+        }
+        else
+        {
+            enemy.gameObject.SetActive(true);
+            target.gameObject.SetActive(true);
+        }
 
-        sm = FindObjectOfType<ScoreManager>();
+        if (sm == null)
+        {
+            sm = FindObjectOfType<ScoreManager>();
+        }
 
         target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
 
@@ -69,38 +82,63 @@ public class Enemy : MonoBehaviour
         spawnPoints.Add(new Vector3(leftSpawn,0,0));
 
         spawnPos = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        enemy.transform.position = spawnPos;
+        enemy.transform.localPosition = spawnPos;
 
         StartCoroutine(StayDuration());
+
+        isActivated = true;
     }
 
     private void Update()
     {
-        enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(enemy.transform.position, target.position) > brakeDistance && stopped == false) currentSpeed += accelerationAndDecelerationSpeed * Time.deltaTime;
-        if (Vector3.Distance(enemy.transform.position, target.position) < brakeDistance && stopped == false) currentSpeed -= accelerationAndDecelerationSpeed * Time.deltaTime;
-
-        if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
-        if (currentSpeed < minSpeed && stopped == false) currentSpeed = minSpeed;
-
-        if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == false && lastPath == false)
+        if (isActivated)
         {
-            target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
-            StartCoroutine(Stopping());
-        }
+            enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
 
-        if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == false)
-        {
-            target.localPosition = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            lastPath = true;
-        }
+            if (Vector3.Distance(enemy.transform.position, target.position) > brakeDistance && stopped == false) currentSpeed += accelerationAndDecelerationSpeed * Time.deltaTime;
+            if (Vector3.Distance(enemy.transform.position, target.position) < brakeDistance && stopped == false) currentSpeed -= accelerationAndDecelerationSpeed * Time.deltaTime;
 
-        if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == true)
-        {
-            sm.modifyScore(scoreMalus);
-            gameObject.SetActive(false);
+            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            if (currentSpeed < minSpeed && stopped == false) currentSpeed = minSpeed;
+
+            if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == false && lastPath == false)
+            {
+                target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
+                StartCoroutine(Stopping());
+            }
+
+            if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == false)
+            {
+                target.localPosition = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                lastPath = true;
+            }
+
+            if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == true)
+            {
+                EndLife();
+            }
         }
+    }
+
+    public void EndLife()
+    {
+        float score = lastPath
+            ? scoreMalus
+            : scoreBonus;
+        
+        Debug.Log(lastPath
+            ? "Enemy has escaped"
+            : "Enemy defeated, good job !"
+            );
+
+        lastPath = false;
+        isActivated = false;
+
+        sm.modifyScore(score);
+        enemy.gameObject.SetActive(false);
+        target.gameObject.SetActive(false);
+        transform.SetParent(null);
+        gameObject.SetActive(false);
     }
 
     IEnumerator Stopping()
