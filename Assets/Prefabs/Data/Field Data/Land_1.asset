@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e54dc15ba6edf44ad400027a958181, type: 3}
-  m_Name: ElementDataExample
+  m_Script: {fileID: 11500000, guid: 7f3529ab8091b8e41913a9beae3d5b0d, type: 3}
+  m_Name: Land_1
   m_EditorClassIdentifier: 
-  element: {fileID: 421053134400237524, guid: 20285390ab0245a4fa37b516536b7bf5, type: 3}
-  description: "Ceci est un exemple pour que le dossier ne soit pas supprim\xE9"
+  attribute: 1
+  field: {fileID: 819987303105758284, guid: 47ba91183d2f2fa48b14989e69e292ef, type: 3}

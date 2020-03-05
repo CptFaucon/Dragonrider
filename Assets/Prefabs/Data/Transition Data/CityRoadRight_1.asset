@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e54dc15ba6edf44ad400027a958181, type: 3}
-  m_Name: ElementDataExample
+  m_Script: {fileID: 11500000, guid: 295735458a68efd45905a51019151e82, type: 3}
+  m_Name: CityRoadRight_1
   m_EditorClassIdentifier: 
-  element: {fileID: 421053134400237524, guid: 20285390ab0245a4fa37b516536b7bf5, type: 3}
-  description: "Ceci est un exemple pour que le dossier ne soit pas supprim\xE9"
+  inAttribute: 0
+  outAttribute: 2
+  outDirection: 1
+  transition: {fileID: 3418242833505219271, guid: 54f599ca789e90c4ca80b70844033943,
+    type: 3}

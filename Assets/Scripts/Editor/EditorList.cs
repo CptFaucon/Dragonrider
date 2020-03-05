@@ -12,6 +12,7 @@ public enum EditorListOption {
 	Default = ListSize | ListLabel | ElementLabels,
 	NoElementLabels = ListSize | ListLabel,
     NoListSize = ListLabel | ElementLabels,
+    NoListLabel = ListSize | ElementLabels,
 	All = Default | Buttons
 }
 

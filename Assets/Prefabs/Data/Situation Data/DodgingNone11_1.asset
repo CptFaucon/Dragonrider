@@ -10,8 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
-  m_Name: SituationDataExample
+  m_Name: DodgingNone11_1
   m_EditorClassIdentifier: 
-  majorChallenge: 0
+  attribute: 3
+  majorChallenge: 1
+  length: 1
   difficulty: 1
-  elements: []
+  path:
+  - {x: 0, y: 0, z: 0.1}
+  - {x: 1, y: 0, z: 2.5}
+  - {x: 0, y: 0, z: 4.9}
+  elements:
+  - element: {fileID: 11400000, guid: 04bdf2887d514574cad4ed08cf7b5777, type: 2}
+    localPosition: {x: 0, y: 0, z: 2.5}
+    localRotation: {x: 0, y: 0, z: 0}
