@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e54dc15ba6edf44ad400027a958181, type: 3}
   m_Name: ElementDataExample
   m_EditorClassIdentifier: 
-  element: {fileID: 0}
+  element: {fileID: 421053134400237524, guid: 20285390ab0245a4fa37b516536b7bf5, type: 3}
   description: "Ceci est un exemple pour que le dossier ne soit pas supprim\xE9"

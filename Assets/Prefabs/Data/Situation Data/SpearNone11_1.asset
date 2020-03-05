@@ -10,8 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
-  m_Name: SituationDataExample
+  m_Name: SpearNone11_1
   m_EditorClassIdentifier: 
+  attribute: 3
   majorChallenge: 0
+  length: 1
   difficulty: 1
-  elements: []
+  path:
+  - {x: -1.5, y: -1.5, z: 3}
+  elements:
+  - element: {fileID: 11400000, guid: e27a3906e16e8d64ea925ec00d090391, type: 2}
+    localPosition: {x: 0, y: 0, z: 2}
+    localRotation: {x: 0, y: 0, z: 0}

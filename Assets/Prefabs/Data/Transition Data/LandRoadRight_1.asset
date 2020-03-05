@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 295735458a68efd45905a51019151e82, type: 3}
-  m_Name: TransitionDataCityLandLeft_1
+  m_Name: LandRoadRight_1
   m_EditorClassIdentifier: 
-  inAttribute: 0
-  outAttribute: 1
-  outDirection: 0
-  transition: {fileID: 0}
+  inAttribute: 1
+  outAttribute: 2
+  outDirection: 1
+  transition: {fileID: 3657832106924943166, guid: cab368f2c0b67184b836695fd795a47e,
+    type: 3}

@@ -1,215 +1,706 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
+[RequireComponent(typeof(BoxCollider))]
 
 public class EnvironmentManager : MonoBehaviour
 {
-    /*
-    public enum Type {
-
-        City, Land, Road
-    }
-    public enum Direction {
-
-        Left, Forward, Right
-    }
-
-    [Serializable]
-    public class Path {
-
-        public Direction direction;
-        public PathManager path;
-        public GameObject situations;
-        public int numberOfObstacles;
-    }
-    
-    [Serializable]
-    public class Terrain {
-
-        public Type type;
-        public GameObject terrain;
-        public Path[] easyPaths;
-        public Path[] difficultPaths;
-    }
-    [Header("   Terrains && Transitions")]
+    [Space]
+    [Header("__________________DATA__________________________________________________________________________________________________________________________________________________________________")]
     [SerializeField]
-    private Terrain[] terrains;
-    
-    [Serializable]
-    public class Transition {
-
-        public Type currentType;
-        public Type newType;
-        public PathManager transition;
-    }
+    private ElementData[] elementData;
     [SerializeField]
-    private Transition[] transitions;
-
-
-    [Header("Terrain Variables")]
+    private SituationData[] situationData;
     [SerializeField]
-    private Vector2 dimensions;
-    private Vector2[] whereToSpawn = new Vector2[3];
-
-    
-    [Header("   Terrains Choice Variables")]
+    private FieldData[] fieldData;
     [SerializeField]
-    [Range(0, 100)]
-    private int firstChancesToRepeatType;
+    private TransitionData[] transitionData;
+
+    private PathManager player;
+
+    [Space]
+    [Header("__________________FIELD__________________________________________________________________________________________________________________________________________________________________")]
+    [SerializeField]
+    private Vector2 dimensions = new Vector2(30, 50);
+
+    [SerializeField]
+    private int numberOfFields = 15;
 
     [SerializeField]
     [Range(0, 100)]
-    private int chanceDecreaseToRepeatType;
+    private int firstChancesToRepeatType = 100;
 
     [SerializeField]
     [Range(0, 100)]
-    private int difficultRate;
-    private int obstacleNb;
+    private int chanceDecreaseToRepeatType = 25;
 
-
-    private Terrain[] currentTerrain = new Terrain[2];
-    private Transition[] currentTransition = new Transition[2];
-    private List<List<Terrain>> terrainTypes = new List<List<Terrain>>();
-    private PathManager[] paths = new PathManager[4];
-    private int[] iterations = new int[3] { 0, 0, 0 };
     private int repeatCount = 0;
-    private int failedObstacles;
+    private Transform[] fields;
+    private Transform[] transitions;
+    private Vector3[] fieldPositions;
+    private Vector3[] transitionPositions;
+    private int[] directions;
+
+    [Space]
+    [Header("__________________DIFFICULTY__________________________________________________________________________________________________________________________________________________________________")]
+    [SerializeField]
+    [Range(50, 100)]
+    private int difficultRateUp = 80;
+
+    [SerializeField]
+    [Range(0, 50)]
+    private int difficultRateDown = 40;
+
+    private int currentDifficulty;
+
+
+    [Serializable]
+    public class ChallengeChances {
+
+        [SerializeField]
+        [Range(0, 100)]
+        private int spearChallengeChances = 30;
+
+        [SerializeField]
+        [Range(0, 100)]
+        private int dodgingChallengeChances = 40;
+
+        [SerializeField]
+        [Range(0, 100)]
+        private int observationChallengeChances = 30;
+
+        public int[] chances {
+            get {
+                return new int[] { spearChallengeChances, dodgingChallengeChances, observationChallengeChances };
+            }
+        }
+    }
+
+    [Space]
+    [Header("__________________CHALLENGE__________________________________________________________________________________________________________________________________________________________________")]
+    [SerializeField]
+    private ChallengeChances[] chances = new ChallengeChances[1];
+
+
+    private int nbOfObstacles = 1;
+    private int failedObstacles = 0;
+    private List<List<List<List<List<SituationData>>>>> situations = new List<List<List<List<List<SituationData>>>>>();
+    private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
+    private GameObject[,] elements;
+    private int[] indexes;
+    private int maxIndex = 6;
+    
+    private int[] majorChallenges;
+    private int[] attributes;
+
+    private int fieldIndex = 1;
+    private List<GameObject> currentElements = new List<GameObject>();
+
 
 
     private void Awake()
     {
-        for (int i = 0; i < 3; i++) {
+        #region Instantiate all Elements
+        
+        int length = elementData.Length;
+        
+        indexes = new int[length];
+        
+        for (int i = 0; i < length; i++) {
+            
+            for (int j = 0; j < situationData.Length; j++) {
 
-            List<Terrain> terrainList = new List<Terrain>();
-            Type type = (Type)Enum.GetValues(i.GetType()).GetValue(i);
+                for (int k = 0; k < situationData[j].Elements.Length; k++) {
 
-            foreach (var terrain in terrains) {
+                    if (situationData[j].Elements[k].element == elementData[i]) {
 
-                if (terrain.type == type) {
-
-                    terrainList.Add(terrain);
+                        situationData[j].Elements[k].element.setIndex(i);
+                    }
                 }
             }
 
-            terrainTypes.Add(terrainList);
+            indexes[i] = 0;
         }
-    }
 
 
-    private Transition newTransition(Type currentType, Type newType)
-    {
-        List<Transition> possibilities = new List<Transition>();
+        elements = new GameObject[length, maxIndex];
 
-        foreach (var transition in transitions) {
+        for (int i = 0; i < length; i++) {
 
-            if (transition.currentType == currentType && transition.newType == newType) {
+            for (int j = 0; j < maxIndex; j++) {
 
-                possibilities.Add(transition);
+                elements[i, j] = Instantiate(elementData[i].Element);
+                elements[i, j].SetActive(false);
             }
         }
 
-        int i = 0;
-        return possibilities[UnityEngine.Random.Range(i, possibilities.Count)];
-    }
+        #endregion
 
 
-    private Terrain newTerrain(Terrain currentTerrain)
-    {
-        int currentType = Array.IndexOf(Enum.GetValues(currentTerrain.type.GetType()), currentTerrain.type);
-
-        float random = UnityEngine.Random.Range(0, 100);
-        int repeat = Mathf.Clamp(firstChancesToRepeatType - repeatCount * chanceDecreaseToRepeatType, 0, 100);
-
-        List<int> types = new List<int>();
-
+        #region Classify Situation Data by Difficulty, Major Challenge, Length and Attribute
+        
         for (int i = 0; i < 3; i++) {
 
-            types.Add(i);
+            situations.Add(new List<List<List<List<SituationData>>>>());
+            backup.Add(new List<List<List<List<SituationData>>>>());
+
+            for (int j = 0; j < 3; j++) {
+
+                situations[i].Add(new List<List<List<SituationData>>>());
+                backup[i].Add(new List<List<List<SituationData>>>());
+
+                for (int k = 0; k < 3; k++) {
+
+                    situations[i][j].Add(new List<List<SituationData>>());
+                    backup[i][j].Add(new List<List<SituationData>>());
+
+                    for (int l = 0; l < 2; l++) {
+
+                        situations[i][j][k].Add(new List<SituationData>());
+                        backup[i][j][k].Add(new List<SituationData>());
+                    }
+                }
+            }
         }
-        types.Remove(currentType);
 
-        int otherOne = types[0];
-        int otherTwo = types[1];
-        int newType = currentType;
+        foreach (SituationData data in situationData) {
 
+            int attribute = data.attributeInt;
 
-        if (random >= repeat) { 
-            
-            if (random < repeat + (100 - repeat) * ((float)iterations[otherOne] / iterations[otherTwo])) {
+            if (attribute == 3) {
 
-                newType = otherOne;
-                repeatCount = 0;
+                for (int i = 0; i < 3; i++) {
+                    
+                    situations[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
+                    backup[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
+                }
             }
             else {
 
-                newType = otherTwo;
-                repeatCount = 0;
+                situations[data.Difficulty][data.challengeInt][attribute][data.Length].Add(data);
+                backup[data.Difficulty][data.challengeInt][attribute][data.Length].Add(data);
+            }
+        }
+
+        #endregion
+
+
+        #region Classify Fields by Attribute
+        
+        List<List<FieldData>> fieldDatas = new List<List<FieldData>>();
+
+        for (int i = 0; i < 3; i++) {
+
+            fieldDatas.Add(new List<FieldData>());
+        }
+        
+        foreach (FieldData data in fieldData) {
+            
+            fieldDatas[data.attributeInt].Add(data);
+        }
+
+        #endregion
+
+
+        #region Classify Transitions by Attribute In and Out
+
+        List<List<List<TransitionData>>> transitionDatas = new List<List<List<TransitionData>>>();
+
+        for (int i = 0; i < 3; i++) {
+
+            transitionDatas.Add(new List<List<TransitionData>>());
+
+            for (int j = 0; j < 3; j++) {
+
+                transitionDatas[i].Add(new List<TransitionData>());
+            }
+        }
+        
+        foreach (TransitionData data in transitionData) {
+
+            transitionDatas[data.InAttribute][data.OutAttribute].Add(data);
+        }
+
+        #endregion
+
+
+        #region Set Field Indexes (which Field will appear when) and Transition Indexes
+
+        attributes = new int[numberOfFields];
+
+        int[] iterations = new int[3] { 0, 0, 0 };
+
+        int currentAttribute = UnityEngine.Random.Range(0, 3);
+        attributes[0] = currentAttribute;
+        iterations[currentAttribute]++;
+
+        int currentIndex = UnityEngine.Random.Range(0, fieldDatas[currentAttribute].Count);
+        
+        List<int[]> fieldIndexes = new List<int[]>();
+        fieldIndexes.Add(new int[] { currentAttribute, currentIndex });
+
+        List<int[]> transitionIndexes = new List<int[]>();
+
+        for (int i = 1; i < numberOfFields; i++) {
+
+            float random = UnityEngine.Random.Range(0, 100);
+            int repeat = Mathf.Clamp(firstChancesToRepeatType - repeatCount * chanceDecreaseToRepeatType, 0, 100);
+
+            List<int> types = new List<int>();
+
+            for (int j = 0; j < 3; j++) {
+
+                types.Add(j);
+            }
+            types.Remove(currentAttribute);
+
+            int otherOne = types[0];
+            int otherTwo = types[1];
+            int newAttribute = currentAttribute;
+
+
+            if (random >= repeat) {
+
+                float rapport;
+
+                if (iterations[otherOne] == 0) {
+                    if (iterations[otherTwo] == 0) {
+                        rapport = .5f;
+                    }
+                    else {
+                        rapport = 1;
+                    }
+                }
+                else {
+                    if (otherTwo == 0) {
+                        rapport = 0;
+                    }
+                    else {
+                        rapport = (float)iterations[otherOne] / iterations[otherTwo];
+                    }
+                }
+
+                if (random < repeat + (100f - repeat) * rapport) {
+
+                    newAttribute = otherOne;
+                    repeatCount = 0;
+                }
+                else {
+
+                    newAttribute = otherTwo;
+                    repeatCount = 0;
+                }
+            }
+            else  {
+
+                repeatCount++;
+            }
+
+            attributes[i] = newAttribute;
+            iterations[newAttribute]++;
+
+            int newIndex = UnityEngine.Random.Range(0, fieldDatas[newAttribute].Count);
+
+            int[] fIndex = new int[2] { newAttribute, newIndex };
+
+            while (AreIntsEqual(fieldIndexes[i - 1], fIndex)) {
+
+                newIndex = UnityEngine.Random.Range(0, fieldDatas[newAttribute].Count);
+
+                fIndex[1] = newIndex;
+            }
+
+
+            #region Set Transition
+            
+            int TIndex = UnityEngine.Random.Range(0, transitionDatas[currentAttribute][newAttribute].Count);
+
+            int[] tIndex = new int[4] { currentAttribute, newAttribute, TIndex, transitionDatas[currentAttribute][newAttribute][TIndex].OutDirection };
+
+            if (i > 1) {
+
+                while (AreIntsEqual(transitionIndexes[i - 2], tIndex)) {
+
+                    TIndex = UnityEngine.Random.Range(0, transitionDatas[currentAttribute][newAttribute].Count);
+
+                    tIndex[2] = TIndex;
+                    tIndex[3] = transitionDatas[currentAttribute][newAttribute][TIndex].OutDirection;
+                }
+            }
+
+            transitionIndexes.Add(tIndex);
+
+            #endregion
+
+            
+            currentIndex = newIndex;
+            currentAttribute = newAttribute;
+
+            fieldIndexes.Add(fIndex);
+        }
+
+        #endregion
+
+
+        #region Instantiate needed Fields and Transitions
+
+        fields = new Transform[numberOfFields];
+        transitions = new Transform[numberOfFields - 1];
+
+        for (int i = 0; i < numberOfFields; i++) {
+
+            int index = FieldIndex(i, fieldIndexes);
+
+            if (i > 0 && index != i) {
+
+                fields[i] = fields[index];
+            }
+            else {
+
+                fields[i] = Instantiate(
+                    fieldDatas
+                    [fieldIndexes[i][0]]
+                    [fieldIndexes[i][1]]
+                    .Field.transform
+                    );
+                fields[i].gameObject.SetActive(false);
+            }
+
+            if (i < numberOfFields - 1) { 
+
+                index = FieldIndex(i, transitionIndexes);
+                if (i > 0 && index != i) {
+
+                    transitions[i] = transitions[index];
+                }
+                else {
+
+                    transitions[i] = Instantiate(
+                        transitionDatas
+                        [transitionIndexes[i][0]]
+                        [transitionIndexes[i][1]]
+                        [transitionIndexes[i][2]]
+                        .Transition.transform
+                        );
+                    transitions[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region Set Position && Rotation of Fields and Transitions
+
+        fieldPositions = new Vector3[numberOfFields];
+        transitionPositions = new Vector3[numberOfFields];
+        directions = new int[numberOfFields];
+        int direction = 0;
+        directions[0] = direction;
+
+        Vector3 position = Vector3.zero;
+        fieldPositions[0] = position;
+
+        for (int i = 1; i < numberOfFields; i++) {
+
+            position += TransitionPosition(direction);
+            transitionPositions[i - 1] = position;
+
+            int lastDirection = direction;
+            if (transitionIndexes[i - 1][3] == 0) {
+
+                direction = (direction + 3) % 4;
+            }
+            else {
+
+                direction = (direction + 1) % 4;
+            }
+            position += FieldPosition(direction, lastDirection);
+            fieldPositions[i] = position;
+            directions[i] = direction;
+        }
+
+        position += TransitionPosition(direction);
+        transitionPositions[numberOfFields - 1] = position;
+
+        #endregion
+
+
+        #region Set Major Challenges
+
+        int chalRandom = UnityEngine.Random.Range(0, chances.Length);
+        int[] chal = chances[chalRandom].chances;
+        for (int i = 0; i < 3; i++) {
+            chal[i] = Mathf.RoundToInt(chal[i] * (float)numberOfFields / 100);
+        }
+
+        List<int> chalInt = new List<int>();
+        for (int i = 0; i < 3; i++) {
+
+            for (int j = 0; j < chal[i]; j++) {
+
+                chalInt.Add(i);
+            }
+        }
+
+        List<int> majorChal = new List<int>();
+        for (int i = 0; i < numberOfFields; i++) {
+
+            if (chalInt.Count == 0) {
+
+                majorChal.Add(UnityEngine.Random.Range(0, 3));
+            }
+            else {
+
+                chalRandom = UnityEngine.Random.Range(0, chalInt.Count);
+                majorChal.Add(chalInt[chalRandom]);
+                chalInt.Remove(chalInt[chalRandom]);
+            }
+        }
+
+        majorChallenges = majorChal.ToArray();
+
+        #endregion
+
+        
+        player = FindObjectOfType<PathMovement>().PathToFollow;
+        GetComponent<Collider>().isTrigger = true;
+        SetFieldActive(0);
+    }
+
+
+    private int FieldIndex(int currentIndex, List<int[]> indexes)
+    {
+        for (int i = 0; i < currentIndex; i++) {
+
+            if (AreIntsEqual(indexes[currentIndex], indexes[i])) {
+
+                return i;
+            }
+        }
+
+        return currentIndex;
+    }
+
+
+    private bool AreIntsEqual(int[] a, int[] b)
+    {
+        for (int i = 0; i < a.Length; i++) {
+
+            if (a[i] != b[i]) {
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    private Vector3 TransitionPosition(int direction)
+    {
+        if (direction == 0) {
+
+            return new Vector3(0, 0, dimensions[1]);   /// Forward
+        }
+        else if (direction == 1) {
+
+            return new Vector3(dimensions[1], 0, 0);   /// Right
+        }
+        else if (direction == 2) {
+
+            return new Vector3(0, 0, -dimensions[1]);   /// Back
+        }
+        else {
+
+            return new Vector3(-dimensions[1], 0);   /// Left
+        }
+    }
+
+    
+    private Vector3 FieldPosition(int currentDirection, int lastDirection)
+    {
+        if (currentDirection == 0) {
+
+            int direction = -(lastDirection - 2);
+            return new Vector3(direction * dimensions[0] / 2, 0, dimensions[0] / 2);   /// Forward
+        }
+        else if (currentDirection == 1) {
+
+            int direction = -(lastDirection - 1);
+            return new Vector3(dimensions[0] / 2, 0, direction * dimensions[0] / 2);   /// Right
+        }
+        else if (currentDirection == 2) {
+
+            int direction = -(lastDirection - 2);
+            return new Vector3(direction * dimensions[0] / 2, 0, -dimensions[0] / 2);   /// Back
+        }
+        else {
+
+            int direction = -(lastDirection - 1);
+            return new Vector3(-dimensions[0] / 2, 0, direction * dimensions[0] / 2);   /// Left
+        }
+    }
+
+
+    private Vector3 Rotation(int direction)
+    {
+        return new Vector3(0, direction * 90, 0);
+    }
+
+
+    private SituationData Situation(int majorChallenge, int attribute, int length)
+    {
+        int random = 0;
+        SituationData sd;
+
+        if (failedObstacles / nbOfObstacles * 100 >= difficultRateDown) {
+
+            if (failedObstacles / nbOfObstacles * 100 >= difficultRateUp) {
+
+                currentDifficulty = Mathf.Min(currentDifficulty + 1, 2);
             }
         }
         else {
 
-            repeatCount++;
+            currentDifficulty = Mathf.Max(currentDifficulty - 1, 0);
         }
 
-        iterations[newType]++;
+        if (situations[currentDifficulty][majorChallenge][attribute][length].Count == 0) {
 
+            foreach (var sit in backup[currentDifficulty][majorChallenge][attribute][length]) {
 
-        Terrain terrain = terrainTypes[newType][UnityEngine.Random.Range(0, terrainTypes[newType].Count - 1)];
-
-        while (terrain == currentTerrain) {
-
-            terrain = terrainTypes[newType][UnityEngine.Random.Range(0, terrainTypes[newType].Count - 1)];
+                situations[currentDifficulty][majorChallenge][attribute][length].Add(sit);
+            }
         }
-        return terrain;
+
+        random = UnityEngine.Random.Range(0, situations[currentDifficulty][majorChallenge][attribute][length].Count);
+
+        sd = situations[currentDifficulty][majorChallenge][attribute][length][random];
+
+        for (int i = 0; i < 3; i++) {
+
+            for (int j = 0; j < situations[currentDifficulty][majorChallenge][i][length].Count; j++) {
+
+                if (sd == situations[currentDifficulty][majorChallenge][i][length][j]) {
+
+                    situations[currentDifficulty][majorChallenge][i][length].Remove(situations[currentDifficulty][majorChallenge][i][length][j]);
+                    j--;
+                }
+            }
+        }
+
+        nbOfObstacles = sd.Elements.Length;
+
+        return sd;
     }
 
 
-    public void ChangeTerrain()
+    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint)
     {
-        for (int i = 0; i < 2; i++) {
+        Vector3 position = new Vector3(0, 0, dimensions[1] / 2 * iteration);
 
-            paths[i].gameObject.SetActive(false);
+        foreach (var element in situation.Elements) {
+
+            int index = element.element.Index;
+            elements[index, indexes[index]].transform.SetParent(currentField);
+            elements[index, indexes[index]].transform.localPosition = element.localPosition + position;
+            elements[index, indexes[index]].transform.localRotation = Quaternion.Euler(element.localRotation);
+            elements[index, indexes[index]].SetActive(true);
+            elements[index, indexes[index]].transform.SetParent(null);
+            currentElements.Add(elements[index, indexes[index]]);
+            indexes[index] = (indexes[index] + 1) % maxIndex;
         }
-        currentTerrain[0].terrain.SetActive(false);
-        currentTransition[0].transition.gameObject.SetActive(false);
 
+        foreach (var point in situation.Path) {
 
-        currentTerrain[0] = currentTerrain[1];
-        currentTerrain[1] = newTerrain(currentTerrain[0]);
+            AddPathPoint(point + position, currentField);
+        }
         
-        currentTransition[0] = currentTransition[1];
-        currentTransition[1] = newTransition(currentTerrain[0].type, currentTerrain[1].type);
+        AddPathPoint(lastPoint, currentField);
+    }
 
 
-        /// Activer Current Transition, Current Terrain et leurs Paths
-        currentTransition[1].transition.gameObject.SetActive(true);
-        currentTerrain[1].terrain.SetActive(true);
+    private void AddPathPoint(Vector3 position, Transform parent)
+    {
+        Transform newPoint = Instantiate(new GameObject(), parent).transform;
+        newPoint.localPosition = position;
+        newPoint.SetParent(player.transform);
+        player.pathTransforms.Add(newPoint);
+    }
 
-        paths[2] = currentTransition[1].transition;
+
+    private void SetFieldActive(int index)
+    {
+        SetFieldUnactive(index - 1);
+
+        fields[index].gameObject.SetActive(true);
+        fields[index].position = fieldPositions[index];
+        fields[index].rotation = Quaternion.Euler(Rotation(directions[index]));
+
+        float random = UnityEngine.Random.Range(0, 100);
+
+        int[] length = random > 66 ?
+            new int[2] { 0, 1 } :
+            new int[2] { 1, 0 } ;
+        for (int i = 0; i <= length[1]; i++) {
+
+            Vector3 lastPoint = new Vector3(0, 0, dimensions[1] * (2 + i - length[1]) / 2);
+            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint);
+        }
+
+        if (index < numberOfFields - 1) {
+
+            transitions[index].gameObject.SetActive(true);
+            transitions[index].position = transitionPositions[index];
+            transitions[index].rotation = Quaternion.Euler(Rotation(directions[index]));
+
+            PathManager path = transitions[index].GetComponentInChildren<PathManager>();
+
+            if (path) {
+
+                foreach (var point in path.pathTransforms) {
+
+                    AddPathPoint(point.localPosition, path.transform);
+                }
+            }
+
+            AddPathPoint(fieldPositions[index + 1], null);
+        }
+
+        transform.position = transitionPositions[index];
+    }
 
 
-        Path[] possibilities;
+    private void SetFieldUnactive(int index)
+    {
+        if (index > 0) {
 
-        if ((float)failedObstacles / obstacleNb * 100 >= difficultRate) {
+            fields[index - 1].gameObject.SetActive(false);
+            transitions[index - 1].gameObject.SetActive(false);
+        }
 
-            possibilities = currentTerrain[1].difficultPaths;
+        for (int i = 0; i < currentElements.Count; i++) {
+
+            currentElements[i].SetActive(false);
+            currentElements.Remove(currentElements[i]);
+            i--;
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (fieldIndex < numberOfFields) {
+
+            SetFieldActive(fieldIndex);
+            fieldIndex++;
         }
         else {
 
-            possibilities = currentTerrain[1].easyPaths;
-        }
-
-
-        int random = UnityEngine.Random.Range(0, possibilities.Length);
-        obstacleNb = possibilities[random].numberOfObstacles;
-        paths[3] = possibilities[random].path;
-
-
-        for (int i = 2; i < 4; i++) {
-
-            paths[i].gameObject.SetActive(true);
+            /// LAST SITUATION
         }
     }
-    */
 }

@@ -2,8 +2,11 @@
 
 public class EnemyDisabler : MonoBehaviour
 {
+    [HideInInspector]
+    public Enemy parent;
+
     public void DisableEnemy()
     {
-        gameObject.transform.parent.gameObject.SetActive(false);
+        parent.EndLife();
     }
 }

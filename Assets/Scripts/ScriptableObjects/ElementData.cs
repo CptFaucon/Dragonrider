@@ -19,4 +19,17 @@ public class ElementData : ScriptableObject
             return element;
         }
     }
+    
+    private int index;
+
+    public int Index {
+        get {
+            return index;
+        }
+    }
+
+    public void setIndex(int newIndex) {
+
+        index = newIndex;
+    }
 }

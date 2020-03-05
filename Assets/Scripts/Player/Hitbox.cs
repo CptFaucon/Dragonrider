@@ -18,18 +18,15 @@ public class Hitbox : MonoBehaviour
             hitBoxesManager.isHitboxActivated[HitBoxIndex] = true;
         }
         
-        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Add(other.GetComponent<EnemyScript>());
-        Debug.Log(hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count);
+        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Add(other.GetComponent<EnemyDisabler>());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Remove(other.GetComponent<EnemyScript>());
+        hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Remove(other.GetComponent<EnemyDisabler>());
         if (hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count == 0)
         {
             hitBoxesManager.isHitboxActivated[HitBoxIndex] = false;
         }
-
-        Debug.Log(hitBoxesManager.enemiesOnTrigger[HitBoxIndex].Count);
     }
 }
