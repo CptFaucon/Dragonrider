@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
     private Transform needleTransform;
     private TextMeshProUGUI score;
     private TextMeshProUGUI multiplier;
+    private EnvironmentManager env;
 
     [Header("Gestion des multiplicateurs de score")]
     public float currentMultiplier;
@@ -22,8 +23,10 @@ public class ScoreManager : MonoBehaviour
     private const float minScoreAngle = 210f;
     private float scoreGauge = 210f;
 
-    private void Start()
+    private void Awake()
     {
+        env = FindObjectOfType<EnvironmentManager>();
+
         needleTransform = transform.Find("needle");
 
         score = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
@@ -41,7 +44,11 @@ public class ScoreManager : MonoBehaviour
         if (scoreGauge > 50 && scoreGauge < 130) currentMultiplier = secondMultiplier;
         if (scoreGauge > -30 && scoreGauge < 50) currentMultiplier = thirdMultiplier;
 
-        if (modifier > 0f) scoreValue += modifier * (10f) * currentMultiplier;
+        if (modifier > 0f)
+        {
+            scoreValue += modifier * (10f) * currentMultiplier;
+            env.Success();
+        }
 
         if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
         if (scoreGauge > minScoreAngle) scoreGauge = minScoreAngle;

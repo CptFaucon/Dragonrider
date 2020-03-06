@@ -84,8 +84,8 @@ public class EnvironmentManager : MonoBehaviour
     private ChallengeChances[] chances = new ChallengeChances[1];
 
 
-    private int nbOfObstacles = 1;
-    private int failedObstacles = 0;
+    private int nbOfChallenges = 1;
+    private int challengeDone = 0;
     private List<List<List<List<List<SituationData>>>>> situations = new List<List<List<List<List<SituationData>>>>>();
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
     private GameObject[,] elements;
@@ -570,9 +570,9 @@ public class EnvironmentManager : MonoBehaviour
         int random = 0;
         SituationData sd;
 
-        if (failedObstacles / nbOfObstacles * 100 >= difficultRateDown) {
+        if (challengeDone / nbOfChallenges * 100 >= difficultRateDown) {
 
-            if (failedObstacles / nbOfObstacles * 100 >= difficultRateUp) {
+            if (challengeDone / nbOfChallenges * 100 >= difficultRateUp) {
 
                 currentDifficulty = Mathf.Min(currentDifficulty + 1, 2);
             }
@@ -606,7 +606,7 @@ public class EnvironmentManager : MonoBehaviour
             }
         }
 
-        nbOfObstacles = sd.Elements.Length;
+        nbOfChallenges = sd.Elements.Length;
 
         return sd;
     }
@@ -702,6 +702,12 @@ public class EnvironmentManager : MonoBehaviour
             currentElements.Remove(currentElements[i]);
             i--;
         }
+    }
+
+
+    public void Success()
+    {
+        challengeDone++;
     }
 
 
