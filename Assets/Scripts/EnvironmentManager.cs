@@ -23,18 +23,18 @@ public class EnvironmentManager : MonoBehaviour
     [Space]
     [Header("__________________FIELD__________________________________________________________________________________________________________________________________________________________________")]
     [SerializeField]
-    private Vector2 dimensions = new Vector2(30, 50);
+    private Vector3 dimensions = new Vector3(15, 30, 50);
 
     [SerializeField]
     private int numberOfFields = 15;
 
     [SerializeField]
     [Range(0, 100)]
-    private int firstChancesToRepeatType = 100;
+    private int firstChancesToRepeatAttribute = 100;
 
     [SerializeField]
     [Range(0, 100)]
-    private int chanceDecreaseToRepeatType = 25;
+    private int chanceDecreaseToRepeatAttribute = 25;
 
     private int repeatCount = 0;
     private Transform[] fields;
@@ -246,7 +246,7 @@ public class EnvironmentManager : MonoBehaviour
         for (int i = 1; i < numberOfFields; i++) {
 
             float random = UnityEngine.Random.Range(0, 100);
-            int repeat = Mathf.Clamp(firstChancesToRepeatType - repeatCount * chanceDecreaseToRepeatType, 0, 100);
+            int repeat = Mathf.Clamp(firstChancesToRepeatAttribute - repeatCount * chanceDecreaseToRepeatAttribute, 0, 100);
 
             List<int> types = new List<int>();
 
@@ -437,7 +437,10 @@ public class EnvironmentManager : MonoBehaviour
         }
 
         List<int> chalInt = new List<int>();
+        List<int> chalBackup = new List<int>();
         for (int i = 0; i < 3; i++) {
+
+            chalBackup.Add(i);
 
             for (int j = 0; j < chal[i]; j++) {
 
@@ -450,7 +453,18 @@ public class EnvironmentManager : MonoBehaviour
 
             if (chalInt.Count == 0) {
 
-                majorChal.Add(UnityEngine.Random.Range(0, 3));
+                int count = chalBackup.Count;
+                if (count == 0) {
+
+                    for (int j = 0; j < 3; j++) {
+
+                        chalBackup.Add(i);
+                    }
+                }
+
+                chalRandom = UnityEngine.Random.Range(0, chalBackup.Count);
+                majorChal.Add(chalBackup[chalRandom]);
+                chalBackup.Remove(chalBackup[chalRandom]);
             }
             else {
 
@@ -503,19 +517,19 @@ public class EnvironmentManager : MonoBehaviour
     {
         if (direction == 0) {
 
-            return new Vector3(0, 0, dimensions[1]);   /// Forward
+            return new Vector3(0, 0, dimensions[2]);   /// Forward
         }
         else if (direction == 1) {
 
-            return new Vector3(dimensions[1], 0, 0);   /// Right
+            return new Vector3(dimensions[2], 0, 0);   /// Right
         }
         else if (direction == 2) {
 
-            return new Vector3(0, 0, -dimensions[1]);   /// Back
+            return new Vector3(0, 0, -dimensions[2]);   /// Back
         }
         else {
 
-            return new Vector3(-dimensions[1], 0);   /// Left
+            return new Vector3(-dimensions[2], 0);   /// Left
         }
     }
 
@@ -525,22 +539,22 @@ public class EnvironmentManager : MonoBehaviour
         if (currentDirection == 0) {
 
             int direction = -(lastDirection - 2);
-            return new Vector3(direction * dimensions[0] / 2, 0, dimensions[0] / 2);   /// Forward
+            return new Vector3(direction * dimensions[0], 0, dimensions[1]);   /// Forward
         }
         else if (currentDirection == 1) {
 
             int direction = -(lastDirection - 1);
-            return new Vector3(dimensions[0] / 2, 0, direction * dimensions[0] / 2);   /// Right
+            return new Vector3(dimensions[1], 0, direction * dimensions[0]);   /// Right
         }
         else if (currentDirection == 2) {
 
             int direction = -(lastDirection - 2);
-            return new Vector3(direction * dimensions[0] / 2, 0, -dimensions[0] / 2);   /// Back
+            return new Vector3(direction * dimensions[0], 0, -dimensions[1]);   /// Back
         }
         else {
 
             int direction = -(lastDirection - 1);
-            return new Vector3(-dimensions[0] / 2, 0, direction * dimensions[0] / 2);   /// Left
+            return new Vector3(-dimensions[1], 0, direction * dimensions[0]);   /// Left
         }
     }
 
@@ -600,7 +614,7 @@ public class EnvironmentManager : MonoBehaviour
 
     private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint)
     {
-        Vector3 position = new Vector3(0, 0, dimensions[1] / 2 * iteration);
+        Vector3 position = new Vector3(0, 0, dimensions[2] / 2 * iteration);
 
         foreach (var element in situation.Elements) {
 
@@ -647,7 +661,7 @@ public class EnvironmentManager : MonoBehaviour
             new int[2] { 1, 0 } ;
         for (int i = 0; i <= length[1]; i++) {
 
-            Vector3 lastPoint = new Vector3(0, 0, dimensions[1] * (2 + i - length[1]) / 2);
+            Vector3 lastPoint = new Vector3(0, 0, dimensions[2] * (2 + i - length[1]) / 2);
             SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint);
         }
 
