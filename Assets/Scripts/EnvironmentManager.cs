@@ -53,6 +53,10 @@ public class EnvironmentManager : MonoBehaviour
     [Range(0, 50)]
     private int difficultRateDown = 40;
 
+    [SerializeField]
+    [Range(0, 100)]
+    private int chanceToHaveLength1Situations = 34;
+
     private int currentDifficulty;
 
 
@@ -656,7 +660,7 @@ public class EnvironmentManager : MonoBehaviour
 
         float random = UnityEngine.Random.Range(0, 100);
 
-        int[] length = random > 66 ?
+        int[] length = random >= chanceToHaveLength1Situations ?
             new int[2] { 0, 1 } :
             new int[2] { 1, 0 } ;
         for (int i = 0; i <= length[1]; i++) {
