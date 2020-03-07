@@ -7,8 +7,10 @@ public class HitBoxesManager : MonoBehaviour
 
     public KeyCode[] inputs;
 
-    public List<List<EnemyScript>> enemiesOnTrigger = new List<List<EnemyScript>>();
+    public List<List<Hittable>> enemiesOnTrigger = new List<List<Hittable>>();
     public ScoreManager sm;
+    public DisableEnemy ed;
+    public Enemy e;
 
 
     private void Awake()
@@ -16,7 +18,7 @@ public class HitBoxesManager : MonoBehaviour
         sm = FindObjectOfType<ScoreManager>();
         foreach (var item in isHitboxActivated)
         {
-            enemiesOnTrigger.Add(new List<EnemyScript>());
+            enemiesOnTrigger.Add(new List<Hittable>());
         }
     }
 
@@ -44,8 +46,7 @@ public class HitBoxesManager : MonoBehaviour
                             }
                         }
                     }
-                    enemiesOnTrigger[i][k].gameObject.SetActive(false);
-                    sm.modifyScoreGauge(enemiesOnTrigger[i][k].scoreBonus);
+                    enemiesOnTrigger[i][k].OnHit();
                     enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                 }
 

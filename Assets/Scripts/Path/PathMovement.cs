@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PathMovement : MonoBehaviour
 {
+    private CameraController cam;
     public PathManager PathToFollow;
 
     [HideInInspector]
@@ -12,8 +13,12 @@ public class PathMovement : MonoBehaviour
 
     public float speed = 2f;
     public float rotationSpeed = 2f;
-    
-    
+
+    private void Awake()
+    {
+        cam = FindObjectOfType<CameraController>();
+    }
+
     public void FollowPath(Action OnFinishedPath)
     {
         if (CurrentWayPointID >= PathToFollow.pathTransforms.Count)
@@ -32,6 +37,11 @@ public class PathMovement : MonoBehaviour
             if (distance <= reachDistance)
             {
                 CurrentWayPointID++;
+
+                float distanceY = PathToFollow.pathTransforms[CurrentWayPointID].position.y - PathToFollow.pathTransforms[CurrentWayPointID - 1].position.y;
+                cam.ChangeFollowedPosition(distanceY > 0
+                    ? 2
+                    : (int)Mathf.Sign(distanceY) + 1);
             }
         }
     }
@@ -68,6 +78,11 @@ public class PathMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         yield break;
+    }
+
+    public void SpeedModification(float modifier)
+    {
+        speed = modifier;
     }
 }
  

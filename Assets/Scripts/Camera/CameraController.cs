@@ -5,18 +5,22 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     #region Variables
-    [SerializeField]
     private Transform body;
-    [SerializeField]
     private Transform follow;
 
     [Header("   Position of the Object ToFollow relative to PlayerBody")]
-    [Tooltip("Offset on Y-Axis")]
+    [Tooltip("Offset when the Player goes forward")]
     [SerializeField]
-    private float offsetY = 1;
-    [Tooltip("Offset on Z-Axis")]
+    private Vector3 defaultOffset = new Vector3(0, 1, -6);
+
+    [Tooltip("Offset when the Player goes toward the ground")]
     [SerializeField]
-    private float offsetZ = -8;
+    private Vector3 divingOffset = new Vector3(0, 1.5f, -7);
+
+    [Tooltip("Offset when the Player goes to the sky")]
+    [SerializeField]
+    private Vector3 flyingOffset = new Vector3(0, .5f, -5);
+
 
     [Header("   Move")]
     [Range(0, 1)]
@@ -30,7 +34,7 @@ public class CameraController : MonoBehaviour
         PlayerController pc = FindObjectOfType<PlayerController>();
         body = pc.transform.Find("PlayerBody");
         follow = body.transform.Find("ToFollow");
-        follow.localPosition = new Vector3(0, offsetY, offsetZ);
+        follow.localPosition = defaultOffset;
     }
 
 
@@ -43,6 +47,12 @@ public class CameraController : MonoBehaviour
         position = Vector3.Lerp(position, desiredPosition, lerpSpeed);
 
         transform.position = position;
+    }
+
+    public void ChangeFollowedPosition(int position)
+    {
+        Vector3[] positions = new Vector3[3] { divingOffset, defaultOffset, flyingOffset };
+        follow.localPosition = positions[position];
     }
 
 

@@ -5,40 +5,57 @@ public class ScoreManager : MonoBehaviour
 {
     private Transform needleTransform;
     private TextMeshProUGUI score;
+    private TextMeshProUGUI multiplier;
+    private EnvironmentManager env;
 
-    public float minScoreMultiplier = 0.5f;
-    public float normalScoreMultiplier = 1f;
-    public float maxScoreMultiplier = 2f;
+    [Header("Gestion des multiplicateurs de score")]
+    public float currentMultiplier;
+    public float firstMultiplier;
+    public float secondMultiplier;
+    public float thirdMultiplier;
 
-    private float scoreValue = 0f;
-    [SerializeField]
-    private float scoreMultiplier = 1f;
+    [Header("Vitesse de remplissage de la jauge")]
+    public float fillingSpeed;
+
+    private float scoreValue;
 
     private const float maxScoreAngle = -30f;
     private const float minScoreAngle = 210f;
-    private float scoreGauge = 90f;
+    private float scoreGauge = 210f;
 
-    private void Start()
+    private void Awake()
     {
+        env = FindObjectOfType<EnvironmentManager>();
+
         needleTransform = transform.Find("needle");
-        score = FindObjectOfType<TextMeshProUGUI>();
+
+        score = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
         score.text = "Score : " + scoreValue;
+
+        multiplier = GameObject.Find("Multiplier").GetComponent<TextMeshProUGUI>();
+        multiplier.text = "x" + currentMultiplier;
     }
 
-    public void modifyScoreGauge(float modifier)
+    public void modifyScore(float modifier)
     {
-        scoreGauge -= modifier;
+        scoreGauge -= modifier * (fillingSpeed);
 
-        if (scoreGauge > 130) scoreMultiplier = minScoreMultiplier;
-        if (scoreGauge > 50 && scoreGauge < 130) scoreMultiplier = normalScoreMultiplier;
-        if (scoreGauge > -30 && scoreGauge < 50) scoreMultiplier = maxScoreMultiplier;
+        if (scoreGauge > 130) currentMultiplier = firstMultiplier;
+        if (scoreGauge > 50 && scoreGauge < 130) currentMultiplier = secondMultiplier;
+        if (scoreGauge > -30 && scoreGauge < 50) currentMultiplier = thirdMultiplier;
 
-        if (modifier > 0f) scoreValue += modifier * (10f) * scoreMultiplier;
+        if (modifier > 0f)
+        {
+            scoreValue += modifier * (10f) * currentMultiplier;
+            env.Success();
+        }
 
         if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
         if (scoreGauge > minScoreAngle) scoreGauge = minScoreAngle;
 
         needleTransform.eulerAngles = new Vector3(0, 0, scoreGauge);
+
         score.text = "Score : " + scoreValue;
+        multiplier.text = "x" + currentMultiplier;
     }
 }
