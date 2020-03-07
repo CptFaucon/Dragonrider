@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 
-public class Cible : MonoBehaviour
+public class Cible : Hittable
 {
     private ScoreManager sm;
+    private ParticleSystem particle;
+    private Renderer r;
     public float scoreBonus;
 
-    private void Start()
+    public override void OnHit()
     {
-        sm = GameObject.FindObjectOfType<ScoreManager>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        transform.GetChild(0).gameObject.SetActive(true);
-        sm.modifyScore(scoreBonus);
+        if (particle = null)
+        {
+            sm = FindObjectOfType<ScoreManager>();
+            particle = transform.GetChild(0).GetComponent<ParticleSystem>();
+            r = GetComponent<MeshRenderer>();
+        }
+        if (!particle.isPlaying)
+        {
+            r.enabled = false;
+            particle.Play();
+            sm.modifyScore(scoreBonus);
+        }
     }
 }

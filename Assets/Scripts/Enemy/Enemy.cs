@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    EnemyDisabler enemy;
+    DisableEnemy enemy;
     Transform target;
 
     private bool stopped;
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         {
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
-            enemy = transform.GetChild(1).GetComponent<EnemyDisabler>();
+            enemy = transform.GetChild(1).GetComponent<DisableEnemy>();
             enemy.parent = this;
             target = transform.GetChild(0);
         }

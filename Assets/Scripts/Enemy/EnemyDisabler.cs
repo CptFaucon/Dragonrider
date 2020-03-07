@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class EnemyDisabler : MonoBehaviour
+public class DisableEnemy : Hittable
 {
     [HideInInspector]
     public Enemy parent;
 
-    public void DisableEnemy()
+    public override void OnHit()
     {
         parent.EndLife();
     }

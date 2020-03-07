@@ -7,9 +7,9 @@ public class HitBoxesManager : MonoBehaviour
 
     public KeyCode[] inputs;
 
-    public List<List<EnemyDisabler>> enemiesOnTrigger = new List<List<EnemyDisabler>>();
+    public List<List<Hittable>> enemiesOnTrigger = new List<List<Hittable>>();
     public ScoreManager sm;
-    public EnemyDisabler ed;
+    public DisableEnemy ed;
     public Enemy e;
 
 
@@ -18,7 +18,7 @@ public class HitBoxesManager : MonoBehaviour
         sm = FindObjectOfType<ScoreManager>();
         foreach (var item in isHitboxActivated)
         {
-            enemiesOnTrigger.Add(new List<EnemyDisabler>());
+            enemiesOnTrigger.Add(new List<Hittable>());
         }
     }
 
@@ -46,7 +46,7 @@ public class HitBoxesManager : MonoBehaviour
                             }
                         }
                     }
-                    enemiesOnTrigger[i][k].DisableEnemy();
+                    enemiesOnTrigger[i][k].OnHit();
                     enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                 }
 
