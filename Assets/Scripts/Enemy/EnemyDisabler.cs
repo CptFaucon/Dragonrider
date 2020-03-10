@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DisableEnemy : Hittable
+public class EnemyDisabler : Hittable
 {
     [HideInInspector]
     public Enemy parent;
