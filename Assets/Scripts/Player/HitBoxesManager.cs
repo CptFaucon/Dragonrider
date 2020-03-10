@@ -9,7 +9,7 @@ public class HitBoxesManager : MonoBehaviour
 
     public List<List<Hittable>> enemiesOnTrigger = new List<List<Hittable>>();
     public ScoreManager sm;
-    public DisableEnemy ed;
+    public EnemyDisabler ed;
     public Enemy e;
 
 
