@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b03928babb664c4baf2bb6873a397e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
 --- !u!1 &7643140467708047131
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +155,8 @@ MonoBehaviour:
   downSpawn: -10
   rightSpawn: 15
   leftSpawn: -15
-  HorizontalRange: 7
-  VerticalRange: 4
+  HorizontalRange: 4
+  VerticalRange: 3
   scoreMalus: -10
   scoreBonus: 10
   stayDuration: 20
