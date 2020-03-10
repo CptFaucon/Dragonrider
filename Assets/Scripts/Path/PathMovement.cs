@@ -39,9 +39,16 @@ public class PathMovement : MonoBehaviour
                 CurrentWayPointID++;
 
                 float distanceY = PathToFollow.pathTransforms[CurrentWayPointID].position.y - PathToFollow.pathTransforms[CurrentWayPointID - 1].position.y;
-                cam.ChangeFollowedPosition(distanceY > 0
-                    ? 2
-                    : (int)Mathf.Sign(distanceY) + 1);
+                int pos = 1;
+                if (distanceY > 0)
+                {
+                    pos = 2;
+                }
+                else if (distanceY < 0)
+                {
+                    pos = 0;
+                }
+                cam.ChangeFollowedPosition(pos);
             }
         }
     }
