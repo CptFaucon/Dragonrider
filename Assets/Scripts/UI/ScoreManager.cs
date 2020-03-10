@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
         if (modifier > 0f)
         {
             scoreValue += modifier * (10f) * currentMultiplier;
-            env.Success();
+            //env.Success();
         }
 
         if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
