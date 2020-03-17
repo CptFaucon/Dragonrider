@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour
     public float brakeDistance;
     public float stopDuration;
 
+    private PlayerController pc;
+
     private void OnTriggerEnter(Collider other)
     {
         transform.SetParent(other.transform);
@@ -58,6 +60,7 @@ public class Enemy : MonoBehaviour
             target = transform.GetChild(0);
             enemy = transform.GetChild(1).GetComponent<EnemyDisabler>();
             enemy.parent = this;
+            pc = FindObjectOfType<PlayerController>();
         }
         
         enemy.gameObject.SetActive(true);
@@ -88,7 +91,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (isActivated)
+        if (!pc.isOnPause && isActivated)
         {
             enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
 
@@ -142,13 +145,29 @@ public class Enemy : MonoBehaviour
     {
         stopped = true;
         currentSpeed = 0;
-        yield return new WaitForSeconds(stopDuration);
+        int i = 0;
+        while (i < stopDuration / Time.fixedDeltaTime)
+        {
+            if (!pc.isOnPause)
+            {
+                i++;
+            }
+            yield return new WaitForFixedUpdate();
+        }
         stopped = false;
     }
 
     IEnumerator StayDuration()
     {
-        yield return new WaitForSeconds(stayDuration);
+        int i = 0;
+        while (i < stayDuration / Time.fixedDeltaTime)
+        {
+            if (!pc.isOnPause)
+            {
+                i++;
+            }
+            yield return new WaitForFixedUpdate();
+        }
         stayDurationEnded = true;
     }
 }

@@ -19,6 +19,13 @@ public class PlayerController : PathFollower
     private float lerpMoveSpeed = .08f;
 
     private float moveSpeed;
+
+    [Header("Pause Input")]
+    [SerializeField]
+    private KeyCode pauseInput;
+
+    [HideInInspector]
+    public bool isOnPause;
     #endregion
 
 
@@ -50,7 +57,21 @@ public class PlayerController : PathFollower
 
     public override void Update()
     {
-        base.Update();
-        Movement();
+        if (!isOnPause) {
+
+            base.Update();
+            Movement();
+            if (Input.GetKeyUp(pauseInput)) {
+
+                isOnPause = true;
+            }
+        }
+        else {
+
+            if (Input.GetKeyDown(pauseInput)) {
+
+                isOnPause = false;
+            }
+        }
     }
 }
