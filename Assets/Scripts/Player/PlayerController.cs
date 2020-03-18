@@ -26,12 +26,14 @@ public class PlayerController : PathFollower
 
     [HideInInspector]
     public bool isOnPause;
+    private ScoreManager sm;
     #endregion
 
 
     public override void Awake()
     {
         base.Awake();
+        sm = FindObjectOfType<ScoreManager>();
         OnFinishedPath += EndPath;
     }
 
@@ -51,7 +53,10 @@ public class PlayerController : PathFollower
 
     public void EndPath()
     {
+        if (PlayerPrefs.GetFloat("high_Score") < sm.scoreValue) {
 
+            PlayerPrefs.SetFloat("high_Score", sm.scoreValue);
+        }
     }
 
 

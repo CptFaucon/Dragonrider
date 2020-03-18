@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Scorable
 {
     EnemyDisabler enemy;
     Transform target;
@@ -26,10 +26,7 @@ public class Enemy : MonoBehaviour
     [Header("Limites horizontales et verticales des déplacements")]
     public float HorizontalRange;
     public float VerticalRange;
-
-    [Header("Points lors de la destruction")]
-    public float scoreMalus;
-    public float scoreBonus;
+    
 
     [Header("Durée pendant laquelle l'ennemi reste à l'écran")]
     public float stayDuration;

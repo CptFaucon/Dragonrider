@@ -17,7 +17,32 @@ public class ScoreManager : MonoBehaviour
     [Header("Vitesse de remplissage de la jauge")]
     public float fillingSpeed;
 
-    private float scoreValue;
+    [Header("Valeurs des scores bonus")]
+    [SerializeField]
+    private int lowBonus = 1;
+    [SerializeField]
+    private int mediumBonus = 2;
+    [SerializeField]
+    private int highBonus = 4;
+    [Space]
+    [SerializeField]
+    private float easySituationTotalScorePoints = 100;
+    [SerializeField]
+    private float mediumSituationTotalScorePoints = 300;
+    [SerializeField]
+    private float hardSituationTotalScorePoints = 900;
+    public int[] bonus {
+        get {
+            return new int[] { lowBonus, mediumBonus, highBonus };
+        }
+    }
+    public float[] total {
+        get {
+            return new float[] { easySituationTotalScorePoints, mediumSituationTotalScorePoints, hardSituationTotalScorePoints };
+        }
+    }
+
+    public float scoreValue { get; private set; }
 
     private const float maxScoreAngle = -30f;
     private const float minScoreAngle = 210f;

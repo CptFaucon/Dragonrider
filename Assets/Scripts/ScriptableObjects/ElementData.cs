@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Element Data", menuName = "Element Data", order = 54)]
 public class ElementData : ScriptableObject
 {
     [Space]
     [SerializeField]
-    private GameObject element;
+    private Scorable element;
 
     [Space]
     [TextArea]
     [SerializeField]
     private string description;
 
-    public GameObject Element {
+    public enum ScoreBonus { Low, Medium, High }
+    [SerializeField]
+    private ScoreBonus score;
+
+    public Scorable Element {
         get {
             return element;
         }
@@ -31,5 +36,11 @@ public class ElementData : ScriptableObject
     public void setIndex(int newIndex) {
 
         index = newIndex;
+    }
+
+    public int Score {
+        get {
+            return Array.IndexOf(Enum.GetValues(score.GetType()), score);
+        }
     }
 }

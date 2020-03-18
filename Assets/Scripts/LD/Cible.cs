@@ -4,7 +4,6 @@ public class Cible : Hittable
 {
     private ScoreManager sm;
     private ParticleSystem particle;
-    public float scoreBonus;
 
     public override void OnHit()
     {

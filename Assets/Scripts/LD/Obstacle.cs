@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : Scorable
 {
     private ScoreManager sm;
     private Renderer r;
 
     public bool hasCollided;
-    public float scoreMalus;
-    public float scoreBonus;
 
     private void Start()
     {

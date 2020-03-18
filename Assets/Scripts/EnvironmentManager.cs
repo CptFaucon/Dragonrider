@@ -92,7 +92,7 @@ public class EnvironmentManager : MonoBehaviour
     private int challengeDone = 0;
     private List<List<List<List<List<SituationData>>>>> situations = new List<List<List<List<List<SituationData>>>>>();
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
-    private GameObject[,] elements;
+    private Scorable[,] elements;
     private int[] indexes;
     private int maxIndex = 6;
     
@@ -100,7 +100,8 @@ public class EnvironmentManager : MonoBehaviour
     private int[] attributes;
 
     private int fieldIndex = 1;
-    private List<GameObject> currentElements = new List<GameObject>();
+    private List<Scorable> currentElements = new List<Scorable>();
+    private ScoreManager sm;
 
 
 
@@ -129,14 +130,14 @@ public class EnvironmentManager : MonoBehaviour
         }
 
 
-        elements = new GameObject[length, maxIndex];
+        elements = new Scorable[length, maxIndex];
 
         for (int i = 0; i < length; i++) {
 
             for (int j = 0; j < maxIndex; j++) {
 
                 elements[i, j] = Instantiate(elementData[i].Element);
-                elements[i, j].SetActive(false);
+                elements[i, j].gameObject.SetActive(false);
             }
         }
 
@@ -484,6 +485,7 @@ public class EnvironmentManager : MonoBehaviour
 
         
         player = FindObjectOfType<PathMovement>().PathToFollow;
+        sm = FindObjectOfType<ScoreManager>();
         GetComponent<Collider>().isTrigger = true;
         SetFieldActive(0);
     }
@@ -620,14 +622,21 @@ public class EnvironmentManager : MonoBehaviour
     {
         Vector3 position = new Vector3(0, 0, dimensions[2] / 2 * iteration);
 
+        int total = 0;
+        foreach (var element in situation.Elements) {
+
+            total += element.element.Score;
+        }
+
         foreach (var element in situation.Elements) {
 
             int index = element.element.Index;
             elements[index, indexes[index]].transform.SetParent(currentField);
             elements[index, indexes[index]].transform.localPosition = element.localPosition + position;
             elements[index, indexes[index]].transform.localRotation = Quaternion.Euler(element.localRotation);
-            elements[index, indexes[index]].SetActive(true);
+            elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
+            elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / total * sm.total[situation.Difficulty];
             currentElements.Add(elements[index, indexes[index]]);
             indexes[index] = (indexes[index] + 1) % maxIndex;
         }
@@ -702,7 +711,7 @@ public class EnvironmentManager : MonoBehaviour
 
         for (int i = 0; i < currentElements.Count; i++) {
 
-            currentElements[i].SetActive(false);
+            currentElements[i].gameObject.SetActive(false);
             currentElements.Remove(currentElements[i]);
             i--;
         }
