@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Vector3 spawnPos;
 
     private ScoreManager sm;
+    private TutorialManager tm;
 
     [Header("Position des points de spawn")]
     public float upSpawn;
@@ -62,12 +63,9 @@ public class Enemy : MonoBehaviour
         
         enemy.gameObject.SetActive(true);
         target.gameObject.SetActive(true);
-        
 
-        if (sm == null)
-        {
-            sm = FindObjectOfType<ScoreManager>();
-        }
+        if (sm == null) sm = FindObjectOfType<ScoreManager>();
+        if (tm == null) tm = FindObjectOfType<TutorialManager>();
 
         target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
 
@@ -112,6 +110,8 @@ public class Enemy : MonoBehaviour
 
             if (enemy.transform.localPosition == target.localPosition && stayDurationEnded == true && lastPath == true)
             {
+                if (GameObject.Find("TutorialTextBox") != null) tm.EnemyNotKilled();
+
                 EndLife();
             }
         }
