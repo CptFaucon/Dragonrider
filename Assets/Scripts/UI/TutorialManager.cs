@@ -38,6 +38,8 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(TutorialTimer());
     }
 
+    //La coroutine est bloquée à quatre moments (déplacements, rencontre avec un ennemi, esquive d'un obstacle, destruction d'une cible).
+    //Tant que le joueur n'a pas franchi ces étapes avec succès, le tutoriel n'avance pas.
     IEnumerator TutorialTimer()
     {
         yield return new WaitForSeconds(delays[0]);
@@ -52,6 +54,7 @@ public class TutorialManager : MonoBehaviour
         DisplayNextText();
         yield return new WaitForSeconds(delays[5]);
 
+        //Première situation
         while (firstSituationComplete == false)
         {
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.D)) firstSituationComplete = true;
@@ -62,9 +65,11 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(delays[6]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[7]);
-        Instantiate(enemy, player.position, Quaternion.identity);
         DisplayNextText();
 
+        Instantiate(enemy, player.position, Quaternion.identity);
+
+        //Deuxième situation
         while(secondSituationComplete == false)
         {
             yield return null;
@@ -77,8 +82,10 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(delays[10]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[11]);
+
         Instantiate(obstacle, player.position - new Vector3(0, 0, -20), Quaternion.identity);
 
+        //Troisième situation
         while (thirdSituationComplete == false)
         {
             yield return null;
@@ -92,8 +99,10 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(delays[13]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[14]);
+
         Instantiate(cible, player.position - new Vector3(0, 0, -20), Quaternion.Euler(90, 0, 0));
 
+        //Quatrième situation
         while (fourthSituationComplete == false)
         {
             yield return null;
@@ -111,6 +120,7 @@ public class TutorialManager : MonoBehaviour
         currentText++;
     }
 
+    #region Second Situation
     public void EnemyKilled()
     {
         secondSituationComplete = true;
@@ -123,16 +133,17 @@ public class TutorialManager : MonoBehaviour
     public void EnemyNotKilled()
     {
         if (texts[7].gameObject.activeSelf == true) texts[7].SetActive(false);
-        texts[8].SetActive(true);
+        if (texts[8].gameObject.activeSelf != true) texts[8].SetActive(true);
         Instantiate(enemy, player.position, Quaternion.identity);
     }
+    #endregion
 
+    #region Third Situation
     public void ObstacleTouched()
     {
-        thirdSituationComplete = true;
         if (texts[12].gameObject.activeSelf == true) texts[12].SetActive(false);
-        texts[13].SetActive(true);
-        currentText = 16;
+        if (texts[13].gameObject.activeSelf != true) texts[13].SetActive(true);
+        Instantiate(obstacle, player.position - new Vector3(0, 0, -20), Quaternion.identity);
     }
 
     public void ObstacleDodged()
@@ -150,7 +161,9 @@ public class TutorialManager : MonoBehaviour
         texts[15].SetActive(true);
         currentText = 16;
     }
-     
+    #endregion
+
+    #region Fourth Situation
     public void TargetNotHit()
     {
 
@@ -160,4 +173,5 @@ public class TutorialManager : MonoBehaviour
     {
 
     }
+    #endregion
 }
