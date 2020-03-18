@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8113196902335785870}
   - component: {fileID: 8113196902335785871}
   - component: {fileID: 8113196902335785867}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Cible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreBonus: 10
+  scoreMalus: 0
 --- !u!1001 &328524880
 PrefabInstance:
   m_ObjectHideFlags: 0
