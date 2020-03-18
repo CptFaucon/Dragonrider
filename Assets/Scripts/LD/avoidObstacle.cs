@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
 
-public class avoidObstacle : MonoBehaviour
+public class AvoidObstacle : MonoBehaviour
 {
-    private ScoreManager sm;
     private Obstacle o;
-
-    private void Start()
+    private DodgeObstacle d;
+    private TutorialManager tm;
+    
+    void Start()
     {
-        sm = FindObjectOfType<ScoreManager>();
-        o = GetComponentInParent<Obstacle>();
+        o = FindObjectOfType<Obstacle>();
+        d = FindObjectOfType<DodgeObstacle>();
+        tm = FindObjectOfType<TutorialManager>();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (o.hasCollided == false)
+        if(o.hasCollided != true && d.hasDodged != true)
         {
-            sm.modifyScore(o.scoreBonus);
+            if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleAvoided();
         }
     }
 }

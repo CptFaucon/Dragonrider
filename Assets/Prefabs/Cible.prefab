@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8113196902335785870}
   - component: {fileID: 8113196902335785871}
   - component: {fileID: 8113196902335785867}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Cible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8113196902335785868}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

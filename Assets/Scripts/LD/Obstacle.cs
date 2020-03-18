@@ -4,6 +4,7 @@ public class Obstacle : MonoBehaviour
 {
     private ScoreManager sm;
     private Renderer r;
+    private TutorialManager tm;
 
     public bool hasCollided;
     public float scoreMalus;
@@ -13,6 +14,7 @@ public class Obstacle : MonoBehaviour
     {
         sm = FindObjectOfType<ScoreManager>();
         r = GetComponent<Renderer>();
+        tm = FindObjectOfType<TutorialManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,5 +22,6 @@ public class Obstacle : MonoBehaviour
         sm.modifyScore(scoreMalus);
         r.enabled = false;
         hasCollided = true;
+        if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleTouched();
     }
 }
