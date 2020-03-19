@@ -155,8 +155,8 @@ MonoBehaviour:
   downSpawn: -10
   rightSpawn: 15
   leftSpawn: -15
-  HorizontalRange: 4
-  VerticalRange: 3
+  HorizontalRange: 8
+  VerticalRange: 2
   scoreMalus: -10
   scoreBonus: 10
   stayDuration: 20

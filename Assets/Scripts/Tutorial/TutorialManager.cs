@@ -9,9 +9,6 @@ public class TutorialManager : MonoBehaviour
     public GameObject obstacle;
     public GameObject cible;
 
-    [Header("Le texte actuellement affiché")]
-    public int currentText;
-
     [Header("Durée en sec des pauses entre les textes")]
     public float[] delays;
 
@@ -20,6 +17,9 @@ public class TutorialManager : MonoBehaviour
 
     private Image BackgroundImage;
     private Transform player;
+    private TutorialSounds ts;
+
+    private int currentText;
 
     private bool firstSituationComplete;
     private bool secondSituationComplete;
@@ -29,11 +29,11 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         texts = new GameObject[transform.childCount];
-        BackgroundImage = gameObject.GetComponent<Image>();
-
-        player = GameObject.Find("Player").transform;
-
         for (int i = 0; i < transform.childCount; i++) texts[i] = transform.GetChild(i).gameObject;
+
+        BackgroundImage = gameObject.GetComponent<Image>();
+        player = GameObject.Find("Player").transform;
+        ts = FindObjectOfType<TutorialSounds>();
 
         StartCoroutine(TutorialTimer());
     }
@@ -44,12 +44,15 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delays[0]);
         DisplayNextText();
+        ts.sounds[0].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[1]);
         DisplayNextText();
+        ts.sounds[1].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[2]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[3]);
         DisplayNextText();
+        ts.sounds[2].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[4]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[5]);
@@ -62,11 +65,13 @@ public class TutorialManager : MonoBehaviour
         }
 
         DisplayNextText();
+        ts.sounds[3].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[6]);
         DisplayNextText();
+        ts.sounds[4].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[7]);
         DisplayNextText();
-
+        yield return new WaitForSeconds(delays[8]);
         Instantiate(enemy, player.position, Quaternion.identity);
 
         //Deuxième situation
@@ -75,14 +80,14 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
         
-        yield return new WaitForSeconds(delays[8]);
-        DisplayNextText();
         yield return new WaitForSeconds(delays[9]);
         DisplayNextText();
+        ts.sounds[7].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[10]);
         DisplayNextText();
         yield return new WaitForSeconds(delays[11]);
-
+        DisplayNextText();
+        yield return new WaitForSeconds(delays[12]);
         Instantiate(obstacle, player.position - new Vector3(0, 0, -20), Quaternion.identity);
 
         //Troisième situation
@@ -91,15 +96,15 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(delays[12]);
+        yield return new WaitForSeconds(delays[13]);
         if (texts[13].gameObject.activeSelf == true) texts[13].SetActive(false);
         if (texts[14].gameObject.activeSelf == true) texts[14].SetActive(false);
         if (texts[15].gameObject.activeSelf == true) texts[15].SetActive(false);
         DisplayNextText();
-        yield return new WaitForSeconds(delays[13]);
-        DisplayNextText();
+        ts.sounds[11].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[14]);
-
+        DisplayNextText();
+        yield return new WaitForSeconds(delays[15]);
         Instantiate(cible, player.position - new Vector3(0, 0, -20), Quaternion.Euler(90, 0, 0));
 
         //Quatrième situation
@@ -108,7 +113,7 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(delays[15]);
+        yield return new WaitForSeconds(delays[16]);
         DisplayNextText();
     }
 
@@ -127,6 +132,7 @@ public class TutorialManager : MonoBehaviour
         if(texts[7].gameObject.activeSelf == true) texts[7].SetActive(false);
         if (texts[8].gameObject.activeSelf == true) texts[8].SetActive(false);
         texts[9].SetActive(true);
+        ts.sounds[6].gameObject.SetActive(true);
         currentText = 10;
     }
 
@@ -134,6 +140,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (texts[7].gameObject.activeSelf == true) texts[7].SetActive(false);
         if (texts[8].gameObject.activeSelf != true) texts[8].SetActive(true);
+        if (ts.sounds[5].gameObject.activeSelf != true) ts.sounds[5].gameObject.SetActive(true);
         Instantiate(enemy, player.position, Quaternion.identity);
     }
     #endregion
@@ -143,6 +150,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (texts[12].gameObject.activeSelf == true) texts[12].SetActive(false);
         if (texts[13].gameObject.activeSelf != true) texts[13].SetActive(true);
+        if (ts.sounds[8].gameObject.activeSelf != true) ts.sounds[8].gameObject.SetActive(true);
         Instantiate(obstacle, player.position - new Vector3(0, 0, -20), Quaternion.identity);
     }
 
@@ -150,7 +158,9 @@ public class TutorialManager : MonoBehaviour
     {
         thirdSituationComplete = true;
         if (texts[12].gameObject.activeSelf == true) texts[12].SetActive(false);
+        if (texts[13].gameObject.activeSelf == true) texts[13].SetActive(false);
         texts[14].SetActive(true);
+        ts.sounds[9].gameObject.SetActive(true);
         currentText = 16;
     }
 
@@ -158,7 +168,9 @@ public class TutorialManager : MonoBehaviour
     {
         thirdSituationComplete = true;
         if (texts[12].gameObject.activeSelf == true) texts[12].SetActive(false);
+        if (texts[13].gameObject.activeSelf == true) texts[13].SetActive(false);
         texts[15].SetActive(true);
+        ts.sounds[10].gameObject.SetActive(true);
         currentText = 16;
     }
     #endregion
