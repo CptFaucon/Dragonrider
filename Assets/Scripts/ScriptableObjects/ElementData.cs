@@ -10,14 +10,15 @@ public class ElementData : ScriptableObject
     [SerializeField]
     private Scorable element;
 
+    public enum ScoreBonus { Low, Medium, High }
+    [Space]
+    [SerializeField]
+    private ScoreBonus score;
+
     [Space]
     [TextArea]
     [SerializeField]
     private string description;
-
-    public enum ScoreBonus { Low, Medium, High }
-    [SerializeField]
-    private ScoreBonus score;
 
     public Scorable Element {
         get {

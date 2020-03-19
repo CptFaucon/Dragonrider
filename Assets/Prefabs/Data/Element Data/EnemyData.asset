@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e54dc15ba6edf44ad400027a958181, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  element: {fileID: 7643140467708047131, guid: d7f3d65595df5384e8a807ada73c3b81, type: 3}
+  element: {fileID: 7643140467708047129, guid: d7f3d65595df5384e8a807ada73c3b81, type: 3}
   description: 
+  score: 0

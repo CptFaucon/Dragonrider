@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20e54dc15ba6edf44ad400027a958181, type: 3}
-  m_Name: ElementDataExample
+  m_Name: ObstacleData
   m_EditorClassIdentifier: 
-  element: {fileID: 421053134400237524, guid: 20285390ab0245a4fa37b516536b7bf5, type: 3}
-  description: "Ceci est un exemple pour que le dossier ne soit pas supprim\xE9"
+  element: {fileID: 651969968709629142, guid: d79c21dabcd19c84eac3aa3485680e9a, type: 3}
+  description: 
+  score: 0

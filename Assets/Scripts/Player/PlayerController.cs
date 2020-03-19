@@ -53,6 +53,7 @@ public class PlayerController : PathFollower
 
     public void EndPath()
     {
+        sm.AtRunEnd();
         enabled = false;
     }
 

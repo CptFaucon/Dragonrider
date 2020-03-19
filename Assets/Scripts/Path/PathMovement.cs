@@ -21,20 +21,15 @@ public class PathMovement : MonoBehaviour
 
     public void FollowPath(Action OnFinishedPath)
     {
-        if (CurrentWayPointID >= PathToFollow.pathTransforms.Count)
+        float distance = Vector3.Distance(PathToFollow.pathTransforms[CurrentWayPointID].position, transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, PathToFollow.pathTransforms[CurrentWayPointID].position, Time.deltaTime * speed);
+
+        var rotation = Quaternion.LookRotation(PathToFollow.pathTransforms[CurrentWayPointID].position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+
+        if (distance <= reachDistance)
         {
-            OnFinishedPath.Invoke();
-        }
-
-        else
-        {
-            float distance = Vector3.Distance(PathToFollow.pathTransforms[CurrentWayPointID].position, transform.position);
-            transform.position = Vector3.MoveTowards(transform.position, PathToFollow.pathTransforms[CurrentWayPointID].position, Time.deltaTime * speed);
-
-            var rotation = Quaternion.LookRotation(PathToFollow.pathTransforms[CurrentWayPointID].position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-
-            if (distance <= reachDistance)
+            if (CurrentWayPointID < PathToFollow.pathTransforms.Count - 1)
             {
                 CurrentWayPointID++;
 
@@ -49,6 +44,10 @@ public class PathMovement : MonoBehaviour
                     pos = 0;
                 }
                 cam.ChangeFollowedPosition(pos);
+            }
+            else if (CurrentWayPointID != 0)
+            {
+                OnFinishedPath.Invoke();
             }
         }
     }

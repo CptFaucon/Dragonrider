@@ -88,7 +88,7 @@ public class Enemy : Scorable
 
     private void Update()
     {
-        if (!pc.isOnPause && isActivated)
+        if (isActivated && !pc.isOnPause)
         {
             enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
 

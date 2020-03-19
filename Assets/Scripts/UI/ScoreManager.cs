@@ -6,8 +6,6 @@ public class ScoreManager : MonoBehaviour
     private Transform needleTransform;
     private TextMeshProUGUI score;
     private TextMeshProUGUI multiplier;
-    private TextMeshProUGUI newScore;
-    private GameObject highScore;
     private EnvironmentManager env;
 
     [Header("Gestion des multiplicateurs de score")]
@@ -47,6 +45,10 @@ public class ScoreManager : MonoBehaviour
     [Header("Fin de run")]
     [SerializeField]
     private string newScoreText = "Score :";
+    [SerializeField]
+    private TextMeshProUGUI newScore;
+    [SerializeField]
+    private GameObject highScore;
 
     private float scoreValue;
 

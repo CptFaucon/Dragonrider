@@ -607,7 +607,7 @@ public class EnvironmentManager : MonoBehaviour
 
         sd = situations[currentDifficulty][majorChallenge][attribute][length][random];
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             for (int j = 0; j < situations[currentDifficulty][majorChallenge][i][length].Count; j++) {
 
@@ -632,7 +632,7 @@ public class EnvironmentManager : MonoBehaviour
         int total = 0;
         foreach (var element in situation.Elements) {
 
-            total += element.element.Score;
+            total += sm.bonus[element.element.Score];
         }
 
         foreach (var element in situation.Elements) {
