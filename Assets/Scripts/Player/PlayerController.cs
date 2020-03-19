@@ -53,10 +53,7 @@ public class PlayerController : PathFollower
 
     public void EndPath()
     {
-        if (PlayerPrefs.GetFloat("high_Score") < sm.scoreValue) {
-
-            PlayerPrefs.SetFloat("high_Score", sm.scoreValue);
-        }
+        enabled = false;
     }
 
 

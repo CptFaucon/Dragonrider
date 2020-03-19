@@ -29,6 +29,9 @@ public class EnvironmentManager : MonoBehaviour
     private int numberOfFields = 15;
 
     [SerializeField]
+    private int numberOfAttributes = 1;
+
+    [SerializeField]
     [Range(0, 100)]
     private int firstChancesToRepeatAttribute = 100;
 
@@ -156,7 +159,7 @@ public class EnvironmentManager : MonoBehaviour
                 situations[i].Add(new List<List<List<SituationData>>>());
                 backup[i].Add(new List<List<List<SituationData>>>());
 
-                for (int k = 0; k < 3; k++) {
+                for (int k = 0; k < numberOfAttributes; k++) {
 
                     situations[i][j].Add(new List<List<SituationData>>());
                     backup[i][j].Add(new List<List<SituationData>>());
@@ -174,9 +177,9 @@ public class EnvironmentManager : MonoBehaviour
 
             int attribute = data.attributeInt;
 
-            if (attribute == 3) {
+            if (attribute == numberOfAttributes) {
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < numberOfAttributes; i++) {
                     
                     situations[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
                     backup[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
@@ -196,7 +199,7 @@ public class EnvironmentManager : MonoBehaviour
         
         List<List<FieldData>> fieldDatas = new List<List<FieldData>>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             fieldDatas.Add(new List<FieldData>());
         }
@@ -213,11 +216,11 @@ public class EnvironmentManager : MonoBehaviour
 
         List<List<List<TransitionData>>> transitionDatas = new List<List<List<TransitionData>>>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             transitionDatas.Add(new List<List<TransitionData>>());
 
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < numberOfAttributes; j++) {
 
                 transitionDatas[i].Add(new List<TransitionData>());
             }
@@ -235,9 +238,9 @@ public class EnvironmentManager : MonoBehaviour
 
         attributes = new int[numberOfFields];
 
-        int[] iterations = new int[3] { 0, 0, 0 };
+        int[] iterations = new int[numberOfAttributes];
 
-        int currentAttribute = UnityEngine.Random.Range(0, 3);
+        int currentAttribute = UnityEngine.Random.Range(0, numberOfAttributes);
         attributes[0] = currentAttribute;
         iterations[currentAttribute]++;
 
@@ -249,6 +252,8 @@ public class EnvironmentManager : MonoBehaviour
         List<int[]> transitionIndexes = new List<int[]>();
 
         for (int i = 1; i < numberOfFields; i++) {
+            /*
+
 
             float random = UnityEngine.Random.Range(0, 100);
             int repeat = Mathf.Clamp(firstChancesToRepeatAttribute - repeatCount * chanceDecreaseToRepeatAttribute, 0, 100);
@@ -263,9 +268,11 @@ public class EnvironmentManager : MonoBehaviour
 
             int otherOne = types[0];
             int otherTwo = types[1];
+
+            */
             int newAttribute = currentAttribute;
 
-
+            /*
             if (random >= repeat) {
 
                 float rapport;
@@ -302,7 +309,7 @@ public class EnvironmentManager : MonoBehaviour
 
                 repeatCount++;
             }
-
+            */
             attributes[i] = newAttribute;
             iterations[newAttribute]++;
 
@@ -634,6 +641,7 @@ public class EnvironmentManager : MonoBehaviour
             elements[index, indexes[index]].transform.SetParent(currentField);
             elements[index, indexes[index]].transform.localPosition = element.localPosition + position;
             elements[index, indexes[index]].transform.localRotation = Quaternion.Euler(element.localRotation);
+            elements[index, indexes[index]].transform.localScale = element.localScale;
             elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
             elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / total * sm.total[situation.Difficulty];

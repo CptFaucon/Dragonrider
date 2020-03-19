@@ -6,6 +6,8 @@ public class ScoreManager : MonoBehaviour
     private Transform needleTransform;
     private TextMeshProUGUI score;
     private TextMeshProUGUI multiplier;
+    private TextMeshProUGUI newScore;
+    private GameObject highScore;
     private EnvironmentManager env;
 
     [Header("Gestion des multiplicateurs de score")]
@@ -42,7 +44,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public float scoreValue { get; private set; }
+    [Header("Fin de run")]
+    [SerializeField]
+    private string newScoreText = "Score :";
+
+    private float scoreValue;
 
     private const float maxScoreAngle = -30f;
     private const float minScoreAngle = 210f;
@@ -72,7 +78,10 @@ public class ScoreManager : MonoBehaviour
         if (modifier > 0f)
         {
             scoreValue += modifier * (10f) * currentMultiplier;
-            //env.Success();
+            if (env)
+            {
+                env.Success();
+            }
         }
 
         if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
@@ -82,5 +91,22 @@ public class ScoreManager : MonoBehaviour
 
         score.text = "Score : " + scoreValue;
         multiplier.text = "x" + currentMultiplier;
+    }
+
+    public void AtRunEnd()
+    {
+        if (PlayerPrefs.GetFloat("high_Score") < scoreValue)
+        {
+            PlayerPrefs.SetFloat("high_Score", scoreValue);
+            if (highScore)
+            {
+                highScore.SetActive(true);
+            }
+        }
+        if (newScore)
+        {
+            newScore.text = newScoreText + " " + scoreValue.ToString();
+            newScore.gameObject.SetActive(true);
+        }
     }
 }

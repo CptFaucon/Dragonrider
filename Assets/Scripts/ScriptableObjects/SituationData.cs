@@ -37,6 +37,7 @@ public class SituationData : ScriptableObject
         public ElementData element;
         public Vector3 localPosition;
         public Vector3 localRotation;
+        public Vector3 localScale;
     }
     
     [Space]

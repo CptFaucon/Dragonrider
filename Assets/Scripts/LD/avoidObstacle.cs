@@ -5,10 +5,10 @@ public class avoidObstacle : MonoBehaviour
     private ScoreManager sm;
     private Obstacle o;
 
-    private void Start()
+    public void Assign(ScoreManager score, Obstacle parent)
     {
-        sm = FindObjectOfType<ScoreManager>();
-        o = GetComponentInParent<Obstacle>();
+        sm = score;
+        o = parent;
     }
 
     private void OnTriggerExit(Collider other)
