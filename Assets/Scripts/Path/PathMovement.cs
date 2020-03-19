@@ -45,7 +45,7 @@ public class PathMovement : MonoBehaviour
                 }
                 cam.ChangeFollowedPosition(pos);
             }
-            else if (CurrentWayPointID != 0)
+            else 
             {
                 OnFinishedPath.Invoke();
             }

@@ -58,7 +58,7 @@ public class EnvironmentManager : MonoBehaviour
 
     [SerializeField]
     [Range(0, 100)]
-    private int chanceToHaveLength1Situations = 34;
+    private int chanceToHaveLength2Situations = 66;
 
     private int currentDifficulty;
 
@@ -625,7 +625,7 @@ public class EnvironmentManager : MonoBehaviour
     }
 
 
-    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint)
+    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint, int length)
     {
         Vector3 position = new Vector3(0, 0, dimensions[2] / 2 * iteration);
 
@@ -644,7 +644,7 @@ public class EnvironmentManager : MonoBehaviour
             elements[index, indexes[index]].transform.localScale = element.localScale;
             elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
-            elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / total * sm.total[situation.Difficulty];
+            elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / (float)total * sm.total[situation.Difficulty] * length;
             currentElements.Add(elements[index, indexes[index]]);
             indexes[index] = (indexes[index] + 1) % maxIndex;
         }
@@ -677,13 +677,13 @@ public class EnvironmentManager : MonoBehaviour
 
         float random = UnityEngine.Random.Range(0, 100);
 
-        int[] length = random >= chanceToHaveLength1Situations ?
+        int[] length = random >= chanceToHaveLength2Situations ?
             new int[2] { 0, 1 } :
             new int[2] { 1, 0 } ;
         for (int i = 0; i <= length[1]; i++) {
 
             Vector3 lastPoint = new Vector3(0, 0, dimensions[2] * (2 + i - length[1]) / 2);
-            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint);
+            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint, length[0] + 1);
         }
 
         if (index < numberOfFields - 1) {
