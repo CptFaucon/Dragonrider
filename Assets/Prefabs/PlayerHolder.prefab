@@ -1159,9 +1159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
   body: {fileID: 264975612805466231}
-  limit: 16
+  limit: 10
   maxMoveSpeed: 5
-  lerpMoveSpeed: 0.08
+  lerpMoveSpeed: 1
 --- !u!1 &264975611865567635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,7 +2478,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974399974328678099}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.99455863, z: -0.10417863, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2487,7 +2487,7 @@ Transform:
   - {fileID: 264975612646098184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.960001, y: 180.00002, z: 0}
 --- !u!1 &8970219813334263016
 GameObject:
   m_ObjectHideFlags: 0
