@@ -3,14 +3,11 @@
 public class AvoidObstacle : MonoBehaviour
 {
     private Obstacle o;
-    private DodgeObstacle d;
-    private TutorialManager tm;
-    
-    void Start()
+
+    public void Assign(ScoreManager score, Obstacle parent)
     {
-        o = FindObjectOfType<Obstacle>();
-        d = FindObjectOfType<DodgeObstacle>();
-        tm = FindObjectOfType<TutorialManager>();
+        sm = score;
+        o = parent;
     }
 
     private void OnTriggerExit(Collider other)

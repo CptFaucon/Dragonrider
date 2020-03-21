@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
   m_Name: DodgingNone11_1
   m_EditorClassIdentifier: 
-  attribute: 3
+  attribute: 0
   majorChallenge: 1
   length: 1
   difficulty: 1
   path: []
   elements:
-  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
-    localPosition: {x: 0, y: 0, z: 1}
-    localRotation: {x: 0, y: 0, z: 0}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 0, y: 0, z: 10}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}

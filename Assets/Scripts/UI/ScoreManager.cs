@@ -17,6 +17,39 @@ public class ScoreManager : MonoBehaviour
     [Header("Vitesse de remplissage de la jauge")]
     public float fillingSpeed;
 
+    [Header("Valeurs des scores bonus")]
+    [SerializeField]
+    private int lowBonus = 1;
+    [SerializeField]
+    private int mediumBonus = 2;
+    [SerializeField]
+    private int highBonus = 4;
+    [Space]
+    [SerializeField]
+    private float easySituationTotalScorePoints = 100;
+    [SerializeField]
+    private float mediumSituationTotalScorePoints = 300;
+    [SerializeField]
+    private float hardSituationTotalScorePoints = 900;
+    public int[] bonus {
+        get {
+            return new int[] { lowBonus, mediumBonus, highBonus };
+        }
+    }
+    public float[] total {
+        get {
+            return new float[] { easySituationTotalScorePoints, mediumSituationTotalScorePoints, hardSituationTotalScorePoints };
+        }
+    }
+
+    [Header("Fin de run")]
+    [SerializeField]
+    private string newScoreText = "Score :";
+    [SerializeField]
+    private TextMeshProUGUI newScore;
+    [SerializeField]
+    private GameObject highScore;
+
     private float scoreValue;
 
     private const float maxScoreAngle = -30f;
@@ -47,7 +80,10 @@ public class ScoreManager : MonoBehaviour
         if (modifier > 0f)
         {
             scoreValue += modifier * (10f) * currentMultiplier;
-            //env.Success();
+            if (env)
+            {
+                env.Success();
+            }
         }
 
         if (scoreGauge < maxScoreAngle) scoreGauge = maxScoreAngle;
@@ -57,5 +93,22 @@ public class ScoreManager : MonoBehaviour
 
         score.text = "Score : " + scoreValue;
         multiplier.text = "x" + currentMultiplier;
+    }
+
+    public void AtRunEnd()
+    {
+        if (PlayerPrefs.GetFloat("high_Score") < scoreValue)
+        {
+            PlayerPrefs.SetFloat("high_Score", scoreValue);
+            if (highScore)
+            {
+                highScore.SetActive(true);
+            }
+        }
+        if (newScore)
+        {
+            newScore.text = newScoreText + " " + scoreValue.ToString();
+            newScore.gameObject.SetActive(true);
+        }
     }
 }

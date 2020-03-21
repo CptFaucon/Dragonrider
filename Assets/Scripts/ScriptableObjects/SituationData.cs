@@ -32,11 +32,12 @@ public class SituationData : ScriptableObject
     private Vector3[] path;
 
     [Serializable]
-    public struct Element {
+    public class Element {
 
         public ElementData element;
         public Vector3 localPosition;
         public Vector3 localRotation;
+        public Vector3 localScale = Vector3.one;
     }
     
     [Space]

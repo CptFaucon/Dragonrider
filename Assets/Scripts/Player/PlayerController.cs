@@ -10,6 +10,8 @@ public class PlayerController : PathFollower
     [Tooltip("Lenght of the zone where the player can move")]
     [SerializeField]
     private float limit = 16;
+    public float Limit { get { return limit; } }
+    public float currentLimit;
 
     [Header("   Move Speed")]
     [SerializeField]
@@ -19,13 +21,23 @@ public class PlayerController : PathFollower
     private float lerpMoveSpeed = .08f;
 
     private float moveSpeed;
+
+    [Header("Pause Input")]
+    [SerializeField]
+    private KeyCode pauseInput;
+
+    [HideInInspector]
+    public bool isOnPause;
+    private ScoreManager sm;
     #endregion
 
 
     public override void Awake()
     {
         base.Awake();
+        sm = FindObjectOfType<ScoreManager>();
         OnFinishedPath += EndPath;
+        currentLimit = limit;
     }
 
 
@@ -36,7 +48,7 @@ public class PlayerController : PathFollower
         
         /// Move between limits
         Vector2 position = body.transform.localPosition;
-        position.x = Mathf.Clamp(position.x + moveSpeed * Time.deltaTime, -limit / 2, limit / 2);
+        position.x = Mathf.Clamp(position.x + moveSpeed * Time.deltaTime, -currentLimit / 2, currentLimit / 2);
 
         body.transform.localPosition = position;
     }
@@ -44,13 +56,28 @@ public class PlayerController : PathFollower
 
     public void EndPath()
     {
-
+        sm.AtRunEnd();
+        enabled = false;
     }
 
 
     public override void Update()
     {
-        base.Update();
-        Movement();
+        if (!isOnPause) {
+
+            base.Update();
+            Movement();
+            if (Input.GetKeyUp(pauseInput)) {
+
+                isOnPause = true;
+            }
+        }
+        else {
+
+            if (Input.GetKeyDown(pauseInput)) {
+
+                isOnPause = false;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Scorable
 {
     EnemyDisabler enemy;
     Transform target;
@@ -27,10 +27,7 @@ public class Enemy : MonoBehaviour
     [Header("Limites horizontales et verticales des déplacements")]
     public float HorizontalRange;
     public float VerticalRange;
-
-    [Header("Points lors de la destruction")]
-    public float scoreMalus;
-    public float scoreBonus;
+    
 
     [Header("Durée pendant laquelle l'ennemi reste à l'écran")]
     public float stayDuration;
@@ -44,6 +41,8 @@ public class Enemy : MonoBehaviour
     [Header("Paramètres de l'arrêt")]
     public float brakeDistance;
     public float stopDuration;
+
+    private PlayerController pc;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -59,6 +58,7 @@ public class Enemy : MonoBehaviour
             target = transform.GetChild(0);
             enemy = transform.GetChild(1).GetComponent<EnemyDisabler>();
             enemy.parent = this;
+            pc = FindObjectOfType<PlayerController>();
         }
         
         enemy.gameObject.SetActive(true);
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (isActivated)
+        if (isActivated && !pc.isOnPause)
         {
             enemy.transform.localPosition = Vector3.MoveTowards(enemy.transform.localPosition, target.localPosition, currentSpeed * Time.deltaTime);
 
@@ -142,13 +142,29 @@ public class Enemy : MonoBehaviour
     {
         stopped = true;
         currentSpeed = 0;
-        yield return new WaitForSeconds(stopDuration);
+        int i = 0;
+        while (i < stopDuration / Time.fixedDeltaTime)
+        {
+            if (!pc.isOnPause)
+            {
+                i++;
+            }
+            yield return new WaitForFixedUpdate();
+        }
         stopped = false;
     }
 
     IEnumerator StayDuration()
     {
-        yield return new WaitForSeconds(stayDuration);
+        int i = 0;
+        while (i < stayDuration / Time.fixedDeltaTime)
+        {
+            if (!pc.isOnPause)
+            {
+                i++;
+            }
+            yield return new WaitForFixedUpdate();
+        }
         stayDurationEnded = true;
     }
 }

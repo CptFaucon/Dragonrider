@@ -9,12 +9,12 @@ public class HitBoxesManager : MonoBehaviour
 
     public List<List<Hittable>> enemiesOnTrigger = new List<List<Hittable>>();
     public ScoreManager sm;
-    public EnemyDisabler ed;
-    public Enemy e;
 
+    private PlayerController pc;
 
     private void Awake()
     {
+        pc = FindObjectOfType<PlayerController>();
         sm = FindObjectOfType<ScoreManager>();
         foreach (var item in isHitboxActivated)
         {
@@ -25,35 +25,38 @@ public class HitBoxesManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < 6; i++)
-        {
-            if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
-            {
-                for (int k = 0; k < enemiesOnTrigger[i].Count; k++)
-                {
-                    for (int j = 0; j < 6; j++)
-                    {
-                        for (int l = 0; l < enemiesOnTrigger[j].Count; l++)
-                        {
-                            if (i != j && enemiesOnTrigger[i][k] == enemiesOnTrigger[j][l])
-                            {
-                                enemiesOnTrigger[j].Remove(enemiesOnTrigger[j][l]);
+        if (!pc.isOnPause) {
 
-                                if (enemiesOnTrigger[j].Count == 0)
+            for (int i = 0; i < 6; i++)
+            {
+                if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
+                {
+                    for (int k = 0; k < enemiesOnTrigger[i].Count; k++)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            for (int l = 0; l < enemiesOnTrigger[j].Count; l++)
+                            {
+                                if (i != j && enemiesOnTrigger[i][k] == enemiesOnTrigger[j][l])
                                 {
-                                    isHitboxActivated[j] = false;
+                                    enemiesOnTrigger[j].Remove(enemiesOnTrigger[j][l]);
+
+                                    if (enemiesOnTrigger[j].Count == 0)
+                                    {
+                                        isHitboxActivated[j] = false;
+                                    }
                                 }
                             }
                         }
+                        enemiesOnTrigger[i][k].OnHit();
+                        enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
                     }
-                    enemiesOnTrigger[i][k].OnHit();
-                    enemiesOnTrigger[i].Remove(enemiesOnTrigger[i][k]);
-                }
 
                 
-                if (enemiesOnTrigger[i].Count == 0)
-                {
-                    isHitboxActivated[i] = false;
+                    if (enemiesOnTrigger[i].Count == 0)
+                    {
+                        isHitboxActivated[i] = false;
+                    }
                 }
             }
         }

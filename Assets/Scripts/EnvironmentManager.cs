@@ -29,6 +29,9 @@ public class EnvironmentManager : MonoBehaviour
     private int numberOfFields = 15;
 
     [SerializeField]
+    private int numberOfAttributes = 1;
+
+    [SerializeField]
     [Range(0, 100)]
     private int firstChancesToRepeatAttribute = 100;
 
@@ -55,7 +58,7 @@ public class EnvironmentManager : MonoBehaviour
 
     [SerializeField]
     [Range(0, 100)]
-    private int chanceToHaveLength1Situations = 34;
+    private int chanceToHaveLength2Situations = 66;
 
     private int currentDifficulty;
 
@@ -92,7 +95,7 @@ public class EnvironmentManager : MonoBehaviour
     private int challengeDone = 0;
     private List<List<List<List<List<SituationData>>>>> situations = new List<List<List<List<List<SituationData>>>>>();
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
-    private GameObject[,] elements;
+    private Scorable[,] elements;
     private int[] indexes;
     private int maxIndex = 6;
     
@@ -100,7 +103,8 @@ public class EnvironmentManager : MonoBehaviour
     private int[] attributes;
 
     private int fieldIndex = 1;
-    private List<GameObject> currentElements = new List<GameObject>();
+    private List<Scorable> currentElements = new List<Scorable>();
+    private ScoreManager sm;
 
 
 
@@ -129,14 +133,14 @@ public class EnvironmentManager : MonoBehaviour
         }
 
 
-        elements = new GameObject[length, maxIndex];
+        elements = new Scorable[length, maxIndex];
 
         for (int i = 0; i < length; i++) {
 
             for (int j = 0; j < maxIndex; j++) {
 
                 elements[i, j] = Instantiate(elementData[i].Element);
-                elements[i, j].SetActive(false);
+                elements[i, j].gameObject.SetActive(false);
             }
         }
 
@@ -155,7 +159,7 @@ public class EnvironmentManager : MonoBehaviour
                 situations[i].Add(new List<List<List<SituationData>>>());
                 backup[i].Add(new List<List<List<SituationData>>>());
 
-                for (int k = 0; k < 3; k++) {
+                for (int k = 0; k < numberOfAttributes; k++) {
 
                     situations[i][j].Add(new List<List<SituationData>>());
                     backup[i][j].Add(new List<List<SituationData>>());
@@ -173,9 +177,9 @@ public class EnvironmentManager : MonoBehaviour
 
             int attribute = data.attributeInt;
 
-            if (attribute == 3) {
+            if (attribute == numberOfAttributes) {
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < numberOfAttributes; i++) {
                     
                     situations[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
                     backup[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
@@ -195,7 +199,7 @@ public class EnvironmentManager : MonoBehaviour
         
         List<List<FieldData>> fieldDatas = new List<List<FieldData>>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             fieldDatas.Add(new List<FieldData>());
         }
@@ -212,11 +216,11 @@ public class EnvironmentManager : MonoBehaviour
 
         List<List<List<TransitionData>>> transitionDatas = new List<List<List<TransitionData>>>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             transitionDatas.Add(new List<List<TransitionData>>());
 
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < numberOfAttributes; j++) {
 
                 transitionDatas[i].Add(new List<TransitionData>());
             }
@@ -234,9 +238,9 @@ public class EnvironmentManager : MonoBehaviour
 
         attributes = new int[numberOfFields];
 
-        int[] iterations = new int[3] { 0, 0, 0 };
+        int[] iterations = new int[numberOfAttributes];
 
-        int currentAttribute = UnityEngine.Random.Range(0, 3);
+        int currentAttribute = UnityEngine.Random.Range(0, numberOfAttributes);
         attributes[0] = currentAttribute;
         iterations[currentAttribute]++;
 
@@ -248,6 +252,8 @@ public class EnvironmentManager : MonoBehaviour
         List<int[]> transitionIndexes = new List<int[]>();
 
         for (int i = 1; i < numberOfFields; i++) {
+            /*
+
 
             float random = UnityEngine.Random.Range(0, 100);
             int repeat = Mathf.Clamp(firstChancesToRepeatAttribute - repeatCount * chanceDecreaseToRepeatAttribute, 0, 100);
@@ -262,9 +268,11 @@ public class EnvironmentManager : MonoBehaviour
 
             int otherOne = types[0];
             int otherTwo = types[1];
+
+            */
             int newAttribute = currentAttribute;
 
-
+            /*
             if (random >= repeat) {
 
                 float rapport;
@@ -301,7 +309,7 @@ public class EnvironmentManager : MonoBehaviour
 
                 repeatCount++;
             }
-
+            */
             attributes[i] = newAttribute;
             iterations[newAttribute]++;
 
@@ -484,6 +492,7 @@ public class EnvironmentManager : MonoBehaviour
 
         
         player = FindObjectOfType<PathMovement>().PathToFollow;
+        sm = FindObjectOfType<ScoreManager>();
         GetComponent<Collider>().isTrigger = true;
         SetFieldActive(0);
     }
@@ -598,7 +607,7 @@ public class EnvironmentManager : MonoBehaviour
 
         sd = situations[currentDifficulty][majorChallenge][attribute][length][random];
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < numberOfAttributes; i++) {
 
             for (int j = 0; j < situations[currentDifficulty][majorChallenge][i][length].Count; j++) {
 
@@ -616,9 +625,15 @@ public class EnvironmentManager : MonoBehaviour
     }
 
 
-    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint)
+    private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint, int length)
     {
         Vector3 position = new Vector3(0, 0, dimensions[2] / 2 * iteration);
+
+        int total = 0;
+        foreach (var element in situation.Elements) {
+
+            total += sm.bonus[element.element.Score];
+        }
 
         foreach (var element in situation.Elements) {
 
@@ -626,8 +641,10 @@ public class EnvironmentManager : MonoBehaviour
             elements[index, indexes[index]].transform.SetParent(currentField);
             elements[index, indexes[index]].transform.localPosition = element.localPosition + position;
             elements[index, indexes[index]].transform.localRotation = Quaternion.Euler(element.localRotation);
-            elements[index, indexes[index]].SetActive(true);
+            elements[index, indexes[index]].transform.localScale = element.localScale;
+            elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
+            elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / (float)total * sm.total[situation.Difficulty] * length;
             currentElements.Add(elements[index, indexes[index]]);
             indexes[index] = (indexes[index] + 1) % maxIndex;
         }
@@ -660,13 +677,13 @@ public class EnvironmentManager : MonoBehaviour
 
         float random = UnityEngine.Random.Range(0, 100);
 
-        int[] length = random >= chanceToHaveLength1Situations ?
+        int[] length = random >= chanceToHaveLength2Situations ?
             new int[2] { 0, 1 } :
             new int[2] { 1, 0 } ;
         for (int i = 0; i <= length[1]; i++) {
 
             Vector3 lastPoint = new Vector3(0, 0, dimensions[2] * (2 + i - length[1]) / 2);
-            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint);
+            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint, length[0] + 1);
         }
 
         if (index < numberOfFields - 1) {
@@ -702,7 +719,7 @@ public class EnvironmentManager : MonoBehaviour
 
         for (int i = 0; i < currentElements.Count; i++) {
 
-            currentElements[i].SetActive(false);
+            currentElements[i].gameObject.SetActive(false);
             currentElements.Remove(currentElements[i]);
             i--;
         }
