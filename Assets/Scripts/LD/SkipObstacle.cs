@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AvoidObstacle : MonoBehaviour
+public class SkipObstacle : MonoBehaviour
 {
     private Obstacle o;
     private ScoreManager sm;
