@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -203,7 +204,7 @@ public class TutorialManager : MonoBehaviour
     #region Scene Change
     public void SceneChange()
     {
-        Debug.Log("scène changée");
+        SceneManager.LoadScene(2);
     }
     #endregion
 }
