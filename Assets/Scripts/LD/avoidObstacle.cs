@@ -3,16 +3,20 @@
 public class AvoidObstacle : MonoBehaviour
 {
     private Obstacle o;
+    private ScoreManager sm;
+    private TutorialManager tm;
+    private DodgeObstacle d;
 
-    public void Assign(ScoreManager score, Obstacle parent)
+    private void Start()
     {
-        sm = score;
-        o = parent;
+        d = GetComponentInParent<DodgeObstacle>();
+        sm = FindObjectOfType<ScoreManager>();
+        tm = FindObjectOfType<TutorialManager>();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(o.hasCollided != true && d.hasDodged != true)
+        if(d.hasDodged != true)
         {
             if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleAvoided();
         }

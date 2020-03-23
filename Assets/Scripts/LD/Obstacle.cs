@@ -10,19 +10,21 @@ public class Obstacle : Scorable
 
     public bool hasCollided;
 
+    private void Start()
+    {
+        sm = FindObjectOfType<ScoreManager>();
+        r = GetComponent<Renderer>();
+        pc = FindObjectOfType<PlayerController>();
+        tm = FindObjectOfType<TutorialManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (r = null)
-        {
-            sm = FindObjectOfType<ScoreManager>();
-            r = GetComponent<Renderer>();
-            pc = FindObjectOfType<PlayerController>();
-            GetComponentInChildren<avoidObstacle>().Assign(sm, this);
-        }
         sm.modifyScore(scoreMalus);
         r.enabled = false;
         hasCollided = true;
         StartCoroutine(ReEnable());
+        if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleTouched();
     }
 
     private IEnumerator ReEnable()

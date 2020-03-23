@@ -11,8 +11,8 @@ public class DodgeObstacle : MonoBehaviour
     private void Start()
     {
         sm = FindObjectOfType<ScoreManager>();
-        o = GetComponentInParent<Obstacle>();
         tm = FindObjectOfType<TutorialManager>();
+        o = GetComponentInParent<Obstacle>();
     }
 
     private void OnTriggerEnter(Collider other)
