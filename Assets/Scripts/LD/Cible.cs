@@ -8,6 +8,9 @@ public class Cible : Hittable
     private List<ParticleSystem> particle = new List<ParticleSystem>();
     private Renderer rend;
     private PlayerController pc;
+    private TutorialManager tm;
+
+    public bool touched;
 
     public override void OnHit()
     {
@@ -16,6 +19,7 @@ public class Cible : Hittable
             sm = FindObjectOfType<ScoreManager>();
             rend = GetComponent<Renderer>();
             pc = FindObjectOfType<PlayerController>();
+            tm = FindObjectOfType<TutorialManager>();
             for (int i = 0; i < 3; i++)
             {
                 particle.Add(transform.GetChild(0).transform.GetChild(i).GetComponent<ParticleSystem>());
@@ -28,6 +32,8 @@ public class Cible : Hittable
                 item.Play();
             }
             sm.modifyScore(scoreBonus);
+            touched = true;
+            if (GameObject.Find("TutorialTextBox") != null) tm.TargetHit();
             rend.enabled = false;
             StartCoroutine(ReAppearance());
         }

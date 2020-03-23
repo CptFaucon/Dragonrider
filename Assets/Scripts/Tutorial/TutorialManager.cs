@@ -115,8 +115,12 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(delays[16]);
         DisplayNextText();
+        ts.sounds[14].SetActive(true);
+        yield return new WaitForSeconds(delays[17]);
+        SceneChange();
     }
 
+    #region Display Next Text
     public void DisplayNextText()
     {
         if(BackgroundImage.enabled != true) BackgroundImage.enabled = true;
@@ -124,6 +128,7 @@ public class TutorialManager : MonoBehaviour
         texts[currentText].SetActive(true);
         currentText++;
     }
+    #endregion
 
     #region Second Situation
     public void EnemyKilled()
@@ -178,12 +183,27 @@ public class TutorialManager : MonoBehaviour
     #region Fourth Situation
     public void TargetNotHit()
     {
-
+        if (texts[17].gameObject.activeSelf == true) texts[17].SetActive(false);
+        if (texts[18].gameObject.activeSelf != true) texts[18].SetActive(true);
+        Instantiate(cible, player.position - new Vector3(0, 0, -20), Quaternion.Euler(90, 0, 0));
+        ts.sounds[12].SetActive(true);
     }
 
     public void TargetHit()
     {
+        fourthSituationComplete = true;
+        if (texts[17].gameObject.activeSelf == true) texts[17].SetActive(false);
+        if (texts[18].gameObject.activeSelf == true) texts[18].SetActive(false);
+        texts[19].SetActive(true);
+        ts.sounds[13].SetActive(true);
+        currentText = 20;
+    }
+    #endregion
 
+    #region Scene Change
+    public void SceneChange()
+    {
+        Debug.Log("scène changée");
     }
     #endregion
 }
