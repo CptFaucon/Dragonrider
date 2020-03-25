@@ -20,7 +20,7 @@ public class TutorialManager : MonoBehaviour
     private Transform player;
     private TutorialSounds ts;
 
-    public int currentText;
+    private int currentText;
 
     private bool firstSituationComplete;
     private bool secondSituationComplete;
@@ -113,10 +113,10 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(delays[16]);
+        yield return new WaitForSeconds(delays[15]);
         DisplayNextText();
         ts.sounds[14].SetActive(true);
-        yield return new WaitForSeconds(delays[17]);
+        yield return new WaitForSeconds(delays[16]);
         SceneChange();
     }
 
