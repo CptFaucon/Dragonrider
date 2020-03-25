@@ -106,7 +106,6 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(delays[14]);
         DisplayNextText();
         Instantiate(cible, player.position - new Vector3(0, 0, -30), Quaternion.Euler(90, 0, 0));
-        yield return new WaitForSeconds(delays[15]);
 
         //Quatrième situation
         while (fourthSituationComplete == false)
