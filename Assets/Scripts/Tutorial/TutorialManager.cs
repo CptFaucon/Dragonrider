@@ -20,7 +20,7 @@ public class TutorialManager : MonoBehaviour
     private Transform player;
     private TutorialSounds ts;
 
-    private int currentText;
+    public int currentText;
 
     private bool firstSituationComplete;
     private bool secondSituationComplete;
@@ -105,8 +105,8 @@ public class TutorialManager : MonoBehaviour
         ts.sounds[11].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[14]);
         DisplayNextText();
+        Instantiate(cible, player.position - new Vector3(0, 0, -30), Quaternion.Euler(90, 0, 0));
         yield return new WaitForSeconds(delays[15]);
-        Instantiate(cible, player.position - new Vector3(0, 0, -20), Quaternion.Euler(90, 0, 0));
 
         //Quatrième situation
         while (fourthSituationComplete == false)

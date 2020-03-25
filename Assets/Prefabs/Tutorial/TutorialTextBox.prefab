@@ -1357,6 +1357,7 @@ MonoBehaviour:
   enemy: {fileID: 7643140467708047131, guid: d7f3d65595df5384e8a807ada73c3b81, type: 3}
   obstacle: {fileID: 651969968709629137, guid: d79c21dabcd19c84eac3aa3485680e9a, type: 3}
   cible: {fileID: 8113196902335785868, guid: ee59c4347faf1fb4c906b52277888f22, type: 3}
+  currentText: 0
   delays:
   - 1.5
   - 6
