@@ -95,7 +95,7 @@ public class EnvironmentManager : MonoBehaviour
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
     private Scorable[,] elements;
     private int[] indexes;
-    private int maxIndex = 6;
+    private int maxIndex = 15;
     
     private int[] majorChallenges;
     private int[] attributes;

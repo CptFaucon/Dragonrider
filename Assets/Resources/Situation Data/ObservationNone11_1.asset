@@ -14,16 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attribute: 3
   majorChallenge: 2
-  length: 2
-  difficulty: 2
-  path:
-  - {x: -1, y: 1, z: 2.5}
+  length: 1
+  difficulty: 1
+  path: []
   elements:
   - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
-    localPosition: {x: 0, y: 0, z: 10}
-    localRotation: {x: 0, y: 0, z: 0}
-    localScale: {x: 1, y: 1, z: 1}
+    localPosition: {x: -5, y: 3, z: 11}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
   - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
-    localPosition: {x: -2, y: 1, z: 20}
-    localRotation: {x: 0, y: 90, z: 0}
-    localScale: {x: 1, y: 1, z: 1}
+    localPosition: {x: 5, y: -3, z: 22}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: -5, y: -3, z: 29}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 4, y: 3, z: 40}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 0, y: 0, z: 58}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 2, y: 0, z: 76}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: -2, y: 0, z: 76}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 5, y: -3, z: 94}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: -5, y: -3, z: 105}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 0, y: -3, z: 116}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 0, y: 3, z: 123}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: 5, y: -3, z: 134}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
