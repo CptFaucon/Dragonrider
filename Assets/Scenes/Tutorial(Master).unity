@@ -1201,6 +1201,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1500309659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5380410510080672628, guid: 3a5c339963fe62147af763054b2d2ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5380410511058738848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1500309660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500309659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Music/MusicTutorial
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!224 &1802114355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4963033655233120350, guid: a775b423447a49f4fb8fdbf2085e0d86,
