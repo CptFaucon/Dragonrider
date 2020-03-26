@@ -7,6 +7,7 @@ public class Obstacle : Scorable
     private ScoreManager sm;
     private Renderer r;
     private TutorialManager tm;
+    private SoundManager sdm;
 
     public bool hasCollided;
 
@@ -16,6 +17,7 @@ public class Obstacle : Scorable
         r = GetComponent<Renderer>();
         pc = FindObjectOfType<PlayerController>();
         tm = FindObjectOfType<TutorialManager>();
+        sdm = FindObjectOfType<SoundManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,7 @@ public class Obstacle : Scorable
         r.enabled = false;
         hasCollided = true;
         StartCoroutine(ReEnable());
+        sdm.playerCollide.Play();
         if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleTouched();
     }
 
