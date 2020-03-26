@@ -1373,7 +1373,6 @@ MonoBehaviour:
   - 6
   - 4
   - 5
-  - 4
   - 6.5
   - 7
   texts:
@@ -1398,6 +1397,7 @@ MonoBehaviour:
   - {fileID: 3640645747441563696}
   - {fileID: 3640645747643066582}
   - {fileID: 3640645747175199162}
+  currentText: 0
 --- !u!1 &3640645747401695882
 GameObject:
   m_ObjectHideFlags: 0

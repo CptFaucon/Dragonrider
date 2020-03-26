@@ -105,8 +105,7 @@ public class TutorialManager : MonoBehaviour
         ts.sounds[11].gameObject.SetActive(true);
         yield return new WaitForSeconds(delays[14]);
         DisplayNextText();
-        yield return new WaitForSeconds(delays[15]);
-        Instantiate(cible, player.position - new Vector3(0, 0, -20), Quaternion.Euler(90, 0, 0));
+        Instantiate(cible, player.position - new Vector3(0, 0, -30), Quaternion.Euler(90, 0, 0));
 
         //Quatrième situation
         while (fourthSituationComplete == false)
@@ -114,10 +113,10 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(delays[16]);
+        yield return new WaitForSeconds(delays[15]);
         DisplayNextText();
         ts.sounds[14].SetActive(true);
-        yield return new WaitForSeconds(delays[17]);
+        yield return new WaitForSeconds(delays[16]);
         SceneChange();
     }
 
