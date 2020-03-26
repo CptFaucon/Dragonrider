@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
@@ -128,12 +129,14 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Jouer avec le tuto");
                 Tutorial.Select();
+                SceneManager.LoadScene(1);
             }
 
             if ((Input.GetKeyDown("p")) | (Input.GetKeyDown("m")))
             {
                 Debug.Log("Jouer directement");
                 Game.Select();
+                SceneManager.LoadScene(2);
             }
 
             if (Input.GetKeyDown("l"))
