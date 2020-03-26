@@ -1400,6 +1400,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnvironmentManager
       objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: dimensions.z
+      value: 285
+      objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: numberOfFields
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: chances.Array.data[0].observationChallengeChances
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: chances.Array.data[0].dodgingChallengeChances
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: chances.Array.data[0].spearChallengeChances
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119690674688222047, guid: b415a91ffaf3dee4a88058f1894ef952,
+        type: 3}
+      propertyPath: chanceToHaveLength2Situations
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b415a91ffaf3dee4a88058f1894ef952, type: 3}
 --- !u!54 &2162936788731710907
