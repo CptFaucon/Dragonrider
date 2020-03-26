@@ -82,6 +82,7 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Quitter le jeu");
                 Quit.Select();
+                Application.Quit();
             }
         }
 
