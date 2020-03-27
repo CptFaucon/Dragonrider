@@ -36,6 +36,9 @@ namespace FMODUnity
                 }
             }
         }
+
+        
+
         protected override void HandleGameEvent(EmitterGameEvent gameEvent)
         {
             if (TriggerEvent == gameEvent)
@@ -44,8 +47,11 @@ namespace FMODUnity
             }
         }
 
+        
+
         public void TriggerParameters()
         {
+            
             for (int i = 0; i < Emitters.Length; i++)
             {
                 var emitterRef = Emitters[i];

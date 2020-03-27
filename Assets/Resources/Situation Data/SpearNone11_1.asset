@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
   m_Name: SpearNone11_1
   m_EditorClassIdentifier: 
-  attribute: 0
+  attribute: 3
   majorChallenge: 0
-  length: 1
-  difficulty: 1
+  length: 2
+  difficulty: 2
   path:
   - {x: -1.5, y: -1.5, z: 3}
   elements:
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
+    localPosition: {x: 0, y: 0, z: 2}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
+    localPosition: {x: 0, y: 0, z: 2}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
+    localPosition: {x: 0, y: 0, z: 2}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
   - element: {fileID: 11400000, guid: 4652a025dcde6934dab762a558e1453b, type: 2}
     localPosition: {x: 0, y: 0, z: 2}
     localRotation: {x: 0, y: 0, z: 0}
