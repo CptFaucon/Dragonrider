@@ -12,10 +12,394 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
+  EditorBanks:
+  - {fileID: 114164001628588812}
+  - {fileID: 114325094649275162}
+  EditorEvents:
+  - {fileID: 114124176740982686}
+  - {fileID: 114008288480694552}
+  - {fileID: 114555354422415636}
   EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  stringsBankWriteTime: 0
+  MasterBanks:
+  - {fileID: 114325094649275162}
+  StringsBanks:
+  - {fileID: 114164001628588812}
+  stringsBankWriteTime: 637209236226189464
   cacheVersion: 3
+--- !u!114 &114008288480694552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicBase
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicBase
+  guid: d8324579f09d324f93c52a564e70c3f3
+  Banks:
+  - {fileID: 114325094649275162}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114399506619859776}
+  - {fileID: 114501253899709768}
+  - {fileID: 114269301323981634}
+  - {fileID: 114232241259593832}
+  - {fileID: 114418488911637022}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 413345
+--- !u!114 &114061452506804526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/ObsArea
+  m_EditorClassIdentifier: 
+  Name: ObsArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114124176740982686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicTutorial
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicTutorial
+  guid: b4c1e54ae5e1a0498953883ca2a92d34
+  Banks:
+  - {fileID: 114325094649275162}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114533680136670518}
+  - {fileID: 114764718091311376}
+  - {fileID: 114061452506804526}
+  - {fileID: 114980575476828086}
+  - {fileID: 114714753318693068}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 46666
+--- !u!114 &114164001628588812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Dragonrider_ST/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637209236226189464
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1012
+  Exists: 1
+--- !u!114 &114225122252121352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114232241259593832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/EndArea
+  m_EditorClassIdentifier: 
+  Name: EndArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114269301323981634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/SpearArea
+  m_EditorClassIdentifier: 
+  Name: SpearArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114282196800226216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/ObsArea
+  m_EditorClassIdentifier: 
+  Name: ObsArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114325094649275162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Dragonrider_ST/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637209236226033254
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &114354710998854338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/SpearArea
+  m_EditorClassIdentifier: 
+  Name: SpearArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114399506619859776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/DodgingArea
+  m_EditorClassIdentifier: 
+  Name: DodgingArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114418488911637022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114501253899709768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/ObsArea
+  m_EditorClassIdentifier: 
+  Name: ObsArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114533680136670518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/SpearArea
+  m_EditorClassIdentifier: 
+  Name: SpearArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114555354422415636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicMenu
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicMenu
+  guid: ec9651ac0ce4de468dc4d9384459a616
+  Banks:
+  - {fileID: 114325094649275162}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114354710998854338}
+  - {fileID: 114733495388321884}
+  - {fileID: 114282196800226216}
+  - {fileID: 114225122252121352}
+  - {fileID: 114823965107142638}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 73333
+--- !u!114 &114714753318693068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114733495388321884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/DodgingArea
+  m_EditorClassIdentifier: 
+  Name: DodgingArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114764718091311376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/DodgingArea
+  m_EditorClassIdentifier: 
+  Name: DodgingArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114823965107142638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/EndArea
+  m_EditorClassIdentifier: 
+  Name: EndArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114980575476828086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/EndArea
+  m_EditorClassIdentifier: 
+  Name: EndArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1

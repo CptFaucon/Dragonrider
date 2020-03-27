@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class HitBoxesManager : MonoBehaviour
 {
     public bool[] isHitboxActivated;
+    public Vector3[] hitboxPosition = new Vector3[6];
 
     public KeyCode[] inputs;
 
@@ -12,12 +13,14 @@ public class HitBoxesManager : MonoBehaviour
     private ScoreManager sm;
     private PlayerController pc;
     private SoundManager sdm;
+    private SpearParticleManager spm;
 
     private void Awake()
     {
         pc = FindObjectOfType<PlayerController>();
         sm = FindObjectOfType<ScoreManager>();
         sdm = FindObjectOfType<SoundManager>();
+        spm = FindObjectOfType<SpearParticleManager>();
 
         foreach (var item in isHitboxActivated)
         {
@@ -31,7 +34,10 @@ public class HitBoxesManager : MonoBehaviour
 
             for (int i = 0; i < 6; i++)
             {
-                if (Input.GetKeyDown(inputs[i])) sdm.playerAttack.Play();
+                if (Input.GetKeyDown(inputs[i])) {
+                    sdm.playerAttack.Play();
+                    spm.PlayParticle(hitboxPosition[i]);
+                }
 
                 if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
                 {

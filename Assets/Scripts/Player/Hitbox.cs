@@ -9,6 +9,7 @@ public class Hitbox : MonoBehaviour
     private void Start()
     {
         hitBoxesManager = FindObjectOfType<HitBoxesManager>();
+        hitBoxesManager.hitboxPosition[HitBoxIndex] = transform.localPosition;
     }
 
     private void OnTriggerEnter(Collider other)

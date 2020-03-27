@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b03928babb664c4baf2bb6873a397e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreBonus: 0
+  scoreMalus: 0
   parent: {fileID: 0}
 --- !u!1 &7643140467708047131
 GameObject:
@@ -151,15 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6a3832067671247845ddae09b120ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upSpawn: 10
-  downSpawn: -10
-  rightSpawn: 15
-  leftSpawn: -15
+  scoreBonus: 10
+  scoreMalus: -10
+  upSpawn: 5
+  downSpawn: -5
+  rightSpawn: 8
+  leftSpawn: -8
   HorizontalRange: 8
   VerticalRange: 2
-  scoreMalus: -10
-  scoreBonus: 10
-  stayDuration: 20
+  stayDuration: 5
   currentSpeed: 0
   maxSpeed: 4
   minSpeed: 2.5
