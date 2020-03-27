@@ -1,0 +1,36 @@
+--------------
+--How to use--
+--------------
+
+Simply locate the 'Prefabs' folder and drag a prefab into your scene. You can also drag the desired model (from 'Models' folder) into the scene and apply the materials from the 'Materials' folder.
+
+-NOTE 1-
+All prefabs contain one or more UnityEnding.Light Game Objects to light the scene.  If many lights are placed close together, it may be desirable to disable, remove or lower the intensity of the Light Game Object.  
+For example, if many ceiling lights are placed together, disable the child Light game object so the scene is not too bright.
+
+It is worth noting that the UnityEnding.Light(s) already included in this pack are set to 'Baked' mode with Soft Shadows.  
+Please modify as required.  The mode setting will be overridden to 'Realtime' when the games lighting settings is not set to 'Baked Global Illumination'.
+
+
+-GS Light Script-
+The Gamer Squid light script allows a light to be turned on/off via script.
+All prefabs already have the GSLight script attached.  This script allows the light to be turned on/off by:
+ a) Turning on/off the associated UnityEnding.Light(s)
+ b) Setting the emissive value for a material of a game object
+
+Use the following public methods from the GSLight class:
+  GSLight.TurnOn()
+  GSLight.TurnOff()
+  GSLight.Toggle()
+
+
+-GS Light Component Settings-
+When a game object has the GSLight script attached, settings can be modified via the Unity Inspector. 
+The settings are:
+  - Emissive Object List
+  - Light List
+
+The 'Emissive Object List' is an array where each element has the following settings:
+  - Emissive Object: The game object which has a surface that should emit light when the light is turned on
+  - Emissive Mat Index: The index of the material which will have the emissive property modified
+

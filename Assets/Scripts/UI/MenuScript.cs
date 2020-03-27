@@ -44,45 +44,6 @@ public class MenuScript : MonoBehaviour
     void Update()
     {
 
-        if (Intro.activeSelf)
-        {
-            if (Input.GetKeyDown("i") || Input.GetKeyDown("o") || Input.GetKeyDown("p") || Input.GetKeyDown("k") || Input.GetKeyDown("l") || Input.GetKeyDown("m"))
-            {
-                Debug.Log("Accès au menu principal");
-                Intro.SetActive(false);
-                MainMenu.SetActive(true);
-            }
-        }
-
-        if (MainMenu.activeSelf)
-        {
-            if (Input.GetKeyDown("i"))
-            {
-                Debug.Log("Accès au jeu");
-                Play.Select();
-                MainMenu.SetActive(false);
-                PlayMenu.SetActive(true);
-                sdm.menuValid.Play();
-            }
-
-            if (Input.GetKeyDown("p"))
-            {
-                Debug.Log("Accès aux crédits");
-                Credits.Select();
-                MainMenu.SetActive(false);
-                CreditsMenu.SetActive(true);
-                sdm.menuValid.Play();
-            }
-
-            if (Input.GetKeyDown("l"))
-            {
-                Debug.Log("Quitter le jeu");
-                Quit.Select();
-                sdm.menuValid.Play();
-                Application.Quit();
-            }
-        }
-
         if (PlayMenu.activeSelf)
         {
             if ((Input.GetKeyDown("i")) | (Input.GetKeyDown("k")))
@@ -120,6 +81,45 @@ public class MenuScript : MonoBehaviour
                 CreditsMenu.SetActive(false);
                 MainMenu.SetActive(true);
                 sdm.menuValid.Play();
+            }
+        }
+
+        if (MainMenu.activeSelf)
+        {
+            if (Input.GetKeyDown("i"))
+            {
+                Debug.Log("Accès au jeu");
+                Play.Select();
+                MainMenu.SetActive(false);
+                PlayMenu.SetActive(true);
+                sdm.menuValid.Play();
+            }
+
+            if (Input.GetKeyDown("p"))
+            {
+                Debug.Log("Accès aux crédits");
+                Credits.Select();
+                MainMenu.SetActive(false);
+                CreditsMenu.SetActive(true);
+                sdm.menuValid.Play();
+            }
+
+            if (Input.GetKeyDown("l"))
+            {
+                Debug.Log("Quitter le jeu");
+                Quit.Select();
+                sdm.menuValid.Play();
+                Application.Quit();
+            }
+        }
+
+        if (Intro.activeSelf)
+        {
+            if (Input.GetKeyDown("i") || Input.GetKeyDown("o") || Input.GetKeyDown("p") || Input.GetKeyDown("k") || Input.GetKeyDown("l") || Input.GetKeyDown("m"))
+            {
+                Debug.Log("Accès au menu principal");
+                Intro.SetActive(false);
+                MainMenu.SetActive(true);
             }
         }
     }

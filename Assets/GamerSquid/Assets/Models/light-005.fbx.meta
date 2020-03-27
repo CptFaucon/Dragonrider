@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 0b4332d60cdc58343a51fe220fdd7981
+timeCreated: 1551360066
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Frame
+    100002: //RootNode
+    100004: Reflector-01
+    100006: Reflector-02
+    100008: Reflector-03
+    100010: Reflector-04
+    100012: Reflector-Frame-01
+    100014: Reflector-Frame-02
+    100016: Reflector-Frame-03
+    100018: Reflector-Frame-04
+    100020: Roof
+    100022: Roof-Deco-01
+    100024: Roof-Deco-02
+    100026: Roof-Peak
+    100028: Upright-001
+    100030: Upright-002
+    100032: Upright-003
+    100034: Upright-004
+    400000: Frame
+    400002: //RootNode
+    400004: Reflector-01
+    400006: Reflector-02
+    400008: Reflector-03
+    400010: Reflector-04
+    400012: Reflector-Frame-01
+    400014: Reflector-Frame-02
+    400016: Reflector-Frame-03
+    400018: Reflector-Frame-04
+    400020: Roof
+    400022: Roof-Deco-01
+    400024: Roof-Deco-02
+    400026: Roof-Peak
+    400028: Upright-001
+    400030: Upright-002
+    400032: Upright-003
+    400034: Upright-004
+    2300000: Frame
+    2300002: Reflector-01
+    2300004: Reflector-02
+    2300006: Reflector-03
+    2300008: Reflector-04
+    2300010: Reflector-Frame-01
+    2300012: Reflector-Frame-02
+    2300014: Reflector-Frame-03
+    2300016: Reflector-Frame-04
+    2300018: Roof
+    2300020: Roof-Deco-01
+    2300022: Roof-Deco-02
+    2300024: Roof-Peak
+    2300026: Upright-001
+    2300028: Upright-002
+    2300030: Upright-003
+    2300032: Upright-004
+    3300000: Frame
+    3300002: Reflector-01
+    3300004: Reflector-02
+    3300006: Reflector-03
+    3300008: Reflector-04
+    3300010: Reflector-Frame-01
+    3300012: Reflector-Frame-02
+    3300014: Reflector-Frame-03
+    3300016: Reflector-Frame-04
+    3300018: Roof
+    3300020: Roof-Deco-01
+    3300022: Roof-Deco-02
+    3300024: Roof-Peak
+    3300026: Upright-001
+    3300028: Upright-002
+    3300030: Upright-003
+    3300032: Upright-004
+    4300000: Reflector-04
+    4300002: Reflector-03
+    4300004: Reflector-02
+    4300006: Reflector-01
+    4300008: Reflector-Frame-04
+    4300010: Reflector-Frame-03
+    4300012: Reflector-Frame-02
+    4300014: Reflector-Frame-01
+    4300016: Upright-004
+    4300018: Upright-003
+    4300020: Upright-002
+    4300022: Upright-001
+    4300024: Roof-Deco-01
+    4300026: Roof
+    4300028: Roof-Deco-02
+    4300030: Roof-Peak
+    4300032: Frame
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
