@@ -190,7 +190,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59992
+  m_Name: pb_Mesh-226052
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -993,8 +993,7 @@ MonoBehaviour:
     contact. Bonne chance, apprenti dragonnier !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b2bcc47ec5993b4183f05bd681681bb, type: 2}
-  m_sharedMaterial: {fileID: 21648631520254206, guid: 8b2bcc47ec5993b4183f05bd681681bb,
-    type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1400,10 +1399,6 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1395429041, guid: a775b423447a49f4fb8fdbf2085e0d86, type: 3}
-      propertyPath: m_textAlignment
-      value: 514
-      objectReference: {fileID: 0}
     - target: {fileID: 4963033655233120290, guid: a775b423447a49f4fb8fdbf2085e0d86,
         type: 3}
       propertyPath: m_Name
@@ -1540,7 +1535,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_subTextObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 423354987}
+      objectReference: {fileID: 251935828}
     - target: {fileID: 7810038227593551123, guid: a775b423447a49f4fb8fdbf2085e0d86,
         type: 3}
       propertyPath: m_text
@@ -1549,12 +1544,12 @@ PrefabInstance:
     - target: {fileID: 7810038227593551123, guid: a775b423447a49f4fb8fdbf2085e0d86,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7810038227593551123, guid: a775b423447a49f4fb8fdbf2085e0d86,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7810038227593551123, guid: a775b423447a49f4fb8fdbf2085e0d86,
         type: 3}
@@ -1607,6 +1602,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &251935826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 251935827}
+  - component: {fileID: 251935829}
+  - component: {fileID: 251935828}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [Dekiru SDF Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &251935827
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251935826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249960739}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &251935828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251935826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_canvasRenderer: {fileID: 251935829}
+  m_TextComponent: {fileID: 249960740}
+  m_materialReferenceIndex: 1
+--- !u!222 &251935829
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251935826}
+  m_CullTransparentMesh: 0
 --- !u!1 &268835207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,8 +1888,7 @@ MonoBehaviour:
     la F\xEAte des Lumi\xE8res, alors fais de ton mieux !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b2bcc47ec5993b4183f05bd681681bb, type: 2}
-  m_sharedMaterial: {fileID: 21648631520254206, guid: 8b2bcc47ec5993b4183f05bd681681bb,
-    type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1918,78 +1984,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393832066}
-  m_CullTransparentMesh: 0
---- !u!1 &423354985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 423354986}
-  - component: {fileID: 423354988}
-  - component: {fileID: 423354987}
-  m_Layer: 5
-  m_Name: TMP SubMeshUI [Dekiru SDF Material + LiberationSans SDF Atlas]
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &423354986
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423354985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 249960739}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &423354987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423354985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_spriteAsset: {fileID: 0}
-  m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
-  m_isDefaultMaterial: 0
-  m_padding: 1.25
-  m_canvasRenderer: {fileID: 423354988}
-  m_TextComponent: {fileID: 249960740}
-  m_materialReferenceIndex: 1
---- !u!222 &423354988
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423354985}
   m_CullTransparentMesh: 0
 --- !u!1 &455028934
 GameObject:
@@ -2152,7 +2146,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59994
+  m_Name: pb_Mesh-226054
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2624,7 +2618,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59996
+  m_Name: pb_Mesh-226056
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3168,7 +3162,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59986
+  m_Name: pb_Mesh-226046
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3984,8 +3978,7 @@ MonoBehaviour:
     les \xE9viter : tu contribueras au spectacle ! Tiens, essaies !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b2bcc47ec5993b4183f05bd681681bb, type: 2}
-  m_sharedMaterial: {fileID: 21648631520254206, guid: 8b2bcc47ec5993b4183f05bd681681bb,
-    type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4171,8 +4164,7 @@ MonoBehaviour:
     fier d\u2019y \xEAtre affect\xE9 !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b2bcc47ec5993b4183f05bd681681bb, type: 2}
-  m_sharedMaterial: {fileID: 21648631520254206, guid: 8b2bcc47ec5993b4183f05bd681681bb,
-    type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4484,8 +4476,7 @@ MonoBehaviour:
     sur le terrain ! Comment tu te sens ? "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b2bcc47ec5993b4183f05bd681681bb, type: 2}
-  m_sharedMaterial: {fileID: 21648631520254206, guid: 8b2bcc47ec5993b4183f05bd681681bb,
-    type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4562,7 +4553,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -4986,7 +4977,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59988
+  m_Name: pb_Mesh-226048
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -5146,7 +5137,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59984
+  m_Name: pb_Mesh-226044
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
