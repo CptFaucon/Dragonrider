@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
@@ -17,7 +16,6 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Menu_Test")) StartCoroutine(WingDelay());
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("Menu_Test"))
         {
             wind.Play();
@@ -25,13 +23,8 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    IEnumerator WingDelay()
+    public void WingSound()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.5015f);
-            playerWings.Play();
-            yield return new WaitForSeconds(0.5015f);
-        }
+        playerWings.Play();
     }
 }

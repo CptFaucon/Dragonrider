@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using FMODUnity;
 [RequireComponent(typeof(BoxCollider))]
 
 public class EnvironmentManager : MonoBehaviour
 {
-    [Space]
-    [Header("__________________DATA__________________________________________________________________________________________________________________________________________________________________")]
-    [SerializeField]
-    private ElementData[] elementData;
-    [SerializeField]
-    private SituationData[] situationData;
-    [SerializeField]
-    private FieldData[] fieldData;
-    [SerializeField]
-    private TransitionData[] transitionData;
-
+    #region Variables
+    
     private PathManager player;
-
+    
+    #region Field
     [Space]
     [Header("__________________FIELD__________________________________________________________________________________________________________________________________________________________________")]
     [SerializeField]
@@ -45,7 +38,9 @@ public class EnvironmentManager : MonoBehaviour
     private Vector3[] fieldPositions;
     private Vector3[] transitionPositions;
     private int[] directions;
-
+    #endregion
+    
+    #region Difficulty
     [Space]
     [Header("__________________DIFFICULTY__________________________________________________________________________________________________________________________________________________________________")]
     [SerializeField]
@@ -60,7 +55,8 @@ public class EnvironmentManager : MonoBehaviour
     [Range(0, 100)]
     private int chanceToHaveLength2Situations = 66;
 
-    private int currentDifficulty;
+    private int currentDifficulty = 0;
+    private bool hasChangedDifficulty = true;
 
 
     [Serializable]
@@ -84,7 +80,9 @@ public class EnvironmentManager : MonoBehaviour
             }
         }
     }
-
+    #endregion
+    
+    #region Challenge
     [Space]
     [Header("__________________CHALLENGE__________________________________________________________________________________________________________________________________________________________________")]
     [SerializeField]
@@ -97,7 +95,7 @@ public class EnvironmentManager : MonoBehaviour
     private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
     private Scorable[,] elements;
     private int[] indexes;
-    private int maxIndex = 6;
+    private int maxIndex = 15;
     
     private int[] majorChallenges;
     private int[] attributes;
@@ -106,49 +104,17 @@ public class EnvironmentManager : MonoBehaviour
     private List<Scorable> currentElements = new List<Scorable>();
     private ScoreManager sm;
 
+    private StudioParameterTrigger trigger;
+    #endregion
+    #endregion
 
 
     private void Awake()
     {
-        #region Instantiate all Elements
-        
-        int length = elementData.Length;
-        
-        indexes = new int[length];
-        
-        for (int i = 0; i < length; i++) {
-            
-            for (int j = 0; j < situationData.Length; j++) {
-
-                for (int k = 0; k < situationData[j].Elements.Length; k++) {
-
-                    if (situationData[j].Elements[k].element == elementData[i]) {
-
-                        situationData[j].Elements[k].element.setIndex(i);
-                    }
-                }
-            }
-
-            indexes[i] = 0;
-        }
-
-
-        elements = new Scorable[length, maxIndex];
-
-        for (int i = 0; i < length; i++) {
-
-            for (int j = 0; j < maxIndex; j++) {
-
-                elements[i, j] = Instantiate(elementData[i].Element);
-                elements[i, j].gameObject.SetActive(false);
-            }
-        }
-
-        #endregion
-
-
         #region Classify Situation Data by Difficulty, Major Challenge, Length and Attribute
         
+        UnityEngine.Object[] situationData = Resources.LoadAll("Situation Data", typeof(SituationData));
+
         for (int i = 0; i < 3; i++) {
 
             situations.Add(new List<List<List<List<SituationData>>>>());
@@ -194,6 +160,48 @@ public class EnvironmentManager : MonoBehaviour
 
         #endregion
 
+        
+        #region Instantiate all Elements
+        
+        UnityEngine.Object[] elementData = Resources.LoadAll("Element Data", typeof(ElementData));
+        int length = elementData.Length;
+        
+        indexes = new int[length];
+        
+        ElementData[] eData = new ElementData[length];
+        
+        elements = new Scorable[length, maxIndex];
+
+        int e = 0;
+        foreach (ElementData ed in elementData) {
+
+            eData[e] = ed;
+            for (int j = 0; j < maxIndex; j++) {
+
+                elements[e, j] = Instantiate(ed.Element);
+                elements[e, j].gameObject.SetActive(false);
+            }
+            e++;
+        }
+
+        for (int i = 0; i < length; i++) {
+
+            foreach (SituationData data in situationData) {
+
+                for (int k = 0; k < data.Elements.Length; k++) {
+
+                    if (data.Elements[k].element == eData[i]) {
+
+                        data.Elements[k].element.setIndex(i);
+                    }
+                }
+            }
+
+            indexes[i] = 0;
+        }
+
+        #endregion
+
 
         #region Classify Fields by Attribute
         
@@ -204,6 +212,8 @@ public class EnvironmentManager : MonoBehaviour
             fieldDatas.Add(new List<FieldData>());
         }
         
+        UnityEngine.Object[] fieldData = Resources.LoadAll("Field Data", typeof(FieldData));
+
         foreach (FieldData data in fieldData) {
             
             fieldDatas[data.attributeInt].Add(data);
@@ -226,6 +236,8 @@ public class EnvironmentManager : MonoBehaviour
             }
         }
         
+        UnityEngine.Object[] transitionData = Resources.LoadAll("Transition Data", typeof(TransitionData));
+
         foreach (TransitionData data in transitionData) {
 
             transitionDatas[data.InAttribute][data.OutAttribute].Add(data);
@@ -252,7 +264,7 @@ public class EnvironmentManager : MonoBehaviour
         List<int[]> transitionIndexes = new List<int[]>();
 
         for (int i = 1; i < numberOfFields; i++) {
-            /*
+            
 
 
             float random = UnityEngine.Random.Range(0, 100);
@@ -269,10 +281,10 @@ public class EnvironmentManager : MonoBehaviour
             int otherOne = types[0];
             int otherTwo = types[1];
 
-            */
+            
             int newAttribute = currentAttribute;
 
-            /*
+            
             if (random >= repeat) {
 
                 float rapport;
@@ -309,7 +321,7 @@ public class EnvironmentManager : MonoBehaviour
 
                 repeatCount++;
             }
-            */
+            
             attributes[i] = newAttribute;
             iterations[newAttribute]++;
 
@@ -490,7 +502,8 @@ public class EnvironmentManager : MonoBehaviour
 
         #endregion
 
-        
+
+        trigger = FindObjectOfType<StudioParameterTrigger>();
         player = FindObjectOfType<PathMovement>().PathToFollow;
         sm = FindObjectOfType<ScoreManager>();
         GetComponent<Collider>().isTrigger = true;
@@ -583,16 +596,21 @@ public class EnvironmentManager : MonoBehaviour
         int random = 0;
         SituationData sd;
 
-        if (challengeDone / nbOfChallenges * 100 >= difficultRateDown) {
+        if (!hasChangedDifficulty) {
 
-            if (challengeDone / nbOfChallenges * 100 >= difficultRateUp) {
 
-                currentDifficulty = Mathf.Min(currentDifficulty + 1, 2);
+            if (challengeDone / nbOfChallenges * 100f >= difficultRateDown) {
+
+                if (challengeDone / nbOfChallenges * 100f >= difficultRateUp) {
+
+                    currentDifficulty = Mathf.Min(currentDifficulty + 1, 2);
+                }
             }
-        }
-        else {
+            else {
 
-            currentDifficulty = Mathf.Max(currentDifficulty - 1, 0);
+                currentDifficulty = Mathf.Max(currentDifficulty - 1, 0);
+            }
+            hasChangedDifficulty = true;
         }
 
         if (situations[currentDifficulty][majorChallenge][attribute][length].Count == 0) {
@@ -619,7 +637,14 @@ public class EnvironmentManager : MonoBehaviour
             }
         }
 
-        nbOfChallenges = sd.Elements.Length;
+        if (hasChangedDifficulty){
+            
+            nbOfChallenges = sd.Elements.Length;
+            challengeDone = 0;
+        }
+        else {
+            nbOfChallenges += sd.Elements.Length;
+        }
 
         return sd;
     }
@@ -685,6 +710,17 @@ public class EnvironmentManager : MonoBehaviour
             Vector3 lastPoint = new Vector3(0, 0, dimensions[2] * (2 + i - length[1]) / 2);
             SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint, length[0] + 1);
         }
+        hasChangedDifficulty = false;
+
+        
+        int[] values = new int[4];
+        
+        for (int i = 0; i < 3; i++) {
+
+            values[i + 1] = isCurrentChallenge(i, majorChallenges[index]);
+        }
+        values[0] = currentDifficulty;
+        SetFMODParameters(values);
 
         if (index < numberOfFields - 1) {
 
@@ -706,6 +742,7 @@ public class EnvironmentManager : MonoBehaviour
         }
 
         transform.position = transitionPositions[index];
+        Debug.Log(index);
     }
 
 
@@ -729,6 +766,30 @@ public class EnvironmentManager : MonoBehaviour
     public void Success()
     {
         challengeDone++;
+    }
+
+
+    private int isCurrentChallenge(int chal, int currentChal)
+    {
+        if (chal == currentChal) {
+            return 1;
+        }
+        return 0;
+    }
+
+
+    private void SetFMODParameters(int[] values)
+    {
+        Debug.Log("Spear is " + values[1]);
+        Debug.Log("Dodge is " + values[2]);
+        Debug.Log("Obs is " + values[3]);
+        Debug.Log("Difficulty is " + values[0]);
+        
+        for (int i = 0; i < values.Length; i++) {
+            
+            trigger.Emitters[0].Params[i].Value = values[i];
+        }
+        trigger.TriggerParameters();
     }
 
 
