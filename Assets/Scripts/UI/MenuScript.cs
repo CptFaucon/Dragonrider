@@ -13,11 +13,11 @@ public class MenuScript : MonoBehaviour
     public Button Quit;
 
     // Settings menu
-    public GameObject Music;
+    public Button Music;
     public GameObject MusicSlider;
-    public GameObject SFX;
+    public Button SFX;
     public GameObject SFXSlider;
-    public GameObject Voices;
+    public Button Voices;
     public GameObject VoicesSlider;
     public Button BackSettings;
 
@@ -100,7 +100,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown("i"))
             {
                 Debug.Log("Sélection du slider music");
-                //Music.Select();
+                Music.Select();
                 MusicSlider.SetActive(true);
                 SFXSlider.SetActive(false);
                 VoicesSlider.SetActive(false);
@@ -110,7 +110,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown("o"))
             {
                 Debug.Log("Sélection du slider voices");
-                //Voices.Select();
+                Voices.Select();
                 VoicesSlider.SetActive(true);
                 SFXSlider.SetActive(false);
                 MusicSlider.SetActive(false);
@@ -120,7 +120,7 @@ public class MenuScript : MonoBehaviour
             if (Input.GetKeyDown("p"))
             {
                 Debug.Log("Sélection du slider SFX");
-                //SFX.Select();
+                SFX.Select();
                 SFXSlider.SetActive(true);
                 VoicesSlider.SetActive(false);
                 MusicSlider.SetActive(false);
