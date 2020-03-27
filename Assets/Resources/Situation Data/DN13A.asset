@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
+  m_Name: DN13A
+  m_EditorClassIdentifier: 
+  attribute: 3
+  majorChallenge: 1
+  length: 1
+  difficulty: 3
+  path: []
+  elements:
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 5, y: 0, z: 14}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 0, y: 0, z: 28}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 5, y: 0, z: 42}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: -5, y: 0, z: 62}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 0, y: 0, z: 68}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: -5, y: 0, z: 80}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 0, y: 0, z: 89}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 5, y: 0, z: 110}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
+  - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
+    localPosition: {x: -5, y: 2.5, z: 124}
+    localRotation: {x: 90, y: 0, z: 0}
+    localScale: {x: 2, y: 0.25, z: 2}
+  - element: {fileID: 11400000, guid: 83a9e357921692e47a740ad8530f9fbc, type: 2}
+    localPosition: {x: 5, y: 0, z: 138}
+    localRotation: {x: 0, y: 0, z: 0}
+    localScale: {x: 1, y: 10, z: 1}
