@@ -52,9 +52,9 @@ public class ScoreManager : MonoBehaviour
 
     private float scoreValue;
 
-    private const float maxScoreAngle = -30f;
-    private const float minScoreAngle = 210f;
-    private float scoreGauge = 210f;
+    private const float maxScoreAngle = 0f;
+    private const float minScoreAngle = 180f;
+    private float scoreGauge = 180f;
 
     private void Awake()
     {
@@ -73,9 +73,9 @@ public class ScoreManager : MonoBehaviour
     {
         scoreGauge -= modifier * (fillingSpeed);
 
-        if (scoreGauge > 130) currentMultiplier = firstMultiplier;
-        if (scoreGauge > 50 && scoreGauge < 130) currentMultiplier = secondMultiplier;
-        if (scoreGauge > -30 && scoreGauge < 50) currentMultiplier = thirdMultiplier;
+        if (scoreGauge > 120) currentMultiplier = firstMultiplier;
+        if (scoreGauge > 60 && scoreGauge < 120) currentMultiplier = secondMultiplier;
+        if (scoreGauge > 0 && scoreGauge < 60) currentMultiplier = thirdMultiplier;
 
         if (modifier > 0f)
         {

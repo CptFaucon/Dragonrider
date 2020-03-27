@@ -5,6 +5,7 @@ public class DodgeObstacle : MonoBehaviour
     private ScoreManager sm;
     private Obstacle o;
     private TutorialManager tm;
+    private SoundManager sdm;
 
     public bool hasDodged;
 
@@ -12,6 +13,7 @@ public class DodgeObstacle : MonoBehaviour
     {
         sm = FindObjectOfType<ScoreManager>();
         tm = FindObjectOfType<TutorialManager>();
+        sdm = FindObjectOfType<SoundManager>();
         o = GetComponentInParent<Obstacle>();
     }
 
@@ -25,6 +27,7 @@ public class DodgeObstacle : MonoBehaviour
         if (o.hasCollided == false)
         {
             sm.modifyScore(o.scoreBonus);
+            sdm.playerDodge.Play();
             if (GameObject.Find("TutorialTextBox") != null) tm.ObstacleDodged();
         }
     }

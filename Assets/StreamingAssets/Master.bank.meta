@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< refs/remotes/origin/master
+guid: 215d272184fb6294590c39b047d3bbb6
+=======
 guid: 6eb640a14d9f1c54d8ed176fc8a230df
 labels:
 - FMOD
+>>>>>>> Test of a situation data
 DefaultImporter:
   externalObjects: {}
   userData: 

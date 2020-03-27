@@ -8,20 +8,22 @@ public class HitBoxesManager : MonoBehaviour
     public KeyCode[] inputs;
 
     public List<List<Hittable>> enemiesOnTrigger = new List<List<Hittable>>();
-    public ScoreManager sm;
 
+    private ScoreManager sm;
     private PlayerController pc;
+    private SoundManager sdm;
 
     private void Awake()
     {
         pc = FindObjectOfType<PlayerController>();
         sm = FindObjectOfType<ScoreManager>();
+        sdm = FindObjectOfType<SoundManager>();
+
         foreach (var item in isHitboxActivated)
         {
             enemiesOnTrigger.Add(new List<Hittable>());
         }
     }
-
 
     private void Update()
     {
@@ -29,6 +31,8 @@ public class HitBoxesManager : MonoBehaviour
 
             for (int i = 0; i < 6; i++)
             {
+                if (Input.GetKeyDown(inputs[i])) sdm.playerAttack.Play();
+
                 if (Input.GetKeyDown(inputs[i]) && isHitboxActivated[i])
                 {
                     for (int k = 0; k < enemiesOnTrigger[i].Count; k++)

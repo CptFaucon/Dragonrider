@@ -17,6 +17,7 @@ public class Enemy : Scorable
 
     private ScoreManager sm;
     private TutorialManager tm;
+    private SoundManager sdm;
 
     [Header("Position des points de spawn")]
     public float upSpawn;
@@ -64,8 +65,10 @@ public class Enemy : Scorable
         enemy.gameObject.SetActive(true);
         target.gameObject.SetActive(true);
 
-        if (sm == null) sm = FindObjectOfType<ScoreManager>();
-        if (tm == null) tm = FindObjectOfType<TutorialManager>();
+        sm = FindObjectOfType<ScoreManager>();
+        tm = FindObjectOfType<TutorialManager>();
+        sdm = FindObjectOfType<SoundManager>();
+        sdm.enemyEntry.Play();
 
         target.localPosition = new Vector3(Random.Range(-HorizontalRange, HorizontalRange), Random.Range(-VerticalRange, VerticalRange), 0);
 

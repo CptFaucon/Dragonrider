@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class MenuScript : MonoBehaviour
     public GameObject PlayMenu;
     public GameObject CreditsMenu;
 
+    //Lien vers les sons
+    private SoundManager sdm;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,8 @@ public class MenuScript : MonoBehaviour
         MusicSlider.SetActive(false);
         SFXSlider.SetActive(false);
         VoicesSlider.SetActive(false);
+
+        sdm = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -59,6 +65,7 @@ public class MenuScript : MonoBehaviour
                 Settings.Select();
                 SettingsMenu.SetActive(true);
                 MainMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
 
             if (Input.GetKeyDown("o"))
@@ -67,6 +74,7 @@ public class MenuScript : MonoBehaviour
                 Play.Select();
                 PlayMenu.SetActive(true);
                 MainMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
 
             if (Input.GetKeyDown("p"))
@@ -75,12 +83,15 @@ public class MenuScript : MonoBehaviour
                 Credits.Select();
                 CreditsMenu.SetActive(true);
                 MainMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
 
             if (Input.GetKeyDown("l"))
             {
                 Debug.Log("Quitter le jeu");
                 Quit.Select();
+                sdm.menuValid.Play();
+                Application.Quit();
             }
         }
 
@@ -93,6 +104,7 @@ public class MenuScript : MonoBehaviour
                 MusicSlider.SetActive(true);
                 SFXSlider.SetActive(false);
                 VoicesSlider.SetActive(false);
+                sdm.menuNavig.Play();
             }
 
             if (Input.GetKeyDown("o"))
@@ -102,6 +114,7 @@ public class MenuScript : MonoBehaviour
                 VoicesSlider.SetActive(true);
                 SFXSlider.SetActive(false);
                 MusicSlider.SetActive(false);
+                sdm.menuNavig.Play();
             }
 
             if (Input.GetKeyDown("p"))
@@ -111,6 +124,7 @@ public class MenuScript : MonoBehaviour
                 SFXSlider.SetActive(true);
                 VoicesSlider.SetActive(false);
                 MusicSlider.SetActive(false);
+                sdm.menuNavig.Play();
             }
 
             if (Input.GetKeyDown("l"))
@@ -119,6 +133,7 @@ public class MenuScript : MonoBehaviour
                 BackSettings.Select();
                 MainMenu.SetActive(true);
                 SettingsMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
         }
 
@@ -128,12 +143,16 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Jouer avec le tuto");
                 Tutorial.Select();
+                sdm.menuValid.Play();
+                SceneManager.LoadScene(1);
             }
 
             if ((Input.GetKeyDown("p")) | (Input.GetKeyDown("m")))
             {
                 Debug.Log("Jouer directement");
                 Game.Select();
+                sdm.menuValid.Play();
+                SceneManager.LoadScene(2);
             }
 
             if (Input.GetKeyDown("l"))
@@ -142,6 +161,7 @@ public class MenuScript : MonoBehaviour
                 BackPlay.Select();
                 MainMenu.SetActive(true);
                 PlayMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
         }
 
@@ -153,6 +173,7 @@ public class MenuScript : MonoBehaviour
                 BackCredits.Select();
                 MainMenu.SetActive(true);
                 CreditsMenu.SetActive(false);
+                sdm.menuValid.Play();
             }
         }
     }

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
+    public Image background;
+    public Image portrait;
+
     [Header("les liens vers les prefabs")]
     public GameObject enemy;
     public GameObject obstacle;
@@ -15,8 +18,7 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Le tableau contenant tous les textes")]
     public GameObject[] texts;
-
-    private Image BackgroundImage;
+    
     private Transform player;
     private TutorialSounds ts;
 
@@ -31,8 +33,7 @@ public class TutorialManager : MonoBehaviour
     {
         texts = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++) texts[i] = transform.GetChild(i).gameObject;
-
-        BackgroundImage = gameObject.GetComponent<Image>();
+        
         player = GameObject.Find("Player").transform;
         ts = FindObjectOfType<TutorialSounds>();
 
@@ -123,7 +124,8 @@ public class TutorialManager : MonoBehaviour
     #region Display Next Text
     public void DisplayNextText()
     {
-        if(BackgroundImage.enabled != true) BackgroundImage.enabled = true;
+        if (background.enabled != true) background.enabled = true;
+        if (portrait.enabled != true) portrait.enabled = true;
         if (currentText > 0) texts[currentText - 1].SetActive(false);
         texts[currentText].SetActive(true);
         currentText++;
