@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< refs/remotes/origin/master
 guid: 215d272184fb6294590c39b047d3bbb6
+<<<<<<< HEAD
 <<<<<<< HEAD
 labels:
 - FMOD
@@ -11,6 +11,10 @@ labels:
 - FMOD
 >>>>>>> Test of a situation data
 >>>>>>> dev
+=======
+labels:
+- FMOD
+>>>>>>> Thomas
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -10,6 +10,7 @@ public class EnvironmentManager : MonoBehaviour
 {
     #region Variables
     
+    private VoiceLineInGameManager vm;
     private PathManager player;
     
     #region Field
@@ -21,18 +22,6 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField]
     private int numberOfFields = 15;
 
-    [SerializeField]
-    private int numberOfAttributes = 1;
-
-    [SerializeField]
-    [Range(0, 100)]
-    private int firstChancesToRepeatAttribute = 100;
-
-    [SerializeField]
-    [Range(0, 100)]
-    private int chanceDecreaseToRepeatAttribute = 25;
-
-    private int repeatCount = 0;
     private Transform[] fields;
     private Transform[] transitions;
     private Vector3[] fieldPositions;
@@ -91,18 +80,19 @@ public class EnvironmentManager : MonoBehaviour
 
     private int nbOfChallenges = 1;
     private int challengeDone = 0;
-    private List<List<List<List<List<SituationData>>>>> situations = new List<List<List<List<List<SituationData>>>>>();
-    private List<List<List<List<List<SituationData>>>>> backup = new List<List<List<List<List<SituationData>>>>>();
+    private List<List<List<List<SituationData>>>> situations = new List<List<List<List<SituationData>>>>();
+    private List<List<List<List<SituationData>>>> backup = new List<List<List<List<SituationData>>>>();
     private Scorable[,] elements;
     private int[] indexes;
-    private int maxIndex = 15;
+    private int maxIndex = 80;
     
     private int[] majorChallenges;
-    private int[] attributes;
 
     private int fieldIndex = 1;
     private List<Scorable> currentElements = new List<Scorable>();
+    private List<Scorable> lastElements = new List<Scorable>();
     private ScoreManager sm;
+    public GameObject menu;
 
     private StudioParameterTrigger trigger;
     #endregion
@@ -111,56 +101,37 @@ public class EnvironmentManager : MonoBehaviour
 
     private void Awake()
     {
-        #region Classify Situation Data by Difficulty, Major Challenge, Length and Attribute
+        #region Classify Situation Data by Difficulty, Major Challenge and Length
         
         UnityEngine.Object[] situationData = Resources.LoadAll("Situation Data", typeof(SituationData));
 
         for (int i = 0; i < 3; i++) {
 
-            situations.Add(new List<List<List<List<SituationData>>>>());
-            backup.Add(new List<List<List<List<SituationData>>>>());
+            situations.Add(new List<List<List<SituationData>>>());
+            backup.Add(new List<List<List<SituationData>>>());
 
             for (int j = 0; j < 3; j++) {
 
-                situations[i].Add(new List<List<List<SituationData>>>());
-                backup[i].Add(new List<List<List<SituationData>>>());
+                situations[i].Add(new List<List<SituationData>>());
+                backup[i].Add(new List<List<SituationData>>());
 
-                for (int k = 0; k < numberOfAttributes; k++) {
+                for (int k = 0; k < 2; k++) {
 
-                    situations[i][j].Add(new List<List<SituationData>>());
-                    backup[i][j].Add(new List<List<SituationData>>());
-
-                    for (int l = 0; l < 2; l++) {
-
-                        situations[i][j][k].Add(new List<SituationData>());
-                        backup[i][j][k].Add(new List<SituationData>());
-                    }
+                    situations[i][j].Add(new List<SituationData>());
+                    backup[i][j].Add(new List<SituationData>());
                 }
             }
         }
 
         foreach (SituationData data in situationData) {
 
-            int attribute = data.attributeInt;
-
-            if (attribute == numberOfAttributes) {
-
-                for (int i = 0; i < numberOfAttributes; i++) {
-                    
-                    situations[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
-                    backup[data.Difficulty][data.challengeInt][i][data.Length].Add(data);
-                }
-            }
-            else {
-
-                situations[data.Difficulty][data.challengeInt][attribute][data.Length].Add(data);
-                backup[data.Difficulty][data.challengeInt][attribute][data.Length].Add(data);
-            }
+            situations[data.Difficulty][data.challengeInt][data.Length].Add(data);
+            backup[data.Difficulty][data.challengeInt][data.Length].Add(data);
         }
 
         #endregion
 
-        
+        /// A CHANGER PULLING
         #region Instantiate all Elements
         
         UnityEngine.Object[] elementData = Resources.LoadAll("Element Data", typeof(ElementData));
@@ -203,44 +174,29 @@ public class EnvironmentManager : MonoBehaviour
         #endregion
 
 
-        #region Classify Fields by Attribute
+        #region Classify Fields
         
-        List<List<FieldData>> fieldDatas = new List<List<FieldData>>();
+        List<FieldData> fieldDatas = new List<FieldData>();
 
-        for (int i = 0; i < numberOfAttributes; i++) {
-
-            fieldDatas.Add(new List<FieldData>());
-        }
-        
         UnityEngine.Object[] fieldData = Resources.LoadAll("Field Data", typeof(FieldData));
 
         foreach (FieldData data in fieldData) {
             
-            fieldDatas[data.attributeInt].Add(data);
+            fieldDatas.Add(data);
         }
 
         #endregion
 
 
-        #region Classify Transitions by Attribute In and Out
+        #region Classify Transitions
 
-        List<List<List<TransitionData>>> transitionDatas = new List<List<List<TransitionData>>>();
+        List<TransitionData> transitionDatas = new List<TransitionData>();
 
-        for (int i = 0; i < numberOfAttributes; i++) {
-
-            transitionDatas.Add(new List<List<TransitionData>>());
-
-            for (int j = 0; j < numberOfAttributes; j++) {
-
-                transitionDatas[i].Add(new List<TransitionData>());
-            }
-        }
-        
         UnityEngine.Object[] transitionData = Resources.LoadAll("Transition Data", typeof(TransitionData));
 
         foreach (TransitionData data in transitionData) {
 
-            transitionDatas[data.InAttribute][data.OutAttribute].Add(data);
+            transitionDatas.Add(data);
         }
 
         #endregion
@@ -248,121 +204,53 @@ public class EnvironmentManager : MonoBehaviour
 
         #region Set Field Indexes (which Field will appear when) and Transition Indexes
 
-        attributes = new int[numberOfFields];
 
-        int[] iterations = new int[numberOfAttributes];
-
-        int currentAttribute = UnityEngine.Random.Range(0, numberOfAttributes);
-        attributes[0] = currentAttribute;
-        iterations[currentAttribute]++;
-
-        int currentIndex = UnityEngine.Random.Range(0, fieldDatas[currentAttribute].Count);
+        int currentIndex = UnityEngine.Random.Range(0, fieldDatas.Count);
         
         List<int[]> fieldIndexes = new List<int[]>();
-        fieldIndexes.Add(new int[] { currentAttribute, currentIndex });
+        fieldIndexes.Add(new int[] { currentIndex });
 
         List<int[]> transitionIndexes = new List<int[]>();
+        currentIndex = UnityEngine.Random.Range(0, transitionDatas.Count);
+        transitionIndexes.Add(new int[] { currentIndex, transitionDatas[currentIndex].OutDirection });
 
         for (int i = 1; i < numberOfFields; i++) {
             
+            int newIndex = UnityEngine.Random.Range(0, fieldDatas.Count);
 
-
-            float random = UnityEngine.Random.Range(0, 100);
-            int repeat = Mathf.Clamp(firstChancesToRepeatAttribute - repeatCount * chanceDecreaseToRepeatAttribute, 0, 100);
-
-            List<int> types = new List<int>();
-
-            for (int j = 0; j < 3; j++) {
-
-                types.Add(j);
-            }
-            types.Remove(currentAttribute);
-
-            int otherOne = types[0];
-            int otherTwo = types[1];
-
-            
-            int newAttribute = currentAttribute;
-
-            
-            if (random >= repeat) {
-
-                float rapport;
-
-                if (iterations[otherOne] == 0) {
-                    if (iterations[otherTwo] == 0) {
-                        rapport = .5f;
-                    }
-                    else {
-                        rapport = 1;
-                    }
-                }
-                else {
-                    if (otherTwo == 0) {
-                        rapport = 0;
-                    }
-                    else {
-                        rapport = (float)iterations[otherOne] / iterations[otherTwo];
-                    }
-                }
-
-                if (random < repeat + (100f - repeat) * rapport) {
-
-                    newAttribute = otherOne;
-                    repeatCount = 0;
-                }
-                else {
-
-                    newAttribute = otherTwo;
-                    repeatCount = 0;
-                }
-            }
-            else  {
-
-                repeatCount++;
-            }
-            
-            attributes[i] = newAttribute;
-            iterations[newAttribute]++;
-
-            int newIndex = UnityEngine.Random.Range(0, fieldDatas[newAttribute].Count);
-
-            int[] fIndex = new int[2] { newAttribute, newIndex };
+            int[] fIndex = new int[1] { newIndex };
 
             while (AreIntsEqual(fieldIndexes[i - 1], fIndex)) {
 
-                newIndex = UnityEngine.Random.Range(0, fieldDatas[newAttribute].Count);
+                newIndex = UnityEngine.Random.Range(0, fieldDatas.Count);
 
-                fIndex[1] = newIndex;
+                fIndex[0] = newIndex;
             }
+            
+            currentIndex = newIndex;
+
+            fieldIndexes.Add(fIndex);
 
 
             #region Set Transition
             
-            int TIndex = UnityEngine.Random.Range(0, transitionDatas[currentAttribute][newAttribute].Count);
+            int TIndex = UnityEngine.Random.Range(0, transitionDatas.Count);
 
-            int[] tIndex = new int[4] { currentAttribute, newAttribute, TIndex, transitionDatas[currentAttribute][newAttribute][TIndex].OutDirection };
+            int[] tIndex = new int[2] { TIndex, transitionDatas[TIndex].OutDirection };
 
-            if (i > 1) {
+            
+            while (AreIntsEqual(transitionIndexes[i - 1], tIndex)) {
 
-                while (AreIntsEqual(transitionIndexes[i - 2], tIndex)) {
+                TIndex = UnityEngine.Random.Range(0, transitionDatas.Count);
 
-                    TIndex = UnityEngine.Random.Range(0, transitionDatas[currentAttribute][newAttribute].Count);
-
-                    tIndex[2] = TIndex;
-                    tIndex[3] = transitionDatas[currentAttribute][newAttribute][TIndex].OutDirection;
-                }
+                tIndex[0] = TIndex;
+                tIndex[1] = transitionDatas[TIndex].OutDirection;
             }
 
             transitionIndexes.Add(tIndex);
 
             #endregion
 
-            
-            currentIndex = newIndex;
-            currentAttribute = newAttribute;
-
-            fieldIndexes.Add(fIndex);
         }
 
         #endregion
@@ -371,7 +259,7 @@ public class EnvironmentManager : MonoBehaviour
         #region Instantiate needed Fields and Transitions
 
         fields = new Transform[numberOfFields];
-        transitions = new Transform[numberOfFields - 1];
+        transitions = new Transform[numberOfFields];
 
         for (int i = 0; i < numberOfFields; i++) {
 
@@ -386,30 +274,25 @@ public class EnvironmentManager : MonoBehaviour
                 fields[i] = Instantiate(
                     fieldDatas
                     [fieldIndexes[i][0]]
-                    [fieldIndexes[i][1]]
                     .Field.transform
                     );
                 fields[i].gameObject.SetActive(false);
             }
 
-            if (i < numberOfFields - 1) { 
+        
+            index = FieldIndex(i, transitionIndexes);
+            if (i > 0 && index != i) {
 
-                index = FieldIndex(i, transitionIndexes);
-                if (i > 0 && index != i) {
+                transitions[i] = transitions[index];
+            }
+            else {
 
-                    transitions[i] = transitions[index];
-                }
-                else {
-
-                    transitions[i] = Instantiate(
-                        transitionDatas
-                        [transitionIndexes[i][0]]
-                        [transitionIndexes[i][1]]
-                        [transitionIndexes[i][2]]
-                        .Transition.transform
-                        );
-                    transitions[i].gameObject.SetActive(false);
-                }
+                transitions[i] = Instantiate(
+                    transitionDatas
+                    [transitionIndexes[i][0]]
+                    .Transition.transform
+                    );
+                transitions[i].gameObject.SetActive(false);
             }
         }
 
@@ -433,7 +316,7 @@ public class EnvironmentManager : MonoBehaviour
             transitionPositions[i - 1] = position;
 
             int lastDirection = direction;
-            if (transitionIndexes[i - 1][3] == 0) {
+            if (transitionIndexes[i - 1][1] == 0) {
 
                 direction = (direction + 3) % 4;
             }
@@ -506,6 +389,7 @@ public class EnvironmentManager : MonoBehaviour
         trigger = FindObjectOfType<StudioParameterTrigger>();
         player = FindObjectOfType<PathMovement>().PathToFollow;
         sm = FindObjectOfType<ScoreManager>();
+        vm = FindObjectOfType<VoiceLineInGameManager>();
         GetComponent<Collider>().isTrigger = true;
         SetFieldActive(0);
     }
@@ -591,7 +475,7 @@ public class EnvironmentManager : MonoBehaviour
     }
 
 
-    private SituationData Situation(int majorChallenge, int attribute, int length)
+    private SituationData Situation(int majorChallenge, int length)
     {
         int random = 0;
         SituationData sd;
@@ -613,31 +497,23 @@ public class EnvironmentManager : MonoBehaviour
             hasChangedDifficulty = true;
         }
 
-        if (situations[currentDifficulty][majorChallenge][attribute][length].Count == 0) {
+        if (situations[currentDifficulty][majorChallenge][length].Count == 0) {
 
-            foreach (var sit in backup[currentDifficulty][majorChallenge][attribute][length]) {
+            foreach (var sit in backup[currentDifficulty][majorChallenge][length]) {
 
-                situations[currentDifficulty][majorChallenge][attribute][length].Add(sit);
+                situations[currentDifficulty][majorChallenge][length].Add(sit);
             }
         }
 
-        random = UnityEngine.Random.Range(0, situations[currentDifficulty][majorChallenge][attribute][length].Count);
+        random = UnityEngine.Random.Range(0, situations[currentDifficulty][majorChallenge][length].Count);
 
-        sd = situations[currentDifficulty][majorChallenge][attribute][length][random];
+        sd = situations[currentDifficulty][majorChallenge][length][random];
 
-        for (int i = 0; i < numberOfAttributes; i++) {
+        situations[currentDifficulty][majorChallenge][length].Remove(sd);
+            
+        
 
-            for (int j = 0; j < situations[currentDifficulty][majorChallenge][i][length].Count; j++) {
-
-                if (sd == situations[currentDifficulty][majorChallenge][i][length][j]) {
-
-                    situations[currentDifficulty][majorChallenge][i][length].Remove(situations[currentDifficulty][majorChallenge][i][length][j]);
-                    j--;
-                }
-            }
-        }
-
-        if (hasChangedDifficulty){
+        if (hasChangedDifficulty) {
             
             nbOfChallenges = sd.Elements.Length;
             challengeDone = 0;
@@ -649,18 +525,20 @@ public class EnvironmentManager : MonoBehaviour
         return sd;
     }
 
-
+    /// A CHANGER PULLING
     private void SetElementsActive(SituationData situation, Transform currentField, int iteration, Vector3 lastPoint, int length)
     {
+        currentElements.Clear();
+
         Vector3 position = new Vector3(0, 0, dimensions[2] / 2 * iteration);
 
         int total = 0;
-        foreach (var element in situation.Elements) {
+        foreach (SituationData.Element element in situation.Elements) {
 
             total += sm.bonus[element.element.Score];
         }
 
-        foreach (var element in situation.Elements) {
+        foreach (SituationData.Element element in situation.Elements) {
 
             int index = element.element.Index;
             elements[index, indexes[index]].transform.SetParent(currentField);
@@ -669,7 +547,7 @@ public class EnvironmentManager : MonoBehaviour
             elements[index, indexes[index]].transform.localScale = element.localScale;
             elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
-            elements[index, indexes[index]].scoreBonus = sm.bonus[element.element.Score] / (float)total * sm.total[situation.Difficulty] * length;
+            elements[index, indexes[index]].scoreBonus = (float)sm.total[situation.Difficulty] * (float)sm.bonus[element.element.Score] / (float)total / (float)length;
             currentElements.Add(elements[index, indexes[index]]);
             indexes[index] = (indexes[index] + 1) % maxIndex;
         }
@@ -708,7 +586,8 @@ public class EnvironmentManager : MonoBehaviour
         for (int i = 0; i <= length[1]; i++) {
 
             Vector3 lastPoint = new Vector3(0, 0, dimensions[2] * (2 + i - length[1]) / 2);
-            SetElementsActive(Situation(majorChallenges[index], attributes[index], length[0]), fields[index], i, lastPoint, length[0] + 1);
+            Debug.Log("Length is " + dimensions[2] * (2 + i - length[1]) / 2);
+            SetElementsActive(Situation(majorChallenges[index], length[0]), fields[index], i, lastPoint, length[1] + 1);
         }
         hasChangedDifficulty = false;
 
@@ -722,11 +601,11 @@ public class EnvironmentManager : MonoBehaviour
         values[0] = currentDifficulty;
         SetFMODParameters(values);
 
-        if (index < numberOfFields - 1) {
+        transitions[index].gameObject.SetActive(true);
+        transitions[index].position = transitionPositions[index];
+        transitions[index].rotation = Quaternion.Euler(Rotation(directions[index]));
 
-            transitions[index].gameObject.SetActive(true);
-            transitions[index].position = transitionPositions[index];
-            transitions[index].rotation = Quaternion.Euler(Rotation(directions[index]));
+        if (index < numberOfFields - 1) {
 
             PathManager path = transitions[index].GetComponentInChildren<PathManager>();
 
@@ -742,7 +621,6 @@ public class EnvironmentManager : MonoBehaviour
         }
 
         transform.position = transitionPositions[index];
-        Debug.Log(index);
     }
 
 
@@ -754,11 +632,15 @@ public class EnvironmentManager : MonoBehaviour
             transitions[index - 1].gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < currentElements.Count; i++) {
+        for (int i = 0; i < lastElements.Count; i++) {
 
-            currentElements[i].gameObject.SetActive(false);
-            currentElements.Remove(currentElements[i]);
-            i--;
+            lastElements[i].gameObject.SetActive(false);
+        }
+        lastElements.Clear();
+
+        foreach (var element in currentElements) {
+
+            lastElements.Add(element);
         }
     }
 
@@ -795,14 +677,21 @@ public class EnvironmentManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        for (int i = 0; i < 3; i++) {
+
+            if (fieldIndex == (i + 1) * numberOfFields / 3) {
+
+                vm.VoiceLine(i * 3 + sm.LineScore(i));
+            }
+        }
+
         if (fieldIndex < numberOfFields) {
 
             SetFieldActive(fieldIndex);
             fieldIndex++;
         }
         else {
-
-            /// LAST SITUATION
+            menu.SetActive(true);
         }
     }
 }

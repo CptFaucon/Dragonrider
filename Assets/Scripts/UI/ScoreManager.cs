@@ -42,6 +42,16 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    [Header("Valeur en jeu déclenchant les voice lines")]
+    [SerializeField] private float firstLowScore;
+    [SerializeField] private float firstMidScore, firstHighScore, secondLowScore, secondMidScore, secondHighScore, lastLowScore, lastMidScore, lastHighScore;
+    
+    private float[] lineScore {
+        get {
+            return new float[] { firstLowScore, firstMidScore, firstHighScore, secondLowScore, secondMidScore, secondHighScore, lastLowScore, lastMidScore, lastHighScore };
+        }
+    }
+
     [Header("Fin de run")]
     [SerializeField]
     private string newScoreText = "Score :";
@@ -79,7 +89,7 @@ public class ScoreManager : MonoBehaviour
 
         if (modifier > 0f)
         {
-            scoreValue += modifier * (10f) * currentMultiplier;
+            scoreValue += modifier * currentMultiplier;
             if (env)
             {
                 env.Success();
@@ -91,7 +101,7 @@ public class ScoreManager : MonoBehaviour
 
         needleTransform.eulerAngles = new Vector3(0, 0, scoreGauge);
 
-        score.text = "Score : " + scoreValue;
+        score.text = Mathf.FloorToInt(scoreValue).ToString();
         multiplier.text = "x" + currentMultiplier;
     }
 
@@ -107,8 +117,19 @@ public class ScoreManager : MonoBehaviour
         }
         if (newScore)
         {
-            newScore.text = newScoreText + " " + scoreValue.ToString();
+            newScore.text = newScoreText + " " + Mathf.FloorToInt(scoreValue).ToString();
             newScore.gameObject.SetActive(true);
         }
+    }
+
+    public int LineScore(int index) {
+
+        for (int i = 2; i > 0; i--) {
+
+            if (scoreValue >= lineScore[index * 3 + i]) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

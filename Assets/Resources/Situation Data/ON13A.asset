@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d66e2f7fc24d8d84783d5bee29c173be, type: 3}
-  m_Name: ObservationNone11_1
+  m_Name: ON13A
   m_EditorClassIdentifier: 
   attribute: 3
   majorChallenge: 2
   length: 1
-  difficulty: 1
+  difficulty: 3
   path: []
   elements:
   - element: {fileID: 11400000, guid: b375d299154785b40b751c70067b0db6, type: 2}
