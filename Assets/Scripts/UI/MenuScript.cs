@@ -8,18 +8,8 @@ public class MenuScript : MonoBehaviour
 {
     // Main menu
     public Button Play;
-    public Button Settings;
     public Button Credits;
     public Button Quit;
-
-    // Settings menu
-    public Button Music;
-    public GameObject MusicSlider;
-    public Button SFX;
-    public GameObject SFXSlider;
-    public Button Voices;
-    public GameObject VoicesSlider;
-    public Button BackSettings;
 
     // Play menu
     public Button Tutorial;
@@ -31,9 +21,9 @@ public class MenuScript : MonoBehaviour
 
     // Layers
     public GameObject MainMenu;
-    public GameObject SettingsMenu;
     public GameObject PlayMenu;
     public GameObject CreditsMenu;
+    public GameObject Intro;
 
     //Lien vers les sons
     private SoundManager sdm;
@@ -42,14 +32,10 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainMenu.SetActive(true);
-        SettingsMenu.SetActive(false);
+        Intro.SetActive(true);
+        MainMenu.SetActive(false);
         PlayMenu.SetActive(false);
         CreditsMenu.SetActive(false);
-
-        MusicSlider.SetActive(false);
-        SFXSlider.SetActive(false);
-        VoicesSlider.SetActive(false);
 
         sdm = FindObjectOfType<SoundManager>();
     }
@@ -57,23 +43,25 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Intro.activeSelf)
+        {
+            if (Input.GetKeyDown("i") || Input.GetKeyDown("o") || Input.GetKeyDown("p") || Input.GetKeyDown("k") || Input.GetKeyDown("l") || Input.GetKeyDown("m"))
+            {
+                Debug.Log("Accès au menu principal");
+                Intro.SetActive(false);
+                MainMenu.SetActive(true);
+            }
+        }
+
         if (MainMenu.activeSelf)
         {
             if (Input.GetKeyDown("i"))
             {
-                Debug.Log("Accès aux settings");
-                Settings.Select();
-                SettingsMenu.SetActive(true);
-                MainMenu.SetActive(false);
-                sdm.menuValid.Play();
-            }
-
-            if (Input.GetKeyDown("o"))
-            {
                 Debug.Log("Accès au jeu");
                 Play.Select();
-                PlayMenu.SetActive(true);
                 MainMenu.SetActive(false);
+                PlayMenu.SetActive(true);
                 sdm.menuValid.Play();
             }
 
@@ -81,8 +69,8 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Accès aux crédits");
                 Credits.Select();
-                CreditsMenu.SetActive(true);
                 MainMenu.SetActive(false);
+                CreditsMenu.SetActive(true);
                 sdm.menuValid.Play();
             }
 
@@ -92,48 +80,6 @@ public class MenuScript : MonoBehaviour
                 Quit.Select();
                 sdm.menuValid.Play();
                 Application.Quit();
-            }
-        }
-
-        if (SettingsMenu.activeSelf)
-        {
-            if (Input.GetKeyDown("i"))
-            {
-                Debug.Log("Sélection du slider music");
-                Music.Select();
-                MusicSlider.SetActive(true);
-                SFXSlider.SetActive(false);
-                VoicesSlider.SetActive(false);
-                sdm.menuNavig.Play();
-            }
-
-            if (Input.GetKeyDown("o"))
-            {
-                Debug.Log("Sélection du slider voices");
-                Voices.Select();
-                VoicesSlider.SetActive(true);
-                SFXSlider.SetActive(false);
-                MusicSlider.SetActive(false);
-                sdm.menuNavig.Play();
-            }
-
-            if (Input.GetKeyDown("p"))
-            {
-                Debug.Log("Sélection du slider SFX");
-                SFX.Select();
-                SFXSlider.SetActive(true);
-                VoicesSlider.SetActive(false);
-                MusicSlider.SetActive(false);
-                sdm.menuNavig.Play();
-            }
-
-            if (Input.GetKeyDown("l"))
-            {
-                Debug.Log("Sortir des settings");
-                BackSettings.Select();
-                MainMenu.SetActive(true);
-                SettingsMenu.SetActive(false);
-                sdm.menuValid.Play();
             }
         }
 
@@ -159,8 +105,8 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Sortir du play");
                 BackPlay.Select();
-                MainMenu.SetActive(true);
                 PlayMenu.SetActive(false);
+                MainMenu.SetActive(true);
                 sdm.menuValid.Play();
             }
         }
@@ -171,8 +117,8 @@ public class MenuScript : MonoBehaviour
             {
                 Debug.Log("Sortir des crédits");
                 BackCredits.Select();
-                MainMenu.SetActive(true);
                 CreditsMenu.SetActive(false);
+                MainMenu.SetActive(true);
                 sdm.menuValid.Play();
             }
         }
