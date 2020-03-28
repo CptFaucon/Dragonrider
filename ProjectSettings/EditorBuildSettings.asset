@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial(Master).unity
     guid: aacc7718dc7df20408ea53973fb5307f
   - enabled: 1
-    path: Assets/Scenes/Scene(Master).unity
-    guid: e69c407a778a86f45b4af46e04ba9158
+    path: Assets/Scenes/SceneThomas.unity
+    guid: 9a1f33acef82a2640a49b6d7103a25d4
   m_configObjects: {}

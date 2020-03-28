@@ -31,6 +31,8 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
+
         texts = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++) texts[i] = transform.GetChild(i).gameObject;
         

@@ -101,6 +101,8 @@ public class EnvironmentManager : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
+
         #region Classify Situation Data by Difficulty, Major Challenge and Length
         
         UnityEngine.Object[] situationData = Resources.LoadAll("Situation Data", typeof(SituationData));
@@ -544,7 +546,6 @@ public class EnvironmentManager : MonoBehaviour
             elements[index, indexes[index]].transform.SetParent(currentField);
             elements[index, indexes[index]].transform.localPosition = element.localPosition + position;
             elements[index, indexes[index]].transform.localRotation = Quaternion.Euler(element.localRotation);
-            elements[index, indexes[index]].transform.localScale = element.localScale;
             elements[index, indexes[index]].gameObject.SetActive(true);
             elements[index, indexes[index]].transform.SetParent(null);
             elements[index, indexes[index]].scoreBonus = (float)sm.total[situation.Difficulty] * (float)sm.bonus[element.element.Score] / (float)total / (float)length;

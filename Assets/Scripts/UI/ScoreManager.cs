@@ -101,7 +101,7 @@ public class ScoreManager : MonoBehaviour
 
         needleTransform.eulerAngles = new Vector3(0, 0, scoreGauge);
 
-        score.text = Mathf.FloorToInt(scoreValue).ToString();
+        score.text = "Score : "+ Mathf.FloorToInt(scoreValue).ToString();
         multiplier.text = "x" + currentMultiplier;
     }
 

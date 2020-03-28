@@ -32,6 +32,8 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+
         Intro.SetActive(true);
         MainMenu.SetActive(false);
         PlayMenu.SetActive(false);
@@ -44,7 +46,7 @@ public class MenuScript : MonoBehaviour
     void Update()
     {
 
-        if (PlayMenu.activeSelf)
+        if (PlayMenu.activeSelf && !MainMenu.activeSelf)
         {
             if ((Input.GetKeyDown("i")) | (Input.GetKeyDown("k")))
             {
@@ -72,19 +74,7 @@ public class MenuScript : MonoBehaviour
             }
         }
 
-        if (CreditsMenu.activeSelf)
-        {
-            if (Input.GetKeyDown("l"))
-            {
-                Debug.Log("Sortir des crédits");
-                BackCredits.Select();
-                CreditsMenu.SetActive(false);
-                MainMenu.SetActive(true);
-                sdm.menuValid.Play();
-            }
-        }
-
-        if (MainMenu.activeSelf)
+        else if (MainMenu.activeSelf)
         {
             if (Input.GetKeyDown("i"))
             {
@@ -113,7 +103,19 @@ public class MenuScript : MonoBehaviour
             }
         }
 
-        if (Intro.activeSelf)
+        else if (CreditsMenu.activeSelf && !MainMenu.activeSelf)
+        {
+            if (Input.GetKeyDown("l"))
+            {
+                Debug.Log("Sortir des crédits");
+                BackCredits.Select();
+                CreditsMenu.SetActive(false);
+                MainMenu.SetActive(true);
+                sdm.menuValid.Play();
+            }
+        }
+
+        else if (Intro.activeSelf)
         {
             if (Input.GetKeyDown("i") || Input.GetKeyDown("o") || Input.GetKeyDown("p") || Input.GetKeyDown("k") || Input.GetKeyDown("l") || Input.GetKeyDown("m"))
             {

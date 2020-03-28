@@ -13,37 +13,20 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-<<<<<<< HEAD
-  - {fileID: 114188786913261162}
-  - {fileID: 114324455208132172}
+  - {fileID: 114703001260740126}
+  - {fileID: 114502701172800942}
   EditorEvents:
-  - {fileID: 114241917765309936}
-  - {fileID: 114826334983570982}
-  - {fileID: 114654837261265208}
+  - {fileID: 114863037243535080}
+  - {fileID: 114824288385859800}
+  - {fileID: 114546155623709228}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 114324455208132172}
+  - {fileID: 114502701172800942}
   StringsBanks:
-  - {fileID: 114188786913261162}
+  - {fileID: 114703001260740126}
   stringsBankWriteTime: 637209069236910453
   cacheVersion: 3
---- !u!114 &114018652799206694
-=======
-  - {fileID: 114164001628588812}
-  - {fileID: 114325094649275162}
-  EditorEvents:
-  - {fileID: 114124176740982686}
-  - {fileID: 114008288480694552}
-  - {fileID: 114555354422415636}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 114325094649275162}
-  StringsBanks:
-  - {fileID: 114164001628588812}
-  stringsBankWriteTime: 637209236226189464
-  cacheVersion: 3
---- !u!114 &114008288480694552
->>>>>>> Thomas
+--- !u!114 &114144037734658482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,7 +35,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/EndArea
+  m_EditorClassIdentifier: 
+  Name: EndArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114209833775728436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/DodgingArea
+  m_EditorClassIdentifier: 
+  Name: DodgingArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114316351912688466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114320086788598736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/MusicMenu/DodgingArea
   m_EditorClassIdentifier: 
@@ -61,29 +94,7 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
---- !u!114 &114056104956870164
-=======
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicBase
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicBase
-  guid: d8324579f09d324f93c52a564e70c3f3
-  Banks:
-  - {fileID: 114325094649275162}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114399506619859776}
-  - {fileID: 114501253899709768}
-  - {fileID: 114269301323981634}
-  - {fileID: 114232241259593832}
-  - {fileID: 114418488911637022}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 413345
---- !u!114 &114061452506804526
->>>>>>> Thomas
+--- !u!114 &114430917662928802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,165 +104,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicBase/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114108656299558954
-=======
-  m_Name: parameter:/MusicTutorial/ObsArea
-  m_EditorClassIdentifier: 
-  Name: ObsArea
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
---- !u!114 &114124176740982686
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MusicMenu/ObsArea
-  m_EditorClassIdentifier: 
-  Name: ObsArea
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
---- !u!114 &114188786913261162
-=======
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicTutorial
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicTutorial
-  guid: b4c1e54ae5e1a0498953883ca2a92d34
-  Banks:
-  - {fileID: 114325094649275162}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114533680136670518}
-  - {fileID: 114764718091311376}
-  - {fileID: 114061452506804526}
-  - {fileID: 114980575476828086}
-  - {fileID: 114714753318693068}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 46666
---- !u!114 &114164001628588812
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../../Dragonrider_ST/Build/Desktop/Master.strings.bank
-  SubDir: 
-<<<<<<< HEAD
-  lastModified: 637209069236910453
-=======
-  lastModified: 637209236226189464
->>>>>>> Thomas
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1012
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114227431308878192
-=======
---- !u!114 &114225122252121352
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicBase/SpearArea
-  m_EditorClassIdentifier: 
-  Name: SpearArea
-=======
-  m_Name: parameter:/MusicMenu/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114232241259593832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MusicBase/EndArea
-  m_EditorClassIdentifier: 
-  Name: EndArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114234580310825564
-=======
---- !u!114 &114269301323981634
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicTutorial/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114241917765309936
-=======
-  m_Name: parameter:/MusicBase/SpearArea
+  m_Name: parameter:/MusicMenu/SpearArea
   m_EditorClassIdentifier: 
   Name: SpearArea
   Min: 0
   Max: 1
   Default: 0
   Exists: 1
---- !u!114 &114282196800226216
->>>>>>> Thomas
+--- !u!114 &114433357834799848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,38 +120,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicTutorial
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicTutorial
-  guid: b4c1e54ae5e1a0498953883ca2a92d34
-  Banks:
-  - {fileID: 114324455208132172}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114404639630495150}
-  - {fileID: 114336254208624220}
-  - {fileID: 114930004161821008}
-  - {fileID: 114721342153186214}
-  - {fileID: 114234580310825564}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 46666
---- !u!114 &114324455208132172
-=======
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MusicMenu/ObsArea
+  m_Name: parameter:/MusicBase/ObsArea
   m_EditorClassIdentifier: 
   Name: ObsArea
   Min: 0
   Max: 1
   Default: 0
   Exists: 1
---- !u!114 &114325094649275162
->>>>>>> Thomas
+--- !u!114 &114502701172800942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,145 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../Dragonrider_ST/Build/Desktop/Master.bank
   SubDir: 
-<<<<<<< HEAD
   lastModified: 637209069236840360
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &114336254208624220
-=======
-  lastModified: 637209236226033254
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &114354710998854338
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicTutorial/DodgingArea
-  m_EditorClassIdentifier: 
-  Name: DodgingArea
-=======
-  m_Name: parameter:/MusicMenu/SpearArea
-  m_EditorClassIdentifier: 
-  Name: SpearArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114402238596886664
-=======
---- !u!114 &114399506619859776
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicBase/ObsArea
-  m_EditorClassIdentifier: 
-  Name: ObsArea
-=======
-  m_Name: parameter:/MusicBase/DodgingArea
-  m_EditorClassIdentifier: 
-  Name: DodgingArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114404639630495150
-=======
---- !u!114 &114418488911637022
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicTutorial/SpearArea
-  m_EditorClassIdentifier: 
-  Name: SpearArea
-=======
-  m_Name: parameter:/MusicBase/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114501253899709768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/MusicBase/ObsArea
-  m_EditorClassIdentifier: 
-  Name: ObsArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114483649270894552
-=======
---- !u!114 &114533680136670518
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicMenu/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114654837261265208
-=======
-  m_Name: parameter:/MusicTutorial/SpearArea
-  m_EditorClassIdentifier: 
-  Name: SpearArea
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
---- !u!114 &114555354422415636
->>>>>>> Thomas
+--- !u!114 &114546155623709228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,118 +161,20 @@ MonoBehaviour:
   Path: event:/Music/MusicMenu
   guid: ec9651ac0ce4de468dc4d9384459a616
   Banks:
-<<<<<<< HEAD
-  - {fileID: 114324455208132172}
-=======
-  - {fileID: 114325094649275162}
->>>>>>> Thomas
+  - {fileID: 114502701172800942}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-<<<<<<< HEAD
-  - {fileID: 114772074165588380}
-  - {fileID: 114018652799206694}
-  - {fileID: 114108656299558954}
-  - {fileID: 114483649270894552}
-  - {fileID: 114801776297894268}
+  - {fileID: 114430917662928802}
+  - {fileID: 114320086788598736}
+  - {fileID: 114590765722954076}
+  - {fileID: 114905797606072088}
+  - {fileID: 114588345400307830}
   MinDistance: 1
   MaxDistance: 20
   Length: 73333
---- !u!114 &114668464674159936
-=======
-  - {fileID: 114354710998854338}
-  - {fileID: 114733495388321884}
-  - {fileID: 114282196800226216}
-  - {fileID: 114225122252121352}
-  - {fileID: 114823965107142638}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 73333
---- !u!114 &114714753318693068
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicBase/EndArea
-  m_EditorClassIdentifier: 
-  Name: EndArea
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
---- !u!114 &114721342153186214
-=======
-  m_Name: parameter:/MusicTutorial/Difficulty
-  m_EditorClassIdentifier: 
-  Name: Difficulty
-  Min: 0
-  Max: 2
-  Default: 0
-  Exists: 1
---- !u!114 &114733495388321884
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicTutorial/EndArea
-  m_EditorClassIdentifier: 
-  Name: EndArea
-=======
-  m_Name: parameter:/MusicMenu/DodgingArea
-  m_EditorClassIdentifier: 
-  Name: DodgingArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114772074165588380
-=======
---- !u!114 &114764718091311376
->>>>>>> Thomas
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicMenu/SpearArea
-  m_EditorClassIdentifier: 
-  Name: SpearArea
-=======
-  m_Name: parameter:/MusicTutorial/DodgingArea
-  m_EditorClassIdentifier: 
-  Name: DodgingArea
->>>>>>> Thomas
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
-<<<<<<< HEAD
---- !u!114 &114801776297894268
-=======
---- !u!114 &114823965107142638
->>>>>>> Thomas
+--- !u!114 &114588345400307830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,8 +191,168 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
-<<<<<<< HEAD
---- !u!114 &114809670868494162
+--- !u!114 &114590765722954076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/ObsArea
+  m_EditorClassIdentifier: 
+  Name: ObsArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114703001260740126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../Dragonrider_ST/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637209069236910453
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1012
+  Exists: 1
+--- !u!114 &114736012562195634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/SpearArea
+  m_EditorClassIdentifier: 
+  Name: SpearArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114767744737473204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicTutorial/ObsArea
+  m_EditorClassIdentifier: 
+  Name: ObsArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114785640225831714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114824288385859800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicBase
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicBase
+  guid: d8324579f09d324f93c52a564e70c3f3
+  Banks:
+  - {fileID: 114502701172800942}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114917621671890820}
+  - {fileID: 114433357834799848}
+  - {fileID: 114947601665058594}
+  - {fileID: 114969687596454032}
+  - {fileID: 114785640225831714}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 413345
+--- !u!114 &114863037243535080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicTutorial
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicTutorial
+  guid: b4c1e54ae5e1a0498953883ca2a92d34
+  Banks:
+  - {fileID: 114502701172800942}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114736012562195634}
+  - {fileID: 114209833775728436}
+  - {fileID: 114767744737473204}
+  - {fileID: 114144037734658482}
+  - {fileID: 114316351912688466}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 46666
+--- !u!114 &114905797606072088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicMenu/Difficulty
+  m_EditorClassIdentifier: 
+  Name: Difficulty
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &114917621671890820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,38 +369,7 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
---- !u!114 &114826334983570982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicBase
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicBase
-  guid: d8324579f09d324f93c52a564e70c3f3
-  Banks:
-  - {fileID: 114324455208132172}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114809670868494162}
-  - {fileID: 114402238596886664}
-  - {fileID: 114227431308878192}
-  - {fileID: 114668464674159936}
-  - {fileID: 114056104956870164}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 413345
---- !u!114 &114930004161821008
-=======
---- !u!114 &114980575476828086
->>>>>>> Thomas
+--- !u!114 &114947601665058594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -645,15 +379,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< HEAD
-  m_Name: parameter:/MusicTutorial/ObsArea
+  m_Name: parameter:/MusicBase/SpearArea
   m_EditorClassIdentifier: 
-  Name: ObsArea
-=======
-  m_Name: parameter:/MusicTutorial/EndArea
+  Name: SpearArea
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &114969687596454032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicBase/EndArea
   m_EditorClassIdentifier: 
   Name: EndArea
->>>>>>> Thomas
   Min: 0
   Max: 1
   Default: 0
